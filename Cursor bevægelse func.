@@ -1,3 +1,4 @@
+#define ESC 0x1B
 void cursor_up(int amount) {
 	printf("%c[%d%c",ESC,amount,'A');
 }
