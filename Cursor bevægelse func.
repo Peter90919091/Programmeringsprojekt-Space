@@ -1,4 +1,3 @@
-// Move cursor
 void cursor_up(int amount) {
 	printf("%c[%d%c",ESC,amount,'A');
 }
@@ -9,3 +8,5 @@ void cursor_right(int amount) {
 	printf("%c[%d%c",ESC,amount,'C');
 }
 void cursor_left(int amount) {
+	printf("%c[%d%c",ESC,amount,'D');
+}
