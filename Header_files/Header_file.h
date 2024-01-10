@@ -27,6 +27,7 @@ void write_help_header();
 void write_score_header();
 void write_exit();
 void write_Welcome();
+void write_numbers(int number,int x,int y)
 // #### Controls.c ####
 int ScoreControls();
 int HelpControls();
