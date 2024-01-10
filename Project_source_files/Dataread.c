@@ -172,19 +172,18 @@ const char character_data[95][5] = {
 // Function to write a string to the LCD
 
 // Function to write a string to the LCD on a specified line
-// Function to write a string to the LCD on a specified line
 void lcd_write_string(const char* input_string, int line_number) {
-	lcd_init();
     // Ensure that the line_number is within a valid range (adjust as needed)
     if (line_number < 1 || line_number > 4) {
         // Handle error or choose a default line
         return;
     }
 
-    // Set the cursor position based on the line_numbe
+    // Set the cursor position based on the line_number
 
     // Create a buffer to store the pixel data for the string
     uint8_t buffer[512]; // Adjust the buffer size based on your LCD resolution
+    memset(buffer,0x00,512);
 
     // Initialize the buffer with zeros
     for (int i = 0; i < sizeof(buffer); i++) {
@@ -192,7 +191,7 @@ void lcd_write_string(const char* input_string, int line_number) {
     }
 
     // Calculate the starting index based on the line_number
-    int buffer_index = 0;
+    int buffer_index = (line_number - 1) * 128;
 
     // Iterate through each character in the input string
     while (*input_string) {
