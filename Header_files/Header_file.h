@@ -48,5 +48,12 @@ void background();
 void menubox();
 void box();
 void hideCursor();
+void credits();
+// #### menu.c ####
+void menuHELP();
+void menuSCORE();
+void menuPLAY();
+void menu();
+// #### game.c ####
 /*void addWhateverFunctionsYouNeed( type parameter );*/
 #endif // _HEADER_FILE_H_
