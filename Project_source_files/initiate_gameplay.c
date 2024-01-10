@@ -25,6 +25,14 @@ void initiate_rocket(int x, int y){
 
 
 void initiate_enemies(int x, int y){
+	void initiate_enemies(int x, int y){
+	fgcolor(1);
 	gotoxy(x,y);
-	printf("er sgu ikke lavet endnu");
+	printf("%c",219);
+	gotoxy((x-1),y);
+	printf("%c",204);
+	gotoxy((x+1),y);
+	printf("%c",185);
+	fgcolor(15);
+}
 }
