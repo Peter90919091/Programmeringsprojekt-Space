@@ -1,6 +1,7 @@
 #include "Header_file.h"
 int main(void) {
 	uart_init(9600);
+	lcd_init();
 	hideCursor();
 	blink(0);
 	ClearScreen();
