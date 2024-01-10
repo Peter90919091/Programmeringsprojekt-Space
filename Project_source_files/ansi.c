@@ -1,3 +1,13 @@
+#include <string.h>
+#include <stdio.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <math.h>
+#include <unistd.h>
+#include "system_stm32f30x.h"
+#include "stm32f30x_conf.h"
+#include "30010_io.h"
 #define ESC 0x1B
 void fgcolor(uint8_t foreground) {
 /*  Value      foreground     Value     foreground
