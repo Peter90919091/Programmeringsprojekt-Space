@@ -428,8 +428,93 @@ void write_highscore() {
 		cursor_up(2);cursor_left(3);printf("%c", 178);cursor_left(1);cursor_up(1);printf("%c", 178);printf("%c", 178);printf("%c", 178);
 
 	}
+//################## Numbers 1-9 ###################
+void write_numbers(int number,int x,int y) {
+	//Set cursor
+	gotoxy(x,y);
+	//Print 1
+		if (number == 1) {
+			cursor_down(1);printf("%c", 178);
+			cursor_up(1);
+			printf("%c", 178);printf("%c", 178);printf("%c", 178);
+			for (int i = 0;i < 5;i++) {
+				cursor_down(1);
+				cursor_left(1);
+				printf("%c", 178);
+			}
+			printf("%c", 178);
+			cursor_left(4);
+			printf("%c", 178);
+			printf("%c", 178);
+		}
+		else if (number == 2) {
+			cursor_down(1);
+			printf("%c", 178);
+			cursor_up(1);
+			printf("%c", 178);printf("%c", 178);printf("%c", 178);
+			cursor_down(1);printf("%c", 178);
+			cursor_down(1);cursor_left(3);printf("%c", 178);printf("%c", 178);
+			cursor_down(1);cursor_left(3);printf("%c", 178);
+			cursor_down(1);cursor_left(2);printf("%c", 178);
+			printf("%c", 178);printf("%c", 178);printf("%c", 178);printf("%c", 178);
 
-
+		}
+		else if (number == 3) {
+			cursor_down(1);printf("%c", 178);
+			cursor_up(1);printf("%c", 178);printf("%c", 178);printf("%c", 178);cursor_down(1);
+			printf("%c", 178);cursor_down(1);cursor_left(2);printf("%c", 178);printf("%c", 178);
+			cursor_left(1);cursor_down(1);printf("%c", 178);cursor_left(5);printf("%c", 178);
+			cursor_down(1);printf("%c", 178);printf("%c", 178);printf("%c", 178);
+		}
+		else if (number == 4) {
+			printf("%c", 178);cursor_down(1);cursor_left(1);printf("%c", 178);
+			cursor_left(1);cursor_down(1);printf("%c", 178);printf("%c", 178);printf("%c", 178);printf("%c", 178);
+			cursor_up(2);
+			for (int i = 0;i <5;i++) {
+				printf("%c", 178);
+				cursor_down(1);
+				cursor_left(1);
+			}
+		}
+		else if (number == 5) {
+			cursor_right(1);printf("%c", 178);printf("%c", 178);printf("%c", 178);printf("%c", 178);
+			cursor_down(1);cursor_left(5);printf("%c", 178);
+			cursor_down(1);cursor_left(1);printf("%c", 178);printf("%c", 178);printf("%c", 178);printf("%c", 178);printf("%c", 178);
+			cursor_left(1),cursor_down(1);printf("%c", 178);cursor_down(1);cursor_left(5);
+			printf("%c", 178);printf("%c", 178);printf("%c", 178);printf("%c", 178);printf("%c", 178);
+		}
+		else if (number == 6) {
+			printf("%c", 178);printf("%c", 178);printf("%c", 178);printf("%c", 178);printf("%c", 178);
+			cursor_down(1);cursor_left(5);printf("%c", 178);cursor_down(1);cursor_left(1);
+			printf("%c", 178);printf("%c", 178);printf("%c", 178);printf("%c", 178);printf("%c", 178);
+			cursor_left(5);cursor_down(1);printf("%c", 178);cursor_right(3);printf("%c", 178);
+			cursor_left(5);cursor_down(1);printf("%c", 178);printf("%c", 178);printf("%c", 178);
+			printf("%c", 178);printf("%c", 178);
+		}
+		else if (number == 7) {
+			printf("%c", 178);printf("%c", 178);printf("%c", 178);printf("%c", 178);printf("%c", 178);
+			cursor_down(1);cursor_left(1);printf("%c", 178);
+			for (int i = 0;i<3;i++) {
+				cursor_left(2);cursor_down(1);
+				printf("%c", 178);
+			}
+		}
+		else if (number == 8) {
+			printf("%c", 178);printf("%c", 178);printf("%c", 178);printf("%c", 178);printf("%c", 178);
+			cursor_down(1);cursor_left(5);printf("%c", 178);cursor_right(3);printf("%c", 178);
+			cursor_down(1),cursor_left(4);printf("%c", 178);printf("%c", 178);printf("%c", 178);
+			cursor_down(1);cursor_left(4);printf("%c", 178);cursor_right(3);printf("%c", 178);
+			cursor_down(1);cursor_left(5);printf("%c", 178);printf("%c", 178);
+			printf("%c", 178);printf("%c", 178);printf("%c", 178);
+		}
+		else if (number == 9) {
+			printf("%c", 178);printf("%c", 178);printf("%c", 178);printf("%c", 178);printf("%c", 178);
+			cursor_down(1);cursor_left(5);printf("%c", 178);cursor_right(3);printf("%c", 178);
+			cursor_down(1);cursor_left(5);printf("%c", 178);printf("%c", 178);printf("%c", 178);printf("%c", 178);printf("%c", 178);
+			cursor_down(1);cursor_left(1);printf("%c", 178);
+			cursor_down(1);cursor_left(5);printf("%c", 178);printf("%c", 178);printf("%c", 178);printf("%c", 178);printf("%c", 178);
+		}
+}
 
 
 
