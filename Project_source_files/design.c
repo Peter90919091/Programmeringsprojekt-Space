@@ -1,3 +1,13 @@
+#include <string.h>
+#include <stdio.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <math.h>
+#include <unistd.h>
+#include "system_stm32f30x.h"
+#include "stm32f30x_conf.h"
+#include "30010_io.h"
 void hideCursor() {printf("\e[?25l");}
 void credits() {
 	gotoxy(2,39);
