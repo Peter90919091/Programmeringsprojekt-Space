@@ -450,6 +450,7 @@ void write_exitplay() {
 		cursor_down(1);cursor_left(2);printf("%c", 178);printf("%c", 178);
 }
 void write_play_header() {
+	gotoxy(60,10);
 	//"P"
 
 	printf("%c", 178);cursor_left(1);cursor_up(1);
@@ -503,7 +504,7 @@ void write_numbers(int number,int x,int y) {
 			cursor_down(1);printf("%c", 178);
 			cursor_up(1);
 			printf("%c", 178);printf("%c", 178);printf("%c", 178);
-			for (int i = 0;i < 5;i++) {
+			for (int i = 0;i < 4;i++) {
 				cursor_down(1);
 				cursor_left(1);
 				printf("%c", 178);
@@ -582,6 +583,3 @@ void write_numbers(int number,int x,int y) {
 			cursor_down(1);cursor_left(5);printf("%c", 178);printf("%c", 178);printf("%c", 178);printf("%c", 178);printf("%c", 178);
 		}
 }
-
-
-
