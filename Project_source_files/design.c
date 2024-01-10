@@ -1,13 +1,9 @@
-#include <string.h>
-#include <stdio.h>
-#include <stdint.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <math.h>
-#include <unistd.h>
-#include "system_stm32f30x.h"
-#include "stm32f30x_conf.h"
-#include "30010_io.h"
+/*
+ * design.c
+ *
+ *  Created on: 10. jan. 2024
+ *      Author: Matti
+ */
 void hideCursor() {printf("\e[?25l");}
 void credits() {
 	gotoxy(2,39);
@@ -174,4 +170,33 @@ void box() {
 								}
 					printf("%c",188);
 					gotoxy(60,10);
+}
+void Smallbox() {
+	//Værdier vi benytter:
+					int  toplength = 8; //trukket 2 fra for at have hjørner med
+					int  sidelength = 5;
+					int  bottomlength = 8;
+					//toppen
+					printf("%c",201);
+					for (int j = 0; j <= (toplength); j++) {
+						printf("%c",205);
+					}
+					printf("%c",187);
+					cursor_down(1);
+					cursor_left(1);
+					//Sider
+					for (int i = 0; i< sidelength;i++) {
+						printf("%c",186);
+						cursor_left(11);
+						printf("%c",186);
+						cursor_down(1);
+						cursor_right(9);
+					}
+					//bund
+					cursor_left(10);
+					printf("%c",200);
+					for (int j = 0; j <= (toplength); j++) {
+									printf("%c",205);
+								}
+					printf("%c",188);
 }
