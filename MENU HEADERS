@@ -367,6 +367,27 @@ void write_help_header() {
 		cursor_up(1);cursor_left(1);printf("%c",178);cursor_up(1);cursor_left(5);printf("%c",178);printf("%c",178);printf("%c",178);printf("%c",178);
 }
 
+void write_exit() {
+	//Setting cursor
+	gotoxy(50,30);
+	//Print E
+		cursor_right(1);cursor_up(1);printf("%c", 178);cursor_down(1);cursor_left(1);printf("%c", 178);cursor_down(1);cursor_left(1);printf("%c", 178);cursor_down(1);cursor_left(1);printf("%c", 178);
+		printf("%c", 178);printf("%c", 178);printf("%c", 178);
+		cursor_up(2);cursor_left(3);printf("%c", 178);cursor_left(1);cursor_up(1);printf("%c", 178);printf("%c", 178);printf("%c", 178);
+	//Print X
+		cursor_right(1);printf("%c", 178);cursor_down(1);printf("%c", 178);printf("%c", 178);cursor_down(1);
+		cursor_left(2);printf("%c", 178);printf("%c", 178);cursor_down(1);printf("%c", 178);cursor_left(4);printf("%c", 178);
+		cursor_up(3);cursor_right(2);printf("%c", 178);
+	//Print I
+		cursor_right(1);printf("%c", 178);printf("%c", 178);printf("%c", 178);printf("%c", 178);cursor_down(1);
+		cursor_left(3);printf("%c", 178);printf("%c", 178);cursor_down(1);cursor_left(2);printf("%c", 178);printf("%c", 178);
+		cursor_down(1);cursor_left(3);printf("%c", 178);printf("%c", 178);printf("%c", 178);printf("%c", 178);
+	//Print T
+		cursor_up(3);cursor_right(1);printf("%c", 178);printf("%c", 178);printf("%c", 178);printf("%c", 178);
+		cursor_down(1);cursor_left(3);printf("%c", 178);printf("%c", 178);
+		cursor_down(1);cursor_left(2);printf("%c", 178);printf("%c", 178);
+		cursor_down(1);cursor_left(2);printf("%c", 178);printf("%c", 178);
+}
 
 
 
