@@ -27,7 +27,7 @@ void menuHELP() {
 void menuPLAY() {
 	background();
 	border();
-	lcd_write_string("Select a level to play",2)
+	lcd_write_string("Select a level to play",2);
 	initialize(3000000);
 	//BORDER FOR LEVELS
 	gotoxy(37,15);
@@ -50,9 +50,7 @@ void menuPLAY() {
 	Smallbox();
 	gotoxy(97,23);
 	Smallbox();
-	write_exitplay();
-	gotoxy(60,10);
-	write_play_header();
+	PlayControls();
 
 
 }
@@ -63,7 +61,6 @@ void menuSCORE() {
 	box();
 	write_exit();
 	write_highscore();
-
 	lcd_write_string("Look at your highscore!",2);
 	ScoreControls();
 }
