@@ -33,6 +33,7 @@ int HelpControls();
 int MenuControls();
 // #### dataread.c ####
 uint16_t Joystickport();
+void lcd_write_string(const char* input_string, int line_number);
 // #### ansi.c ####
 void fgcolor(uint8_t foreground);
 void blink();
