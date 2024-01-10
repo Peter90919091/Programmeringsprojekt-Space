@@ -16,6 +16,8 @@
 #include "30010_io.h"
 void menuHELP() {
 	background();
+	asteroid(2,2);
+	asteroid(90,20);
 	border();
 	box();
 	write_help_header();
@@ -27,6 +29,8 @@ void menuHELP() {
 void menuPLAY() {
 	background();
 	border();
+	asteroid(2,2);
+	asteroid(90,20);
 	lcd_write_string("Select a level to play",2);
 	initialize(3000000);
 	//BORDER FOR LEVELS
@@ -57,6 +61,8 @@ void menuPLAY() {
 void menuSCORE() {
 	background();
 	border();
+	asteroid(2,2);
+	asteroid(90,20);
 	write_score_header();
 	box();
 	write_exit();
@@ -68,6 +74,8 @@ void menu() {
 	ClearScreen();
 	background(); //FØRST
 	border();
+	asteroid(2,2);
+	asteroid(90,20);
 	write_Welcome();
 	menubox();
 	lcd_write_string("Please select a menu", 3);
@@ -84,4 +92,3 @@ void menu() {
 		menuPLAY();
 		}
 }
-
