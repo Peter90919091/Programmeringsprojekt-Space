@@ -63,7 +63,7 @@ void menu();
 // #### game.c ####
 
 
-//initiate_rocket.c
+//initiate_gameplay.c
 void initiate_rocket(int x1, int y1);
 /*void addWhateverFunctionsYouNeed( type parameter );*/
 #endif // _HEADER_FILE_H_
