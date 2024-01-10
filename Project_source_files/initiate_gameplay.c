@@ -22,3 +22,9 @@ void initiate_rocket(int x, int y){
 	gotoxy((x+1),(y+1));
 	printf("%c",92);
 }
+
+
+void initiate_enemies(int x, int y){
+	gotoxy(x,y);
+	printf("er sgu ikke lavet endnu");
+}
