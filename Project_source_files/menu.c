@@ -29,6 +29,7 @@ void menuSCORE() {
 	write_score_header();
 	box();
 	write_exit();
+	write_highscore();
 	ScoreControls();
 }
 void menu() {
