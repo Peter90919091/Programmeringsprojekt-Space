@@ -360,7 +360,60 @@ void write_exit() {
 		cursor_down(1);cursor_left(2);printf("%c", 178);printf("%c", 178);
 }
 
+void write_highscore() {
+	//Sets cursor
+		gotoxy(50,40);
 
+	//Print H
+		printf("%c", 178);cursor_down(1);cursor_left(1);printf("%c", 178);cursor_down(1);cursor_left(1);printf("%c", 178);cursor_down(1);cursor_left(1);printf("%c", 178);
+		cursor_up(1);printf("%c", 178);printf("%c", 178);printf("%c", 178);printf("%c", 178);
+		cursor_down(1);cursor_left(1);printf("%c", 178);cursor_up(2);cursor_left(1);printf("%c", 178);cursor_up(1);cursor_left(1);printf("%c", 178);
+
+	//Print I
+		cursor_right(1);printf("%c", 178);printf("%c", 178);printf("%c", 178);printf("%c", 178);cursor_down(1);
+		cursor_left(3);printf("%c", 178);printf("%c", 178);cursor_down(1);cursor_left(2);printf("%c", 178);printf("%c", 178);
+		cursor_down(1);cursor_left(3);printf("%c", 178);printf("%c", 178);printf("%c", 178);printf("%c", 178);
+
+	//Print G
+		cursor_up(2);cursor_right(1);printf("%c", 178);cursor_down(1);cursor_left(1);printf("%c", 178);
+		cursor_down(1);printf("%c", 178);printf("%c", 178);printf("%c", 178);cursor_up(1);cursor_left(1);printf("%c", 178);printf("%c", 178);
+		cursor_left(4);cursor_up(2);printf("%c", 178);printf("%c", 178);printf("%c", 178);printf("%c", 178);
+
+	//Print H
+		cursor_right(1);
+		printf("%c", 178);cursor_down(1);cursor_left(1);printf("%c", 178);cursor_down(1);cursor_left(1);printf("%c", 178);cursor_down(1);cursor_left(1);printf("%c", 178);
+		cursor_up(1);printf("%c", 178);printf("%c", 178);printf("%c", 178);printf("%c", 178);
+		cursor_down(1);cursor_left(1);printf("%c", 178);cursor_up(2);cursor_left(1);printf("%c", 178);cursor_up(1);cursor_left(1);printf("%c", 178);
+
+	//Print "-"
+		cursor_right(1);cursor_down(2); printf("%c", 178);printf("%c", 178);
+		cursor_up(2);cursor_right(1);
+
+	//Print S
+		printf("%c", 178);cursor_down(1);cursor_left(1);printf("%c", 178);printf("%c", 178);cursor_down(1);printf("%c", 178);
+		printf("%c", 178);cursor_down(1);cursor_left(4);printf("%c", 178);printf("%c", 178);printf("%c", 178);printf("%c", 178);
+		cursor_up(3);cursor_left(3);printf("%c", 178);printf("%c", 178);printf("%c", 178);cursor_right(1);
+	
+	//Print C
+		cursor_down(1);printf("%c", 178);cursor_down(1);cursor_left(1);printf("%c", 178);cursor_down(1);printf("%c", 178);printf("%c", 178);printf("%c", 178);
+		cursor_up(3);cursor_left(3);printf("%c", 178);printf("%c", 178);printf("%c", 178);
+	
+	//print O
+		cursor_right(1);
+		cursor_down(1);printf("%c", 178);cursor_down(1);cursor_left(1);printf("%c", 178);cursor_down(1);printf("%c", 178);printf("%c", 178);cursor_up(1);printf("%c", 178);cursor_up(1);
+		cursor_left(1);printf("%c", 178);cursor_up(1);cursor_left(3);printf("%c", 178);printf("%c", 178);cursor_right(2);
+	
+	//Print R
+		cursor_down(1);printf("%c", 178);cursor_down(1);cursor_left(1);printf("%c", 178);cursor_down(1);cursor_left(1);printf("%c", 178);
+		cursor_up(1);printf("%c", 178);printf("%c", 178);cursor_down(1);printf("%c", 178);
+		cursor_up(3);cursor_left(3);printf("%c", 178);printf("%c", 178);cursor_down(1);printf("%c", 178);
+		
+	//Print E
+		cursor_right(1);cursor_up(1);printf("%c", 178);cursor_down(1);cursor_left(1);printf("%c", 178);cursor_down(1);cursor_left(1);printf("%c", 178);cursor_down(1);cursor_left(1);printf("%c", 178);
+		printf("%c", 178);printf("%c", 178);printf("%c", 178);
+		cursor_up(2);cursor_left(3);printf("%c", 178);cursor_left(1);cursor_up(1);printf("%c", 178);printf("%c", 178);printf("%c", 178);
+
+	}
 
 
 
