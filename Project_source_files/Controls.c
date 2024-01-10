@@ -30,7 +30,21 @@ int HelpControls() {
 int PlayControls() {
 		int cursor_updown = 0;
 		int cursor_leftright = 0;
-
+		int prev_cursor_updown = 0;
+		int prev_cursor_leftright = 0;
+		blink(0);
+					fgcolor(7);
+					write_exitplay();
+					write_play_header();
+					write_numbers(1,40,16);
+					write_numbers(2,55,16);
+					write_numbers(3,70,16);
+					write_numbers(4,85,16);
+					write_numbers(5,100,16);
+					write_numbers(6,40,24);
+					write_numbers(7,55,24);
+					write_numbers(8,70,24);
+					write_numbers(9,85,24);
 		while(1) {
 		int value = Joystickport();
 		/// CURSOR MOVEMENT
@@ -38,13 +52,13 @@ int PlayControls() {
 			if (cursor_updown> 0) {cursor_updown -= 1;}
 		}
 		if (value == 2 ) { //DOWN
-			if (cursor_updown< 3) {cursor_updown += 1;}
+			if (cursor_updown< 4) {cursor_updown += 1;}
 		}
 		if (value == 4 ) { //LEFT
 					if (cursor_leftright> 0) {cursor_leftright -= 1;}
 				}
 		if (value == 8) { //RIGHT
-					if (cursor_leftright< 3) {cursor_leftright += 1;}
+					if (cursor_leftright< 4) {cursor_leftright += 1;}
 				}
 		/// CURSORPUSH level 1-4
 		if (value == 16 && cursor_updown == 1 && cursor_leftright== 0 )  { //LEVEL1
@@ -63,22 +77,26 @@ int PlayControls() {
 					ClearScreen();
 					return 4;
 				}
-		/// CURSORPUSH level 5-8
-				if (value == 16 && cursor_updown == 2 && cursor_leftright== 0 )  { //LEVEL5
-					ClearScreen();
-					return 5;
-				}
-				if (value == 16 && cursor_updown == 2 && cursor_leftright== 1 )  { //LEVEL6
+		if (value == 16 && cursor_updown == 1 && cursor_leftright== 3 )  { //LEVEL5
 							ClearScreen();
-							return 6;
+							return 5;
 						}
-				if (value == 16 && cursor_updown == 2 && cursor_leftright== 2 )  { //LEVEL7
+		/// CURSORPUSH level 5-8
+				if (value == 16 && cursor_updown == 2 && cursor_leftright== 0 )  { //LEVEL6
+					ClearScreen();
+					return 6;
+				}
+				if (value == 16 && cursor_updown == 2 && cursor_leftright== 1 )  { //LEVEL7
 							ClearScreen();
 							return 7;
 						}
-				if (value == 16 && cursor_updown == 2 && cursor_leftright== 3 )  { //LEVEL8
+				if (value == 16 && cursor_updown == 2 && cursor_leftright== 2 )  { //LEVEL8
 							ClearScreen();
 							return 8;
+						}
+				if (value == 16 && cursor_updown == 2 && cursor_leftright== 3 )  { //LEVEL9
+							ClearScreen();
+							return 9;
 						}
 		/// CURSOR PLAY
 				if (value == 16 && cursor_updown == 0  )  { //PLAY
@@ -87,14 +105,139 @@ int PlayControls() {
 										}
 				if (value == 16 && cursor_updown == 3  )  { //EXIT
 															ClearScreen();
-															return 10;
+															menu();
 														}
+
+		if (cursor_leftright != prev_cursor_leftright ||cursor_updown != prev_cursor_updown ) {
+			blink(0);
+			fgcolor(7);
+			write_exitplay();
+			write_play_header();
+			write_numbers(1,40,16);
+			write_numbers(2,55,16);
+			write_numbers(3,70,16);
+			write_numbers(4,85,16);
+			write_numbers(5,100,16);
+			write_numbers(6,40,24);
+			write_numbers(7,55,24);
+			write_numbers(8,70,24);
+			write_numbers(9,85,24);
+				}
+		if (cursor_updown == 0) {
+		prev_cursor_updown = cursor_updown;
+		fgcolor(1);
+		blink(1);
+		write_play_header();
+		fgcolor(7);
+		blink(0);
+		}
+		if (cursor_updown == 3) {
+			prev_cursor_updown = cursor_updown;
+			fgcolor(1);
+			blink(1);
+			write_exitplay();
+			fgcolor(7);
+			blink(0);
+				}
+		if (cursor_updown == 1 && cursor_leftright == 0) {
+			prev_cursor_updown = cursor_updown;
+			prev_cursor_leftright = cursor_leftright;
+					fgcolor(2);
+					blink(1);
+					write_numbers(1,40,16);
+					fgcolor(7);
+					blink(0);
+
+						}
+		if (cursor_updown == 1 && cursor_leftright == 1) {
+			prev_cursor_updown = cursor_updown;
+			prev_cursor_leftright = cursor_leftright;
+							fgcolor(2);
+							blink(1);
+							write_numbers(2,55,16);
+							fgcolor(7);
+							blink(0);
+								}
+		if (cursor_updown == 1 && cursor_leftright == 2 ) {
+			prev_cursor_updown = cursor_updown;
+			prev_cursor_leftright = cursor_leftright;
+		fgcolor(2);
+		blink(1);
+		write_numbers(3,70,16);
+		fgcolor(7);
+		blink(0);
+		}
+		if (cursor_updown == 1 && cursor_leftright == 3 ) {
+			prev_cursor_updown = cursor_updown;
+						prev_cursor_leftright = cursor_leftright;
+		fgcolor(2);
+		blink(1);
+		write_numbers(4,85,16);
+		fgcolor(7);
+		blink(0);
+
+		}
+		if (cursor_updown == 1 && cursor_leftright == 4 ) {
+			prev_cursor_updown = cursor_updown;
+						prev_cursor_leftright = cursor_leftright;
+		fgcolor(2);
+		blink(1);
+		write_numbers(5,100,16);
+		fgcolor(7);
+		blink(0);
+
+		}
+		if (cursor_updown == 2 && cursor_leftright == 0 ) {
+			prev_cursor_updown = cursor_updown;
+						prev_cursor_leftright = cursor_leftright;
+		fgcolor(2);
+		blink(1);
+		write_numbers(6,40,24);
+		fgcolor(7);
+		blink(0);
+
+		}
+		if (cursor_updown == 2 && cursor_leftright == 1 ) {
+			prev_cursor_updown = cursor_updown;
+						prev_cursor_leftright = cursor_leftright;
+		fgcolor(2);
+		blink(1);
+		write_numbers(7,55,24);
+		fgcolor(7);
+		blink(0);
+		}
+		if (cursor_updown == 2 && cursor_leftright == 2 ) {
+			prev_cursor_updown = cursor_updown;
+						prev_cursor_leftright = cursor_leftright;
+		fgcolor(2);
+		blink(1);
+		write_numbers(8,70,24);
+		fgcolor(7);
+		blink(0);
+
+		}
+		if (cursor_updown == 2 && cursor_leftright == 3 ) {
+			prev_cursor_updown = cursor_updown;
+						prev_cursor_leftright = cursor_leftright;
+		fgcolor(2);
+		blink(1);
+		write_numbers(9,85,24);
+		fgcolor(7);
+		blink(0);
 		}
 	}
-
+}
 int MenuControls() {
 	int cursor_placement = 0;
-
+	int prev_cursor_placement = 0;
+	fgcolor(7);
+			blink(0);
+			gotoxy(62,17);
+			write_help();
+			gotoxy(60,23);
+			write_score();
+			gotoxy(63,29);
+			write_play();
 	while(1) {
 	int value = Joystickport();
 	if (value == 1 || value == 5 || value== 9 || value == 17 || value == 21 || value == 25) { //UP
@@ -115,36 +258,36 @@ int MenuControls() {
 		ClearScreen();
 				return 3;
 		}
-
+	if (cursor_placement != prev_cursor_placement) {
+		fgcolor(7);
+		blink(0);
+		gotoxy(62,17);
+		write_help();
+		gotoxy(60,23);
+		write_score();
+		gotoxy(63,29);
+		write_play();
+	}
 	if (cursor_placement == 0) {
+		prev_cursor_placement = cursor_placement;
 		gotoxy(62,17);
 		blink(1);
 		fgcolor(1);
 		write_help();
 		fgcolor(7);
 			blink(0);
-		gotoxy(60,23);
-		write_score();
-		gotoxy(63,29);
-		write_play();
 	}
 	if (cursor_placement == 1) {
-			gotoxy(62,17);
-			write_help();
+		prev_cursor_placement = cursor_placement;
 			gotoxy(60,23);
 			blink(1);
 			fgcolor(1);
 			write_score();
 			fgcolor(7);
 				blink(0);
-			gotoxy(63,29);
-			write_play();
 	}
 	if (cursor_placement == 2) {
-			gotoxy(62,17);
-			write_help();
-			gotoxy(60,23);
-			write_score();
+		prev_cursor_placement = cursor_placement;
 			gotoxy(63,29);
 			blink(1);
 			fgcolor(1);
@@ -154,4 +297,3 @@ int MenuControls() {
 		}
 	}
 }
-
