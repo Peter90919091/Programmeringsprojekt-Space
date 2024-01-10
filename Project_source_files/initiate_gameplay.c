@@ -6,19 +6,19 @@
 
 
 
-void initiate_rocket(int x1, int y1){
-	gotoxy(x1,(y1-1));
+void initiate_rocket(int x, int y){
+	gotoxy(x,(y-1));
 	printf("%c",186);
-	gotoxy(x1,y1);
+	gotoxy(x,y);
 	printf("%c",219);
 
 	fgcolor(1);
-	gotoxy(x1,(y1+1));
+	gotoxy(x,(y+1));
 	printf("%c",177);
 	fgcolor(15);
 
-	gotoxy((x1-1),(y1+1));
+	gotoxy((x-1),(y+1));
 	printf("%c",47);
-	gotoxy((x1+1),(y1+1));
+	gotoxy((x+1),(y+1));
 	printf("%c",92);
 }
