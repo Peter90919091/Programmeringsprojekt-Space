@@ -1,3 +1,9 @@
+/*
+ * menu.c
+ *
+ *  Created on: 10. jan. 2024
+ *      Author: Matti
+ */
 #include <string.h>
 #include <stdio.h>
 #include <stdint.h>
@@ -21,6 +27,31 @@ void menuPLAY() {
 	background();
 	border();
 	initialize(3000000);
+	//BORDER FOR LEVELS
+	gotoxy(37,15);
+	Smallbox();
+	gotoxy(52,15);
+	Smallbox();
+	gotoxy(67,15);
+	Smallbox();
+	gotoxy(82,15);
+	Smallbox();
+	gotoxy(97,15);
+	Smallbox();
+	gotoxy(37,23);
+	Smallbox();
+	gotoxy(52,23);
+	Smallbox();
+	gotoxy(67,23);
+	Smallbox();
+	gotoxy(82,23);
+	Smallbox();
+	gotoxy(97,23);
+	Smallbox();
+	write_exitplay();
+	gotoxy(60,10);
+	write_play_header();
+
 
 }
 void menuSCORE() {
