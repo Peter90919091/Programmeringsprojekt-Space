@@ -6,7 +6,7 @@
 #include <stdint.h>
 #include "math.h"
 
-################## ASTEROIDS ###################
+//################## ASTEROIDS ###################
 void write_Welcome() {
 	// 140x40 #178
 	gotoxy(45,8);
@@ -133,37 +133,8 @@ void write_Welcome() {
 		cursor_right(1);
 		fgcolor(7);
 }
-/*
- * menu.c
- *
- *  Created on: 9. jan. 2024
- *      Author: noohr
- */
 
-#define ESC 0x1B
-
-void gotoxy(int x, int y) {
-	printf("%c[%d;%d%c",ESC,y,x,'H');
-}
-void ClearScreen(){
-	printf("%c[2J",ESC);
-	gotoxy(0,0);
-}
-// Move cursor
-void cursor_up(int amount) {
-	printf("%c[%d%c",ESC,amount,'A');
-}
-void cursor_down(int amount) {
-	printf("%c[%d%c",ESC,amount,'B');
-}
-void cursor_right(int amount) {
-	printf("%c[%d%c",ESC,amount,'C');
-}
-void cursor_left(int amount) {
-	printf("%c[%d%c",ESC,amount,'D');
-}
-
-//Function for writing "menu"
+//################## MENU ###################
 void write_menu(){
 	gotoxy(50,20);
 	//Print M
@@ -192,7 +163,7 @@ void write_menu(){
 	cursor_up(1);printf("%c",178);cursor_up(1);cursor_left(1);printf("%c",178);cursor_up(1);cursor_left(1);printf("%c",178);cursor_up(1);cursor_left(1);printf("%c",178);
 }
 
-//Function for writing "HELP"
+//################## HELP ###################
 void write_help(){
 	gotoxy(50,30);
 	//print H
@@ -212,7 +183,7 @@ void write_help(){
 	cursor_up(3);printf("%c", 178);printf("%c", 178);cursor_down(1);printf("%c", 178);cursor_down(1);cursor_left(3);printf("%c", 178);printf("%c", 178);
 	cursor_right(2);cursor_up(2);
 }
-
+//################## SCORE ###################
 void write_score() {
 	//Sets cursor
 	gotoxy(50,40);
@@ -236,7 +207,7 @@ void write_score() {
 	printf("%c", 178);printf("%c", 178);printf("%c", 178);
 	cursor_up(2);cursor_left(3);printf("%c", 178);cursor_left(1);cursor_up(1);printf("%c", 178);printf("%c", 178);printf("%c", 178);
 }
-
+//################## PLAY ###################
 void write_play(){
 
 	//Sets cursor
@@ -256,7 +227,7 @@ void write_play(){
 	cursor_right(2);printf("%c", 178);cursor_down(1);cursor_left(1);printf("%c", 178);cursor_down(1);printf("%c", 178);cursor_down(1);cursor_left(1);printf("%c", 178);
 	cursor_up(3);printf("%c", 178);cursor_left(1);cursor_down(1);printf("%c", 178);
 }
-
+//################## SCORE HEADER ###################
 void write_score_header() {
 	//Setting cursor
 	gotoxy(60,10);
@@ -323,7 +294,7 @@ void write_score_header() {
 		printf("%c",178);cursor_left(1);cursor_up(1);
 		printf("%c",178);printf("%c",178);printf("%c",178);printf("%c",178);printf("%c",178);
 }
-
+//################## HELP HEADER ###################
 void write_help_header() {
 	//setting cursor
 	gotoxy(60,10);
@@ -366,7 +337,7 @@ void write_help_header() {
 		cursor_up(3);printf("%c",178);printf("%c",178);printf("%c",178);printf("%c",178);cursor_up(1);printf("%c",178);
 		cursor_up(1);cursor_left(1);printf("%c",178);cursor_up(1);cursor_left(5);printf("%c",178);printf("%c",178);printf("%c",178);printf("%c",178);
 }
-
+//################## EXIT ###################
 void write_exit() {
 	//Setting cursor
 	gotoxy(50,30);
