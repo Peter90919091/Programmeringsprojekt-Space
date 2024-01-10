@@ -1,3 +1,9 @@
+/*
+ * Controls.c
+ *
+ *  Created on: 10. jan. 2024
+ *      Author: Matti
+ */
 #include <string.h>
 #include <stdio.h>
 #include <stdint.h>
@@ -20,6 +26,72 @@ int HelpControls() {
 	if (value == 16) {menu();}
 	}
 }
+
+int PlayControls() {
+		int cursor_updown = 0;
+		int cursor_leftright = 0;
+
+		while(1) {
+		int value = Joystickport();
+		/// CURSOR MOVEMENT
+		if (value == 1) { //UP
+			if (cursor_updown> 0) {cursor_updown -= 1;}
+		}
+		if (value == 2 ) { //DOWN
+			if (cursor_updown< 3) {cursor_updown += 1;}
+		}
+		if (value == 4 ) { //LEFT
+					if (cursor_leftright> 0) {cursor_leftright -= 1;}
+				}
+		if (value == 8) { //RIGHT
+					if (cursor_leftright< 3) {cursor_leftright += 1;}
+				}
+		/// CURSORPUSH level 1-4
+		if (value == 16 && cursor_updown == 1 && cursor_leftright== 0 )  { //LEVEL1
+			ClearScreen();
+			return 1;
+		}
+		if (value == 16 && cursor_updown == 1 && cursor_leftright== 1 )  { //LEVEL2
+					ClearScreen();
+					return 2;
+				}
+		if (value == 16 && cursor_updown == 1 && cursor_leftright== 2 )  { //LEVEL3
+					ClearScreen();
+					return 3;
+				}
+		if (value == 16 && cursor_updown == 1 && cursor_leftright== 3 )  { //LEVEL4
+					ClearScreen();
+					return 4;
+				}
+		/// CURSORPUSH level 5-8
+				if (value == 16 && cursor_updown == 2 && cursor_leftright== 0 )  { //LEVEL5
+					ClearScreen();
+					return 5;
+				}
+				if (value == 16 && cursor_updown == 2 && cursor_leftright== 1 )  { //LEVEL6
+							ClearScreen();
+							return 6;
+						}
+				if (value == 16 && cursor_updown == 2 && cursor_leftright== 2 )  { //LEVEL7
+							ClearScreen();
+							return 7;
+						}
+				if (value == 16 && cursor_updown == 2 && cursor_leftright== 3 )  { //LEVEL8
+							ClearScreen();
+							return 8;
+						}
+		/// CURSOR PLAY
+				if (value == 16 && cursor_updown == 0  )  { //PLAY
+											ClearScreen();
+											return 9;
+										}
+				if (value == 16 && cursor_updown == 3  )  { //EXIT
+															ClearScreen();
+															return 10;
+														}
+		}
+	}
+
 int MenuControls() {
 	int cursor_placement = 0;
 
@@ -82,3 +154,4 @@ int MenuControls() {
 		}
 	}
 }
+
