@@ -1,4 +1,10 @@
+void hideCursor() {printf("\e[?25l");}
+void credits() {
+	gotoxy(2,39);
+	printf("Lavet af Mattias, Ida, Emil & Peter");
+}
 void border() {
+	fgcolor(7);
 	// 140x40
 			//Værdier vi benytter:
 			int  toplength = 138; //trukket 2 fra for at have hjørner med
@@ -27,6 +33,7 @@ void border() {
 			printf("%c",188);
 }
 void background() {
+	fgcolor(7);
 	printf("\n");
 	printf("                                                                                                                                             \n");
 	printf("                                                     *     *                                 *                        *                      \n");
@@ -100,14 +107,13 @@ void background() {
     }
     */
 }
-
 void menubox() {
 	// 140x40
 				//Værdier vi benytter:
 				int  toplength = 51; //trukket 2 fra for at have hjørner med
-				int  sidelength = 35;
+				int  sidelength = 39;
 				int  bottomlength = 45;
-				gotoxy(45,12);
+				gotoxy(45,9);
 				//toppen
 				printf("%c",201);
 				for (int j = 0; j <= (toplength); j++) {
@@ -115,23 +121,47 @@ void menubox() {
 				}
 				printf("%c",187);
 				//Sider
-				for (int i = 13; i< sidelength;i++) {
+				for (int i = 10; i< sidelength;i++) {
 					gotoxy(45,i);
 					printf("%c",186);
 					gotoxy(98,i);
 					printf("%c",186);
 				}
 				//bund
-				gotoxy(45,35);
+				gotoxy(45,39);
 				printf("%c",200);
 				for (int j = 0; j <= (toplength); j++) {
 								printf("%c",205);
 							}
 				printf("%c",188);
+				gotoxy(60,10);
+				write_menu();
 }
-void menu() {
-	background(); //FØRST
-	border();
-	menubox();
-	credits();
+void box() {
+	//Værdier vi benytter:
+					int  toplength = 51; //trukket 2 fra for at have hjørner med
+					int  sidelength = 39;
+					int  bottomlength = 45;
+					gotoxy(45,9);
+					//toppen
+					printf("%c",201);
+					for (int j = 0; j <= (toplength); j++) {
+						printf("%c",205);
+					}
+					printf("%c",187);
+					//Sider
+					for (int i = 10; i< sidelength;i++) {
+						gotoxy(45,i);
+						printf("%c",186);
+						gotoxy(98,i);
+						printf("%c",186);
+					}
+					//bund
+					gotoxy(45,39);
+					printf("%c",200);
+					for (int j = 0; j <= (toplength); j++) {
+									printf("%c",205);
+								}
+					printf("%c",188);
+					gotoxy(60,10);
 }
