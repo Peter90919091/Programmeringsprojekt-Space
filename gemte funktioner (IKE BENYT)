@@ -1,0 +1,583 @@
+void fgcolor(uint8_t foreground) {
+/*  Value      foreground     Value     foreground
+    ------------------------------------------------
+      0        Black            8       Dark Gray
+      1        Red              9       Light Red
+      2        Green           10       Light Green
+      3        Brown           11       Yellow
+      4        Blue            12       Light Blue
+      5        Purple          13       Light Purple
+      6        Cyan            14       Light Cyan
+      7        Light Gray      15       White
+*/
+  uint8_t type = 22;             // normal text
+	if (foreground > 7) {
+	  type = 1;                // bold text
+		foreground -= 8;
+	}
+  printf("%c[%d;%dm", ESC, type, foreground+30);
+}
+
+void bgcolor(uint8_t background) {
+/* IMPORTANT:   When you first use this function you cannot get back to true white background in HyperTerminal.
+   Why is that? Because ANSI does not support true white background (ANSI white is gray to most human eyes).
+                The designers of HyperTerminal, however, preferred black text on white background, which is why
+                the colors are initially like that, but when the background color is first changed there is no
+ 	              way comming back.
+   Hint:        Use resetbgcolor(); clrscr(); to force HyperTerminal into gray text on black background.
+
+    Value      Color
+    ------------------
+      0        Black
+      1        Red
+      2        Green
+      3        Brown
+      4        Blue
+      5        Purple
+      6        Cyan
+      7        Gray
+*/
+  printf("%c[%dm", ESC, background+40);
+}
+void color(uint8_t foreground, uint8_t background) {
+// combination of fgcolor() and bgcolor() - uses less bandwidth
+  uint8_t type = 22;             // normal text
+	if (foreground > 7) {
+	  type = 1;                // bold text
+		foreground -= 8;
+	}
+  printf("%c[%d;%d;%dm", ESC, type, foreground+30, background+40);
+}
+void resetbgcolor() {
+// gray on black text, no underline, no blink, no reverse
+  printf("%c[m", ESC);
+}
+void gotoxy(int x, int y) {
+	printf("%c[%d;%d%c",ESC,y,x,'H');
+}
+void ClearScreen () {
+	printf("%c[2J",ESC);
+	gotoxy(0,0);
+}
+void clreol() {
+	printf("%c[K",ESC);
+}
+void underline(uint8_t on) {
+	if (on) {
+	printf("%c[%d%c",ESC,04,'m');
+	}
+	else {
+		printf("%c[%d%c",ESC,24,'m');
+	}
+}
+void blink(uint8_t on) {
+	if (on) {
+		printf("%c[%d%c",ESC,05,'m');
+		}
+		else {
+			printf("%c[%d%c",ESC,25,'m');
+		}
+}
+void inverse(uint8_t on) {
+	if (on) {
+		printf("%c[%d%c",ESC,07,'m');
+		}
+		else {
+			printf("%c[%d%c",ESC,27,'m');
+		}
+}
+
+// Move cursor
+void cursor_up(int amount) {
+	printf("%c[%d%c",ESC,amount,'A');
+}
+void cursor_down(int amount) {
+	printf("%c[%d%c",ESC,amount,'B');
+}
+void cursor_right(int amount) {
+	printf("%c[%d%c",ESC,amount,'C');
+}
+void cursor_left(int amount) {
+	printf("%c[%d%c",ESC,amount,'D');
+}
+
+// SKÆRM
+#define LCD_WIDTH 128
+#define LCD_HEIGHT 32
+uint8_t display_buffer[LCD_WIDTH * LCD_HEIGHT / 8];
+void clear_display_buffer() {
+    for (int i = 0; i < LCD_WIDTH * LCD_HEIGHT / 8; i++) {
+        display_buffer[i] = 0x00;
+    }
+}
+void set_pixel(int x, int y) {
+    if (x < LCD_WIDTH && y < LCD_HEIGHT && x >= 0 && y >= 0) {
+        display_buffer[x + (y / 8) * LCD_WIDTH] |= (1 << (y % 8));
+    }
+}
+void update_display() {
+    lcd_push_buffer(display_buffer);
+}
+void initialize_display() {
+    lcd_init();
+}
+
+void printWelcomeBorder(int x1, int y1, int x2, int y2, const char *string, char stylelow, char styleside, char corner) {
+    int borderLength = x2 - x1 - 4;
+
+    // Draw top and bottom borders
+    for (int i = x1; i <= x2; i++) {
+        set_pixel(i, y1);
+        set_pixel(i, y2);
+    }
+
+    for (int i = y1 + 1; i <= y2 - 1; i++) {
+        set_pixel(x1, i);
+        set_pixel(x2, i);
+    }
+
+    int strLength = strlen(string);
+    int textStart = (borderLength - strLength) / 2;
+
+    if (textStart < 0) {
+        textStart = 0;
+        strLength = borderLength - 2;
+    }
+
+    for (int i = 0; i < strLength; i++) {
+        set_pixel(x1 + textStart + i + 2, y1 + 1);
+    }
+}
+void printMessage() {
+
+    // "F"
+    for (int i = 0; i < 16; i++) {
+        set_pixel(20, 8 + i);
+        set_pixel(40 + i, 8);
+        if (i < 8) set_pixel(40 + i, 15);
+    }
+
+    // "U"
+    for (int i = 0; i < 8; i++) {
+        set_pixel(60 + i, 8);
+        set_pixel(60, 8 + i);
+        set_pixel(67, 8 + i);
+    }
+
+    // "C"
+    for (int i = 0; i < 8; i++) {
+        set_pixel(80 + i, 8);
+        set_pixel(80 + i, 15);
+        set_pixel(80, 8 + i);
+    }
+
+    // "K"
+    for (int i = 0; i < 16; i++) {
+        set_pixel(100, 8 + i);
+        set_pixel(100 + i, 10);
+        if (i < 8) {
+            set_pixel(100 + i, 8 + i);
+            set_pixel(100 + i, 16 - i);
+        }
+    }
+}
+
+// BOKS
+//Draw Window
+void window(int x1,int y1,int x2,int y2, const char* message, uint8_t H_hjorne1, uint8_t H_hjorne2,uint8_t V_hjorne1,uint8_t V_hjorne2
+		,uint8_t Vandret,uint8_t Lodret) {
+	int const message_length = strlen(message);
+	int const toplength = x2-x1-message_length-2;
+	int const sidelength = y2-y1;
+	int const bottomlength = x2-x1;
+
+
+	gotoxy(x1,y1);
+//toppen
+	for (int j = 0; j <= (toplength)/2; j++) {
+		printf("%c",Vandret);
+	}
+	printf("%c", 185);
+	underline(1);
+	printf("%s",message);
+	underline(0);
+	printf("%c", 204);
+	for (int j =(toplength)/2 ; j <= (toplength)-1; j++) {
+			printf("%c",Vandret);
+		}
+	cursor_left(1);
+	printf("%c",H_hjorne2);
+	gotoxy(x1,y1);
+	printf("%c",V_hjorne1);
+	gotoxy(x1,y1);
+	cursor_down(1);
+	for (int i = 0; i < sidelength-1 ;i++) {
+			printf("%c",Lodret);
+			cursor_right(bottomlength-1);
+			printf("%c",Lodret);
+			cursor_down(1);
+			cursor_left(bottomlength+1);
+	}
+	printf("%c",V_hjorne2);
+	for (int j =0 ; j <= bottomlength-2; j++) {
+				printf("%c",Vandret);
+			}
+	printf("%c",H_hjorne1);
+}
+
+
+void delay_ms(int milliseconds) {
+    int delay_count = milliseconds;
+
+    while (delay_count > 0) {
+    	delay_count -= 1;
+    }
+}
+void square (int x1, int y1, int x2, int y2 ) {
+	int  message_length = strlen("Count=   ");
+		int  toplength = x2-x1-message_length-2;
+		int  sidelength = y2-y1;
+		int  bottomlength = x2-x1;
+		gotoxy(x1,y1);
+		/// Print boarder
+		//toppen
+		for (int j = 0; j <= (toplength)/2; j++) {
+			printf("%c",205);
+		}
+		printf("%c", 185);
+		underline(1);
+		printf("Count=   ");
+		underline(0);
+		printf("%c", 204);
+		for (int j =(toplength)/2 ; j <= (toplength)-1; j++) {
+				printf("%c",205);
+			}
+		//Hjørner
+		cursor_left(1);
+		printf("%c",187);
+		gotoxy(x1,y1);
+		printf("%c",201);
+		gotoxy(x1,y1);
+		cursor_down(1);
+		// sider
+		for (int i = 0; i < sidelength-1 ;i++) {
+				printf("%c",186);
+				cursor_right(bottomlength-1);
+				printf("%c",186);
+				cursor_down(1);
+				cursor_left(bottomlength+1);
+		}
+		printf("%c",200);
+		//bunden
+		for (int j =0 ; j <= bottomlength-2; j++) {
+					printf("%c",205);
+				}
+		printf("%c",188);
+}
+void ballgame(int x1,int y1,int x2,int y2) {
+	//print firkant
+	square(x1, y1, x2, y2);
+	int velocity = 300000;
+	gotoxy(x1+1,y1+2);
+	int minX = x1+1;
+	int maxX = x2-1;
+	int minY = y1+1;
+	int maxY = y2-1;
+	int BallX = minX;
+	int BallY = minY;
+	int value_x = 1;
+	int value_y = 1;
+	int Max_Bounce = 200000;
+	int count = 0;
+	printf("o");
+
+	for (int Bounces = 0; Bounces <=Max_Bounce; Bounces++) {
+		if (BallX == minX) {
+			value_x = 1;
+			cursor_left(1);
+			printf(" ");
+			printf("o");
+			BallX += value_x;
+			count += 1;
+			printf("%c[s",ESC);
+			gotoxy((x2-x1)/2+8,y1);
+			printf("%d",count);
+			printf("%c[u",ESC);
+
+
+
+		}
+		else if (BallX == maxX) {
+			value_x = -1;
+			cursor_left(1);
+			printf(" ");
+			cursor_left(2);
+			printf("o");
+			BallX += value_x;
+			count += 1;
+			printf("%c[s",ESC);
+			gotoxy((x2-x1)/2+8,y1);
+						printf("%d",count);
+						printf("%c[u",ESC);
+
+				}
+		else if (BallY == minY-1) {
+			value_y = 1;
+			cursor_left(1);
+			printf(" ");
+			cursor_left(1);
+			cursor_down(1);
+			printf("o");
+			BallY += value_y;
+			count += 1;
+			printf("%c[s",ESC);
+			gotoxy((x2-x1)/2+8,y1);
+						printf("%d",count);
+						printf("%c[u",ESC);
+
+
+						}
+		else if (BallY == maxY-1) {
+			value_y = -1;
+			cursor_left(1);
+			printf(" ");
+			cursor_left(1);
+			cursor_up(1);
+			printf("o");
+			BallY += value_y;
+			count += 1;
+			printf("%c[s",ESC);
+			gotoxy((x2-x1)/2+8,y1);
+						printf("%d",count);
+						printf("%c[u",ESC);
+
+						}
+
+		else {
+			BallX += value_x;
+			BallY += value_y;
+
+
+			//Bevægelse venstre op/ned
+			if (value_x == -1 && value_y == 1) {
+				cursor_left(1);
+				printf(" ");
+				cursor_left(2);
+				cursor_down(1);
+			}
+			if (value_x == -1 && value_y == -1) {
+				cursor_left(1);
+				printf(" ");
+				cursor_left(2);
+				cursor_up(1);
+			}
+			//Bevægelse HØjre op/ned
+			if (value_x == 1 && value_y == 1) {
+				cursor_left(1);
+				printf(" ");
+				cursor_down(1);
+			}
+			if (value_x == 1 && value_y == -1) {
+				cursor_left(1);
+				printf(" ");
+				cursor_up(1);
+			}
+			printf("o");
+			delay_ms(velocity);
+		}
+	}
+}
+
+
+uint16_t port(){
+// PA4 UP
+RCC->AHBENR |= RCC_AHBPeriph_GPIOA; // Enable clock for GPIO Port A PA0 = 110
+GPIOA->MODER &= ~(0x00000003 << (4 * 2)); // Clear mode register
+GPIOA->MODER |= (0x00000000 << (4 * 2)); // Set mode register (0x00 – Input, 0x01 - Output, 0x02 - Alternate Function, 0x03 - Analog in/out)
+GPIOA->PUPDR &= ~(0x00000003 << (4 * 2)); // Clear push/pull register
+GPIOA->PUPDR |= (0x00000002 << (4 * 2)); // Set push/pull register (0x00 -No pull, 0x01 - Pull-up, 0x02 - Pull-down)
+uint16_t val_UP = GPIOA->IDR & (0x0001 << 4); //Read from pin PA0
+if (val_UP != 0) {
+	val_UP=1;
+}
+// PB0 DOWN
+RCC->AHBENR |= RCC_AHBPeriph_GPIOB; // Enable clock for GPIO Port A PA0 = 110
+GPIOB->MODER &= ~(0x00000003 << (0 * 2)); // Clear mode register
+GPIOB->MODER |= (0x00000000 << (0 * 2)); // Set mode register (0x00 – Input, 0x01 - Output, 0x02 - Alternate Function, 0x03 - Analog in/out)
+GPIOB->PUPDR &= ~(0x00000003 << (0 * 2)); // Clear push/pull register
+GPIOB->PUPDR |= (0x00000002 << (0 * 2)); // Set push/pull register (0x00 -No pull, 0x01 - Pull-up, 0x02 - Pull-down)
+uint16_t val_DOWN = GPIOB->IDR & (0x0001 << 0); //Read from pin PA0
+if (val_DOWN != 0) {
+	val_DOWN=1;
+}
+// PC0 RIGHT
+RCC->AHBENR |= RCC_AHBPeriph_GPIOC; // Enable clock for GPIO Port A PA0 = 110
+GPIOC->MODER &= ~(0x00000003 << (0 * 2)); // Clear mode register
+GPIOC->MODER |= (0x00000000 << (0 * 2)); // Set mode register (0x00 – Input, 0x01 - Output, 0x02 - Alternate Function, 0x03 - Analog in/out)
+GPIOC->PUPDR &= ~(0x00000003 << (0 * 2)); // Clear push/pull register
+GPIOC->PUPDR |= (0x00000002 << (0 * 2)); // Set push/pull register (0x00 -No pull, 0x01 - Pull-up, 0x02 - Pull-down)
+uint16_t val_RIGHT = GPIOC->IDR & (0x0001 << 0); //Read from pin PA0
+if (val_RIGHT != 0) {
+	val_RIGHT=1;
+}
+// PC1 LEFT
+RCC->AHBENR |= RCC_AHBPeriph_GPIOC; // Enable clock for GPIO Port A PA0 = 110
+GPIOC->MODER &= ~(0x00000003 << (1 * 2)); // Clear mode register
+GPIOC->MODER |= (0x00000000 << (1 * 2)); // Set mode register (0x00 – Input, 0x01 - Output, 0x02 - Alternate Function, 0x03 - Analog in/out)
+GPIOC->PUPDR &= ~(0x00000003 << (1 * 2)); // Clear push/pull register
+GPIOC->PUPDR |= (0x00000002 << (1 * 2)); // Set push/pull register (0x00 -No pull, 0x01 - Pull-up, 0x02 - Pull-down)
+uint16_t val_LEFT = GPIOC->IDR & (0x0001 << 1); //Read from pin PA0
+if (val_LEFT != 0) {
+	val_LEFT=1;
+}
+// PB5 CENTER
+RCC->AHBENR |= RCC_AHBPeriph_GPIOB; // Enable clock for GPIO Port A PA0 = 110
+GPIOB->MODER &= ~(0x00000003 << (5 * 2));
+GPIOB->MODER |= (0x00000000 << (5 * 2));
+GPIOB->PUPDR &= ~(0x00000003 << (5 * 2));
+GPIOB->PUPDR |= (0x00000002 << (1 * 2));
+uint16_t val_CENTER = GPIOB->IDR & (0x0001 << 5);
+if (val_CENTER != 0) {
+	 val_CENTER=1;
+}
+int all_bits = val_CENTER + val_RIGHT + val_LEFT + val_UP + val_DOWN;
+if (all_bits != 0) {
+uint8_t bit[8] = {0,0,0,val_CENTER,val_RIGHT,val_LEFT,val_DOWN,val_UP};
+    uint8_t result = 0;
+
+    for (int i = 0; i < 8; i++) {
+        result = (result << 1) | bit[i];
+    }
+    return result;
+}
+}
+void readJoystick() {
+	if (port() != 0) {
+	uint8_t value = port();
+	printf("Binary: %d\n", value);
+	}
+}
+void setLed() {
+	int value = port();
+	if (value == 8) { // blue PA9
+		GPIOA->ODR &= ~(1 << 9); //Set pin PA1 to high
+					GPIOA-> BSRR &= ~(1<<9);
+				RCC->AHBENR |= RCC_AHBPeriph_GPIOA; // Enable clock for GPIO Port A PA0 = 110
+				GPIOA->OSPEEDR &= ~(0x00000003 << (9 * 2)); // Clear speed register
+				GPIOA->OSPEEDR |= (0x00000002 << (9 * 2)); // set speed register (0x01 - 10MHz, 0x02 - 2 MHz, 0x03 - 50 MHz)
+				GPIOA->OTYPER &= ~(0x0001 << (9 * 1)); // Clear output type register
+				GPIOA->OTYPER |= (0x0000 << (9)); // Set output type register (0x00 -Push pull, 0x01 - Open drain)
+				GPIOA->MODER &= ~(0x00000003 << (9 * 2)); // Clear mode register
+				GPIOA->MODER |= (0x00000001 << (9 * 2)); // Set mode register (0x00 –Input, 0x01 - Output, 0x02 - Alternate Function, 0x03 - Analog in/out)
+				GPIOA->ODR |= (0 << 9); //Set pin PA1 to high
+				GPIOA-> BSRR |= (0<<9);
+			}
+	if (value == 4) { // grøn PC7
+		GPIOC->ODR &= ~(1 << 7); //Set pin PA1 to high
+		GPIOC-> BSRR &= ~(1<<7);
+			RCC->AHBENR |= RCC_AHBPeriph_GPIOC; // Enable clock for GPIO Port A PA0 = 110
+			GPIOC->OSPEEDR &= ~(0x00000003 << (7 * 2)); // Clear speed register
+			GPIOC->OSPEEDR |= (0x00000002 << (7 * 2)); // set speed register (0x01 - 10MHz, 0x02 - 2 MHz, 0x03 - 50 MHz)
+			GPIOC->OTYPER &= ~(0x0001 << (7 * 1)); // Clear output type register
+			GPIOC->OTYPER |= (0x0000 << (7)); // Set output type register (0x00 -Push pull, 0x01 - Open drain)
+			GPIOC->MODER &= ~(0x00000003 << (7 * 2)); // Clear mode register
+			GPIOC->MODER |= (0x00000001 << (7 * 2)); // Set mode register (0x00 –Input, 0x01 - Output, 0x02 - Alternate Function, 0x03 - Analog in/out)
+			GPIOC->ODR |= (0 << 7); //Set pin PA1 to high
+			GPIOC-> BSRR |= (0<<7);
+		}
+	if (value == 1) { // red PB4
+				GPIOB->ODR &= ~(1 << 4); //Set pin PA1 to high
+				GPIOB-> BSRR &= ~(1<<4);
+				RCC->AHBENR |= RCC_AHBPeriph_GPIOB; // Enable clock for GPIO Port A PA0 = 110
+				GPIOB->OSPEEDR &= ~(0x00000003 << (4 * 2)); // Clear speed register
+				GPIOB->OSPEEDR |= (0x00000002 << (4 * 2)); // set speed register (0x01 - 10MHz, 0x02 - 2 MHz, 0x03 - 50 MHz)
+				GPIOB->OTYPER &= ~(0x0001 << (4 * 1)); // Clear output type register
+				GPIOB->OTYPER |= (0x0000 << (4)); // Set output type register (0x00 -Push pull, 0x01 - Open drain)
+				GPIOB->MODER &= ~(0x00000003 << (4 * 2)); // Clear mode register
+				GPIOB->MODER |= (0x00000001 << (4 * 2)); // Set mode register (0x00 –Input, 0x01 - Output, 0x02 - Alternate Function, 0x03 - Analog in/out)
+				GPIOB->ODR |= (0 << 4); //Set pin PA1 to high
+				GPIOB-> BSRR |= (0<<4);
+			}
+	if (value == 2) {
+		RCC->AHBENR |= RCC_AHBPeriph_GPIOA; // Enable clock for GPIO Port A PA0 = 110
+				GPIOA->ODR |= (1 << 9); //Set pin PA1 to high
+				GPIOA-> BSRR |= (1<<9);
+				RCC->AHBENR |= RCC_AHBPeriph_GPIOC;
+				GPIOC->ODR |= (1 << 7); //Set pin PA1 to high
+				GPIOC-> BSRR |= (1<<7);
+
+				RCC->AHBENR |= RCC_AHBPeriph_GPIOB;
+				GPIOB->ODR |= (1 << 4); //Set pin PA1 to high
+				GPIOB-> BSRR |= (1<<4);
+	}
+
+}
+
+
+void configpins() {
+
+	RCC->AHBENR |= RCC_AHBPeriph_GPIOA; //enable clock
+	//config A1 & A0
+	GPIOA->MODER &= ~(0x00000003 << (0 * 2));
+	GPIOA->MODER |= (0x00000000 << (0 * 2));
+	GPIOA->PUPDR &= ~(0x00000003 << (0 * 2));
+	GPIOA->PUPDR |= (0x00000002 << (0 * 2));
+	GPIOA->MODER &= ~(0x00000003 << (1 * 2));
+	GPIOA->MODER |= (0x00000000 << (1 * 2));
+	GPIOA->PUPDR &= ~(0x00000003 << (1 * 2));
+	GPIOA->PUPDR |= (0x00000002 << (1 * 2));
+
+}
+void configADC() {
+	RCC->CFGR2 &= ~RCC_CFGR2_ADCPRE12; // Clear ADC12 prescaler bits
+	RCC->CFGR2 |= RCC_CFGR2_ADCPRE12_DIV6; // Set ADC12 prescaler to 6
+	RCC->AHBENR |= RCC_AHBPeriph_ADC12; // Enable clock for ADC12
+
+	ADC1->CR = 0x00000000; // Clear CR register
+	ADC1->CFGR &= 0xFDFFC007; // Clear ADC1 config register
+	ADC1->SQR1 &= ~ADC_SQR1_L; // Clear regular sequence register
+
+	ADC1->CR |= 0x10000000; // Enable internal ADC voltage regulator
+	for (int i = 0 ; i < 1000 ; i++) {} // Wait for about 16 microseconds
+
+	ADC1->CR |= 0x80000000; // Start ADC1 calibration
+	while (!(ADC1->CR & 0x80000000)); // Wait for calibration to finish
+	for (int i = 0 ; i < 100 ; i++) {} // Wait for a little while
+
+	ADC1->CR |= 0x01; // Enable ADC1 (0x01 - Enable, 0x02 - Disable)
+	while (!(ADC1->ISR & 0x00000001)); // Wait until ready
+
+	ADC_RegularChannelConfig(ADC1, ADC_Channel_1, 1, ADC_SampleTime_1Cycles5);
+
+
+}
+void getmeasure1() {
+	configpins();
+	configADC();
+	ADC_StartConversion(ADC1); // Start ADC read
+	while (ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC) == 0); // Wait for ADC read
+	uint16_t x = ADC_GetConversionValue(ADC1); // Read the ADC value
+
+	uint16_t valpin0 = GPIOA->IDR & (0x0001 << 0); //Read from pin PA0
+	uint16_t valpin1 = GPIOA->IDR & (0x0001 << 1); //Read from pin PA1
+	valpin0 *= x;
+	valpin1 *= x;
+	printf("Value = %02ld\n", valpin0);
+	printf("Value = %02ld\n", valpin1);
+}
+void getmeasure2() {
+	configpins();
+	configADC();
+	ADC_StartConversion(ADC1); // Start ADC read
+		while (ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC) == 0); // Wait for ADC read
+		uint16_t x = ADC_GetConversionValue(ADC1); // Read the ADC value
+
+		uint16_t valpin0 = GPIOA->IDR & (0x0001 << 0); //Read from pin PA0
+		uint16_t valpin1 = GPIOA->IDR & (0x0001 << 1); //Read from pin PA1
+		valpin0 *= x;
+		valpin1 *= x;
+		char str[7];
+		sprintf(str, "val = %2d", valpin0);
+		sprintf(str, "val = %2d", valpin1);
+
+}
