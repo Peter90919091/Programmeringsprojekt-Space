@@ -34,6 +34,19 @@ int MenuControls();
 // #### dataread.c ####
 uint16_t Joystickport();
 // #### ansi.c ####
-
+void fgcolor();
+void blink();
+void voidgotoxy();
+void ClearScreen();
+void cursor_up(int amount);
+void cursor_down(int amount);
+void cursor_right(int amount);
+void cursor_left(int amount);
+// #### design.c ####
+void border();
+void background();
+void menubox();
+void box();
+void hideCursor();
 /*void addWhateverFunctionsYouNeed( type parameter );*/
 #endif // _HEADER_FILE_H_
