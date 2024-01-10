@@ -34,7 +34,7 @@ int MenuControls();
 // #### dataread.c ####
 uint16_t Joystickport();
 // #### ansi.c ####
-void fgcolor();
+void fgcolor(uint8_t foreground);
 void blink();
 void voidgotoxy();
 void ClearScreen();
