@@ -1,3 +1,4 @@
+#include "Header_file.h"
 int main(void) {
 	uart_init(9600);
 	hideCursor();
