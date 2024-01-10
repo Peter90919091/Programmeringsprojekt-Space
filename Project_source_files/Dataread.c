@@ -1,45 +1,41 @@
-void hideCursor() {
-    printf("\e[?25l"); // ANSI escape code to hide cursor
-}
-
 uint16_t Joystickport(){
 // PA4 UP
 RCC->AHBENR |= RCC_AHBPeriph_GPIOA; // Enable clock for GPIO Port A PA0 = 110
-GPIOA->MODER &= ~(0x00000003 << (4 * 2)); 
-GPIOA->MODER |= (0x00000000 << (4 * 2));
-GPIOA->PUPDR &= ~(0x00000003 << (4 * 2)); 
-GPIOA->PUPDR |= (0x00000002 << (4 * 2));
-uint16_t val_UP = GPIOA->IDR & (0x0001 << 4); 
+GPIOA->MODER &= ~(0x00000003 << (4 * 2)); // Clear mode register
+GPIOA->MODER |= (0x00000000 << (4 * 2)); // Set mode register (0x00 – Input, 0x01 - Output, 0x02 - Alternate Function, 0x03 - Analog in/out)
+GPIOA->PUPDR &= ~(0x00000003 << (4 * 2)); // Clear push/pull register
+GPIOA->PUPDR |= (0x00000002 << (4 * 2)); // Set push/pull register (0x00 -No pull, 0x01 - Pull-up, 0x02 - Pull-down)
+uint16_t val_UP = GPIOA->IDR & (0x0001 << 4); //Read from pin PA0
 if (val_UP != 0) {
 	val_UP=1;
 }
 // PB0 DOWN
 RCC->AHBENR |= RCC_AHBPeriph_GPIOB; // Enable clock for GPIO Port A PA0 = 110
-GPIOB->MODER &= ~(0x00000003 << (0 * 2)); 
-GPIOB->MODER |= (0x00000000 << (0 * 2));
-GPIOB->PUPDR &= ~(0x00000003 << (0 * 2)); 
-GPIOB->PUPDR |= (0x00000002 << (0 * 2)); 
+GPIOB->MODER &= ~(0x00000003 << (0 * 2)); // Clear mode register
+GPIOB->MODER |= (0x00000000 << (0 * 2)); // Set mode register (0x00 – Input, 0x01 - Output, 0x02 - Alternate Function, 0x03 - Analog in/out)
+GPIOB->PUPDR &= ~(0x00000003 << (0 * 2)); // Clear push/pull register
+GPIOB->PUPDR |= (0x00000002 << (0 * 2)); // Set push/pull register (0x00 -No pull, 0x01 - Pull-up, 0x02 - Pull-down)
 uint16_t val_DOWN = GPIOB->IDR & (0x0001 << 0); //Read from pin PA0
 if (val_DOWN != 0) {
 	val_DOWN=1;
 }
 // PC0 RIGHT
 RCC->AHBENR |= RCC_AHBPeriph_GPIOC; // Enable clock for GPIO Port A PA0 = 110
-GPIOC->MODER &= ~(0x00000003 << (0 * 2));
-GPIOC->MODER |= (0x00000000 << (0 * 2));
-GPIOC->PUPDR &= ~(0x00000003 << (0 * 2)); 
-GPIOC->PUPDR |= (0x00000002 << (0 * 2));
-uint16_t val_RIGHT = GPIOC->IDR & (0x0001 << 0); 
+GPIOC->MODER &= ~(0x00000003 << (0 * 2)); // Clear mode register
+GPIOC->MODER |= (0x00000000 << (0 * 2)); // Set mode register (0x00 – Input, 0x01 - Output, 0x02 - Alternate Function, 0x03 - Analog in/out)
+GPIOC->PUPDR &= ~(0x00000003 << (0 * 2)); // Clear push/pull register
+GPIOC->PUPDR |= (0x00000002 << (0 * 2)); // Set push/pull register (0x00 -No pull, 0x01 - Pull-up, 0x02 - Pull-down)
+uint16_t val_RIGHT = GPIOC->IDR & (0x0001 << 0); //Read from pin PA0
 if (val_RIGHT != 0) {
 	val_RIGHT=1;
 }
 // PC1 LEFT
 RCC->AHBENR |= RCC_AHBPeriph_GPIOC; // Enable clock for GPIO Port A PA0 = 110
-GPIOC->MODER &= ~(0x00000003 << (1 * 2)); 
-GPIOC->MODER |= (0x00000000 << (1 * 2));
-GPIOC->PUPDR &= ~(0x00000003 << (1 * 2));
-GPIOC->PUPDR |= (0x00000002 << (1 * 2)); 
-uint16_t val_LEFT = GPIOC->IDR & (0x0001 << 1); 
+GPIOC->MODER &= ~(0x00000003 << (1 * 2)); // Clear mode register
+GPIOC->MODER |= (0x00000000 << (1 * 2)); // Set mode register (0x00 – Input, 0x01 - Output, 0x02 - Alternate Function, 0x03 - Analog in/out)
+GPIOC->PUPDR &= ~(0x00000003 << (1 * 2)); // Clear push/pull register
+GPIOC->PUPDR |= (0x00000002 << (1 * 2)); // Set push/pull register (0x00 -No pull, 0x01 - Pull-up, 0x02 - Pull-down)
+uint16_t val_LEFT = GPIOC->IDR & (0x0001 << 1); //Read from pin PA0
 if (val_LEFT != 0) {
 	val_LEFT=1;
 }
@@ -60,7 +56,7 @@ uint8_t bit[8] = {0,0,0,val_CENTER,val_RIGHT,val_LEFT,val_DOWN,val_UP};
 
     for (int i = 0; i < 8; i++) {
         result = (result << 1) | bit[i];
-    }delay_ms(2000000);
+    }
     return result;
 }
 }
