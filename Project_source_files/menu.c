@@ -20,12 +20,14 @@ void menuHELP() {
 	box();
 	write_help_header();
 	write_exit();
+	lcd_write_string("A tutorial of the game",2);
 	HelpControls();
 
 }
 void menuPLAY() {
 	background();
 	border();
+	lcd_write_string("Select a level to play",2)
 	initialize(3000000);
 	//BORDER FOR LEVELS
 	gotoxy(37,15);
@@ -61,6 +63,8 @@ void menuSCORE() {
 	box();
 	write_exit();
 	write_highscore();
+
+	lcd_write_string("Look at your highscore!",2);
 	ScoreControls();
 }
 void menu() {
@@ -69,6 +73,7 @@ void menu() {
 	border();
 	write_Welcome();
 	menubox();
+	lcd_write_string("Please select a menu", 3);
 	credits();
 	int value = MenuControls();
 	if (value == 1) {
