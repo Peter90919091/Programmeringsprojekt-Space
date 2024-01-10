@@ -583,3 +583,25 @@ void write_numbers(int number,int x,int y) {
 			cursor_down(1);cursor_left(5);printf("%c", 178);printf("%c", 178);printf("%c", 178);printf("%c", 178);printf("%c", 178);
 		}
 }
+void asteroid(int x, int y){
+	fgcolor(3);
+	gotoxy(x,y);
+    printf("      .-\"\"\"\"\"\"-.\n");
+    gotoxy(x,y+1);
+    printf("    .-'   ()       '-.\n");
+    gotoxy(x,y+2);
+    printf("   .'          O       '.\n");
+    gotoxy(x,y+3);
+    printf(" /   O      .    ()       \\\n");
+    gotoxy(x,y+4);
+    printf(":           .           o  :\n");
+    gotoxy(x,y+5);
+    printf(" :  .   ()   .      '    :\n");
+    gotoxy(x,y+6);
+    printf("  \\           .    .    /\n");
+    gotoxy(x,y+7);
+    printf("   '.()   O        o  .'\n");
+    gotoxy(x,y+8);
+    printf("       '-.______ _.-'\n");
+    fgcolor(7);
+}
