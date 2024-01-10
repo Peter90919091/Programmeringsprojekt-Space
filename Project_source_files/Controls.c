@@ -1,3 +1,13 @@
+#include <string.h>
+#include <stdio.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <math.h>
+#include <unistd.h>
+#include "system_stm32f30x.h"
+#include "stm32f30x_conf.h"
+#include "30010_io.h"
 int ScoreControls() {
 	int value = 0;
 	while(1) {value = Joystickport();
