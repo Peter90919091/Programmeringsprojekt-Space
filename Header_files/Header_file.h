@@ -66,6 +66,7 @@ void menu();
 
 //initiate_gameplay.c
 void initiate_rocket(int x, int y);
+void initiate_enemies(int x, int y)
 /*void addWhateverFunctionsYouNeed( type parameter );*/
 #endif // _HEADER_FILE_H_
 
