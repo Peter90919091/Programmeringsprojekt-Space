@@ -31,6 +31,7 @@ void write_highscore();
 void write_exitplay();
 void write_play_header();
 void write_numbers(int number,int x,int y)
+void asteroid(int x, int y);
 // #### Controls.c ####
 int ScoreControls();
 int HelpControls();
