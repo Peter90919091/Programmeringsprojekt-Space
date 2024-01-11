@@ -18,6 +18,7 @@
 /* Exported macro -------------------------------------------------------*/
 /* #define			 // Whatever needs to be defined < */
 /* Exported functions -------------------------------------------------- */
+
 // #### MENU_TEXT.c ####
 void write_score();
 void write_play();
@@ -32,13 +33,16 @@ void write_exitplay();
 void write_play_header();
 void write_numbers(int number,int x,int y)
 void asteroid(int x, int y);
+
 // #### Controls.c ####
 int ScoreControls();
 int HelpControls();
 int MenuControls();
+
 // #### dataread.c ####
 uint16_t Joystickport();
 void lcd_write_string(const char* input_string, int line_number);
+
 // #### ansi.c ####
 void fgcolor(uint8_t foreground);
 void blink();
@@ -48,6 +52,7 @@ void cursor_up(int amount);
 void cursor_down(int amount);
 void cursor_right(int amount);
 void cursor_left(int amount);
+
 // #### design.c ####
 void border();
 void background();
@@ -56,11 +61,14 @@ void box();
 void hideCursor();
 void credits();
 void Smallbox();
+void help_design();
+
 // #### menu.c ####
 void menuHELP();
 void menuSCORE();
 void menuPLAY();
 void menu();
+
 // #### game.c ####
 
 
