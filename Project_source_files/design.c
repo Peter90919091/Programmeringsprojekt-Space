@@ -4,6 +4,17 @@
  *  Created on: 10. jan. 2024
  *      Author: Matti
  */
+#include <string.h>
+#include <stdio.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <math.h>
+#include <unistd.h>
+#include "system_stm32f30x.h"
+#include "stm32f30x_conf.h"
+#include "30010_io.h"
+#include "Header_file.h"
 void hideCursor() {printf("\e[?25l");}
 void credits() {
 	gotoxy(2,39);
@@ -201,4 +212,12 @@ void Smallbox() {
 					printf("%c",188);
 }
 
+void help_design() {
+	box();
+	gotoxy(47,18);
+	printf("Move the spaceship right or left using joystick");
+	gotoxy(47,23);
+	printf("Avoid obstacles");
+	asteroid(55,25);
 
+}
