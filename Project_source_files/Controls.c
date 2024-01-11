@@ -28,6 +28,57 @@ int HelpControls() {
 	}
 }
 
+int levelControls() {
+	int cursor_leftright = 38;
+	int prev_cursor_leftright = 3;
+	int shot_x = 0;
+	int shot_y = 0;
+	initiate_rocket(cursor_leftright, 0);
+	blink(0);
+	fgcolor(7);
+	int shot = 0;
+	while(1) {
+		int value =  Joystickport();
+	if (value == 4 ) { //LEFT
+						if (cursor_leftright> 38) {cursor_leftright -= 2;}
+					}
+			if (value == 8) { //RIGHT
+						if (cursor_leftright< 103) {cursor_leftright += 2;}
+					}
+	if (cursor_leftright != prev_cursor_leftright) {
+						blink(0);
+						fgcolor(7);
+						delete_rocket(prev_cursor_leftright , 0);
+						prev_cursor_leftright = cursor_leftright;
+						initiate_rocket(cursor_leftright, 0);
+							}
+	if (value == 16) { //SKUD
+		gotoxy(cursor_leftright,35);
+		printf("o");
+		shot_x = cursor_leftright;
+		shot_y = 35;
+		shot = 1;
+		}
+	if (shot == 1) {
+		if (shot_y> 2) {
+		gotoxy(shot_x,--shot_y);
+				printf("o");
+				cursor_left(1);
+				cursor_down(1);
+				printf(" ");
+		}
+		else {
+			cursor_left(1);
+			cursor_up(1);
+			printf(" ");
+			shot = 0;
+
+		}
+	}
+	}
+
+}
+
 int PlayControls() {
 		int cursor_updown = 0;
 		int cursor_leftright = 0;
@@ -64,39 +115,48 @@ int PlayControls() {
 		/// CURSORPUSH level 1-4
 		if (value == 16 && cursor_updown == 1 && cursor_leftright== 0 )  { //LEVEL1
 			ClearScreen();
+			level_1();
 			return 1;
 		}
 		if (value == 16 && cursor_updown == 1 && cursor_leftright== 1 )  { //LEVEL2
 					ClearScreen();
+					level_2();
 					return 2;
 				}
 		if (value == 16 && cursor_updown == 1 && cursor_leftright== 2 )  { //LEVEL3
 					ClearScreen();
+					level_3();
 					return 3;
 				}
 		if (value == 16 && cursor_updown == 1 && cursor_leftright== 3 )  { //LEVEL4
 					ClearScreen();
+					level_4();
 					return 4;
 				}
 		if (value == 16 && cursor_updown == 1 && cursor_leftright== 3 )  { //LEVEL5
 							ClearScreen();
+							level_5();
 							return 5;
 						}
 		/// CURSORPUSH level 5-8
 				if (value == 16 && cursor_updown == 2 && cursor_leftright== 0 )  { //LEVEL6
 					ClearScreen();
+					level_6();
 					return 6;
 				}
 				if (value == 16 && cursor_updown == 2 && cursor_leftright== 1 )  { //LEVEL7
 							ClearScreen();
+							level_7();
 							return 7;
 						}
 				if (value == 16 && cursor_updown == 2 && cursor_leftright== 2 )  { //LEVEL8
 							ClearScreen();
+							level_8();
 							return 8;
 						}
 				if (value == 16 && cursor_updown == 2 && cursor_leftright== 3 )  { //LEVEL9
 							ClearScreen();
+							level_9();
 							return 9;
 						}
 		/// CURSOR PLAY
