@@ -25,7 +25,6 @@ void menuHELP() {
 	write_exit();
 	lcd_write_string("A tutorial of the game",2);
 	HelpControls();
-
 }
 void menuPLAY() {
 	background();
@@ -56,7 +55,6 @@ void menuPLAY() {
 	gotoxy(97,23);
 	Smallbox();
 	PlayControls();
-
 
 }
 void menuSCORE() {
@@ -93,3 +91,4 @@ void menu() {
 		menuPLAY();
 		}
 }
+
