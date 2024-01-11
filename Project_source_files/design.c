@@ -49,6 +49,58 @@ void border() {
 						}
 			printf("%c",188);
 }
+void game_border() {
+	fgcolor(7);
+	// 140x40
+			//Værdier vi benytter:
+			int  toplength = 138; //trukket 2 fra for at have hjørner med
+			int  sidelength = 40;
+			int  bottomlength = 138;
+			gotoxy(0,0);
+			//toppen
+			printf("%c",201);
+			for (int j = 0; j <= (toplength)/4 - 1; j++) {
+				printf("%c",205);
+			}
+			printf("%c",203);
+			for (int j = 0; j <= (toplength)/2-1; j++) {
+							printf("%c",205);
+						}
+			printf("%c",203);
+						for (int j = 0; j <= (toplength)/4 - 1; j++) {
+										printf("%c",205);
+									}
+			printf("%c",187);
+			//Sider
+			for (int i = 2; i< sidelength;i++) {
+				gotoxy(toplength/4+2,i);
+				printf("%c",186);
+				gotoxy(toplength/4+toplength/2+3,i);
+				printf("%c",186);
+			}
+			for (int i = 2; i< sidelength;i++) {
+							gotoxy(0,i);
+							printf("%c",186);
+							gotoxy(141,i);
+							printf("%c",186);
+						}
+			//bund
+			gotoxy(1,40);
+			printf("%c",200);
+						for (int j = 0; j <= (toplength)/4 - 1; j++) {
+							printf("%c",205);
+						}
+						printf("%c",202);
+						for (int j = 0; j <= (toplength)/2-1; j++) {
+										printf("%c",205);
+									}
+						printf("%c",202);
+									for (int j = 0; j <= (toplength)/4 - 1; j++) {
+													printf("%c",205);
+												}
+			printf("%c",188);
+}
+
 void background() {
 	fgcolor(7);
 	printf("\n");
@@ -211,7 +263,6 @@ void Smallbox() {
 								}
 					printf("%c",188);
 }
-
 void help_design() {
 	box();
 	gotoxy(47,18);
