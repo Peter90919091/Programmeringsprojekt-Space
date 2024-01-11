@@ -18,7 +18,6 @@
 /* Exported macro -------------------------------------------------------*/
 /* #define			 // Whatever needs to be defined < */
 /* Exported functions -------------------------------------------------- */
-
 // #### MENU_TEXT.c ####
 void write_score();
 void write_play();
@@ -38,6 +37,8 @@ void asteroid(int x, int y);
 int ScoreControls();
 int HelpControls();
 int MenuControls();
+int PlayControls();
+int levelControls();
 
 // #### dataread.c ####
 uint16_t Joystickport();
@@ -61,6 +62,7 @@ void box();
 void hideCursor();
 void credits();
 void Smallbox();
+void game_border();
 void help_design();
 
 // #### menu.c ####
@@ -69,12 +71,30 @@ void menuSCORE();
 void menuPLAY();
 void menu();
 
-// #### game.c ####
-
-
 //initiate_gameplay.c
+void initiate_rocket(int x1, int y1);
+
+// #### game.c ####
 void initiate_rocket(int x, int y);
 void initiate_enemies(int x, int y);
+void initialize(int time_between);
+void delete_rocket(int x, int y);
+void initiate_shot(int x, int y);
+void initialize_screen();
+void display_screen();
+void initiate_shot(int x, int y);
+
+//#### levels.c ####
+void level_1();
+void level_2();
+void level_3();
+void level_4();
+void level_5();
+void level_6();
+void level_7();
+void level_8();
+void level_9();
+
 /*void addWhateverFunctionsYouNeed( type parameter );*/
 #endif // _HEADER_FILE_H_
 
