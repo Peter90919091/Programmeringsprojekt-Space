@@ -42,7 +42,8 @@ int levelControls();
 
 // #### dataread.c ####
 uint16_t Joystickport();
-void lcd_write_string(const char* input_string, int line_number);
+void lcd_resetwrite(const char* input_string, int line_number);
+void lcd_write_index(const char* input_string,int line_number, int index);
 
 // #### ansi.c ####
 void fgcolor(uint8_t foreground);
