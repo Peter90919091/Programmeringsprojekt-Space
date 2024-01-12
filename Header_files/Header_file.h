@@ -72,12 +72,13 @@ void menuSCORE();
 void menuPLAY();
 void menu();
 
-//initiate_gameplay.c
-void initiate_rocket(int x1, int y1);
-
 // #### game.c ####
 void initiate_rocket(int x, int y);
 void initiate_enemies(int x, int y);
+void clear_enemy(int x, int y);
+void config_timer();
+void enemies_down(int total_enemies[][2], int size);
+void enemies();
 void initialize(int time_between);
 void delete_rocket(int x, int y);
 void initiate_shot(int x, int y);
