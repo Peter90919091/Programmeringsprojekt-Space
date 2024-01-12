@@ -15,6 +15,7 @@
 #include "stm32f30x_conf.h"
 #include "30010_io.h"
 #include "Header_file.h"
+
 void menuHELP() {
 	background();
 	asteroid(2,2);
@@ -23,15 +24,18 @@ void menuHELP() {
 	box();
 	write_help_header();
 	write_exit();
-	lcd_write_string("A tutorial of the game",2);
+	help_design();
+	lcd_resetwrite("Controls and object",1);
+	lcd_write_index("of the game:",2,0);
 	HelpControls();
+
 }
 void menuPLAY() {
 	background();
 	border();
 	asteroid(2,2);
 	asteroid(90,20);
-	lcd_write_string("Select a level to play",2);
+	lcd_resetwrite("Select a level to play",2);
 	initialize(3000000);
 	//BORDER FOR LEVELS
 	gotoxy(37,15);
@@ -56,6 +60,7 @@ void menuPLAY() {
 	Smallbox();
 	PlayControls();
 
+
 }
 void menuSCORE() {
 	background();
@@ -66,7 +71,7 @@ void menuSCORE() {
 	box();
 	write_exit();
 	write_highscore();
-	lcd_write_string("Look at your highscore!",2);
+	lcd_resetwrite("Look at your highscore!",2);
 	ScoreControls();
 }
 void menu() {
@@ -77,7 +82,7 @@ void menu() {
 	asteroid(90,20);
 	write_Welcome();
 	menubox();
-	lcd_write_string("Please select a menu", 3);
+	lcd_resetwrite("Please select a menu", 3);
 	credits();
 	int value = MenuControls();
 	if (value == 1) {
@@ -91,4 +96,3 @@ void menu() {
 		menuPLAY();
 		}
 }
-
