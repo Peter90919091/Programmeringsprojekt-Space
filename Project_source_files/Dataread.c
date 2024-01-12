@@ -69,7 +69,7 @@ uint8_t bit[8] = {0,0,0,val_CENTER,val_RIGHT,val_LEFT,val_DOWN,val_UP};
         result = (result << 1) | bit[i];
     }
     return result;
-}
+	}
 }
 
 
@@ -173,7 +173,7 @@ const char character_data[95][5] = {
 // Function to write a string to the LCD
 
 // Function to write a string to the LCD on a specified line
-void lcd_write_string(const char* input_string, int line_number) {
+void lcd_resetwrite(const char* input_string, int line_number) {
     // Ensure that the line_number is within a valid range (adjust as needed)
     if (line_number < 1 || line_number > 4) {
         // Handle error or choose a default line
@@ -214,3 +214,47 @@ void lcd_write_string(const char* input_string, int line_number) {
     // Push the buffer to the LCD
     lcd_push_buffer(buffer);
 }
+
+void lcd_write_index(const char* input_string, int line_number, int index) {
+	// Ensure that the line_number is within a valid range (adjust as needed)
+		    if (line_number < 1 || line_number > 4) {
+		        // Handle error or choose a default line
+		        return;
+		    }
+
+		    // Set the cursor position based on the line_number
+
+		    // Create a buffer to store the pixel data for the string
+		    uint8_t buffer[512]; // Adjust the buffer size based on your LCD resolution
+
+		    // Initialize the buffer with zeros
+		    for (int i = 0; i < sizeof(buffer); i++) {
+		    	if (buffer[i] != 0) {i++;}
+		    	else {
+		    		buffer[i] = 0x00;
+		    	}
+		    }
+
+		    // Calculate the starting index based on the line_number
+		    int buffer_index = (line_number - 1) * 128+index;
+
+		    // Iterate through each character in the input string
+		    while (*input_string) {
+		        // Find the index of the character in the character_data array
+		        int char_index = *input_string - 32; // Assuming ASCII characters starting from space (32)
+
+		        // Copy the character data to the buffer
+		        for (int i = 0; i < 5; i++) {
+		            buffer[buffer_index++] = character_data[char_index][i];
+		        }
+
+		        // Add a space between characters
+		        buffer[buffer_index++] = 0x00;
+
+		        // Move to the next character in the input string
+		        input_string++;
+		    }
+
+		    // Push the buffer to the LCD
+		    lcd_push_buffer(buffer);
+		}
