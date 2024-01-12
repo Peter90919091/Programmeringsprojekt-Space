@@ -272,3 +272,29 @@ void help_design() {
 	asteroid(55,25);
 
 }
+
+int big_asteroid(){
+	fgcolor(3);
+    printf("      .-\"\"\"\"\"\"-.\n");
+    printf("    .-'   ()       '-.\n");
+    printf("   .'          O       '.\n");
+    printf(" /   O      .    ()       \\\n");
+    printf(":           .           o  :\n");
+    printf(" :  .   ()   .      '    :\n");
+    printf("  \\           .    .    /\n");
+    printf("   '.()   O        o  .'\n");
+    printf("       '-.______ _.-'\n");
+}
+
+
+int small_asteroid(){
+	fgcolor(3);
+    printf("    .- .\"\"_.    \n");
+    printf(" .  .   o     :  \n");
+    printf("/     .  () .   \\ \n");
+    printf(".  ()      o    :\n");
+    printf(".   o  '  .    :\n");
+    printf("\\    ( ) .  o  /\n");
+    printf("  :  .        . \n");
+    printf("   \ () __.. /  \n");
+}
