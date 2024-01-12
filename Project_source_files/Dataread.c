@@ -70,6 +70,7 @@ uint8_t bit[8] = {0,0,0,val_CENTER,val_RIGHT,val_LEFT,val_DOWN,val_UP};
     }
     return result;
 	}
+	return 0;
 }
 
 
@@ -229,10 +230,9 @@ void lcd_write_index(const char* input_string, int line_number, int index) {
 
 		    // Initialize the buffer with zeros
 		    for (int i = 0; i < sizeof(buffer); i++) {
-		    	if (buffer[i] != 0) {i++;}
+		    	if (buffer[i] != 0) {;}
 		    	else {
 		    		buffer[i] = 0x00;
-		    	}
 		    }
 
 		    // Calculate the starting index based on the line_number
@@ -258,3 +258,39 @@ void lcd_write_index(const char* input_string, int line_number, int index) {
 		    // Push the buffer to the LCD
 		    lcd_push_buffer(buffer);
 		}
+
+void lcd_write_array(uint8_t array[], int line_number, int index,int size) {
+	if (line_number < 1 || line_number > 4) {
+		// Handle error or choose a default line
+		   return;
+	    }
+	//Init buffer of 512 bytes
+	uint8_t buffer[512];
+	for (int i = 0; i < sizeof(buffer); i++) {
+			    	if (buffer[i] != 0) {;}
+			    	else {
+			    		buffer[i] = 0x00;
+			    	}
+			    }
+
+	int buffer_index = (line_number - 1) * 128+index;
+	for (int i = 0; i < size; i++) {
+			            buffer[buffer_index++] = array[i];
+
+			        }
+	lcd_push_buffer(buffer);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
