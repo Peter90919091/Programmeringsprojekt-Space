@@ -68,6 +68,7 @@ void credits();
 void Smallbox();
 void game_border();
 void help_design();
+void text_color_blink(int on);
 
 // #### menu.c ####
 void menuHELP();
