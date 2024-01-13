@@ -15,6 +15,16 @@
 #include "stm32f30x_conf.h"
 #include "30010_io.h"
 #include "Header_file.h"
+void text_color_blink(int on) {
+	if (on == 1) {
+		blink(1);
+		fgcolor(1);
+	}
+	else if (on != 1) {
+		blink(0);
+		fgcolor(7);
+	}
+}
 void hideCursor() {printf("\e[?25l");}
 void credits() {
 	gotoxy(2,39);
