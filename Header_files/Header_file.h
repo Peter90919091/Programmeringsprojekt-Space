@@ -50,7 +50,7 @@ void clear_line(int line_number);
 
 // #### ansi.c ####
 void fgcolor(uint8_t foreground);
-void blink();
+void blink(uint8_t on);
 void voidgotoxy();
 void ClearScreen();
 void cursor_up(int amount);
