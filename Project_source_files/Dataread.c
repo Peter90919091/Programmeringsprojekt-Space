@@ -259,26 +259,70 @@ void lcd_write_index(const char* input_string, int line_number, int index) {
 		    lcd_push_buffer(buffer);
 		}
 
-void lcd_write_array(uint8_t array[], int line_number, int index,int size) {
-	if (line_number < 1 || line_number > 4) {
-		// Handle error or choose a default line
-		   return;
+void lcd_write_array(uint8_t array[], int line_number, int index, int size) {
+    if (line_number < 1 || line_number > 4) {
+        // Handle error or choose a default line
+        return;
+    }
+
+    // Initialize buffer of 512 bytes
+    uint8_t bufferarray[512];
+
+    // Preserve the existing contents of the buffer
+    for (int i = 0; i < sizeof(bufferarray); i++) {
+        // You may want to add logic here to check if the buffer[i] is not part of the existing content
+        if (bufferarray[i] != 0) {
+            ;
+        }
+        else {
+            bufferarray[i] = 0x00;
+        }
+    }
+
+    // Calculate the starting index based on the line_number and index
+    int buffer_index = (line_number - 1) * 128 + index;
+
+    // Add the new array to the buffer
+    for (int i = 0; i < size; i++) {
+        bufferarray[buffer_index++] = array[i];
+    }
+
+
+
+    // Push the buffer to the LCD
+    lcd_push_buffer(bufferarray);
+}
+
+void write_heart(int line_number, int index) {
+	uint8_t heartl1[17] ={0x38,0x7C,0xFE,0xFF,0xFF,0xFF,0xFE,0xFC,0xF8,0xFC,0xFE,0xFF,0xFF,0xFF,0xFE,0x7C,0x38};
+	uint8_t heartl2[11]= {0x01,0x03,0x07,0x0F,0x01F,0x3F,0x1F,0x0F,0x07,0x03,0x01};
+	lcd_write_array(heartl1,line_number,index,17);
+	lcd_write_array(heartl2,line_number+1,index+3,11);
+}
+
+void clear_line(int line_number) {
+	 if (line_number < 1 || line_number > 4) {
+	        // Handle error or choose a default line
+	        return;
 	    }
-	//Init buffer of 512 bytes
-	uint8_t buffer[512];
-	for (int i = 0; i < sizeof(buffer); i++) {
-			    	if (buffer[i] != 0) {;}
-			    	else {
-			    		buffer[i] = 0x00;
-			    	}
-			    }
-
-	int buffer_index = (line_number - 1) * 128+index;
-	for (int i = 0; i < size; i++) {
-			            buffer[buffer_index++] = array[i];
-
-			        }
-	lcd_push_buffer(buffer);
+	 uint8_t bufferclear[512];
+	 int buffer_index = (line_number - 1)*128;
+	 for (int i =0 ; i<sizeof(bufferclear); i++) {
+	         // You may want to add logic here to check if the buffer[i] is not part of the existing content
+	         if (bufferclear[i] != 0) {
+	             ;
+	         }
+	         else {
+	             bufferclear[i] = 0x00;
+	         }
+	     }
+	 for (int i = 0; i < 128; i++) {
+	         bufferclear[buffer_index++] = 0x00;
+	     }
+	 for (int i = 0; i< 50;i++) {
+		 printf("%d\n", bufferclear[i]);
+	 }
+	 lcd_push_buffer(bufferclear);
 }
 
 
