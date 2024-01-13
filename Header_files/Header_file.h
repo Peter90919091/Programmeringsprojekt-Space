@@ -88,6 +88,7 @@ void initiate_shot(int x, int y);
 void initialize_screen();
 void display_screen();
 void initiate_shot(int x, int y);
+void initiate_black_hole(int x,int y);
 
 //#### levels.c ####
 void level_1();
