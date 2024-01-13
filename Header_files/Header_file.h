@@ -45,6 +45,8 @@ uint16_t Joystickport();
 void lcd_resetwrite(const char* input_string, int line_number);
 void lcd_write_index(const char* input_string,int line_number, int index);
 void lcd_write_array(uint8_t array[],int line_number,int index,int size);
+void write_heart(int line_number, int index);
+void clear_line(int line_number);
 
 // #### ansi.c ####
 void fgcolor(uint8_t foreground);
