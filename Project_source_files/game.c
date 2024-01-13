@@ -67,19 +67,6 @@ void delete_rocket(int x, int y){
 }
 
 
-void initiate_enemies(int x, int y){
-	void initiate_enemies(int x, int y){
-	fgcolor(1);
-	gotoxy(x,y);
-	printf("%c",219);
-	gotoxy((x-1),y);
-	printf("%c",204);
-	gotoxy((x+1),y);
-	printf("%c",185);
-	fgcolor(15);
-}
-}
-
 void initiate_shot(int x, int y) {
 	fgcolor(1);
 	gotoxy(x,y);
@@ -125,6 +112,42 @@ void initiate_black_hole(int x,int y){
 	fgcolor(15);
 }
 
+void initiate_enemies(int x, int y) {
+    fgcolor(1);
+    gotoxy(x,y);
+    printf("%c", 204);
+    printf("%c", 219);
+    printf("%c", 185);
+    fgcolor(15);
+}
+
+void clear_enemy(int x, int y) {
+    gotoxy(x, y);
+    printf("   ");
+}
+
+void enemies_down(int total_enemies[][2], int size) {
+    for (int j = 0; j < size; j++) {
+        clear_enemy(total_enemies[j][0], total_enemies[j][1]);
+        total_enemies[j][1]++;
+        initiate_enemies(total_enemies[j][0], total_enemies[j][1]);
+    }
+}
+void enemies() {
+    static int total_enemies[10][2];
+    static int i = 0;
+    int init_pos_y = 0;
+
+    if (timer == 10) {
+        total_enemies[i][0] = rand()% 71;
+        total_enemies[i][1] = init_pos_y;
+        initiate_enemies(total_enemies[i][0], total_enemies[i][1]);
+
+        timer = 0;
+        i++;
+        enemies_down(total_enemies, i);
+    }
+}
 
 
 
