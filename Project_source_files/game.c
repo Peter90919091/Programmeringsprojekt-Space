@@ -169,5 +169,30 @@ void updateAndPrintShots() {
     for (int i = 0; i < 60000; ++i) {}
 }
 
-
+void initiate_black_hole(int x,int y){
+	fgcolor(8);
+	gotoxy(x-2,y-1);
+	for (int k=0; k <= 4; k++){
+		printf("%c",187);
+	}
+	cursor_down(1);
+	cursor_left(6);
+	for (int k=0; k <= 6; k++){
+		if (k == 0) {
+			printf("%c",201);
+		}
+		else if (k==6){
+			printf("%c",188);
+		}
+		else{
+			printf("%c",178);
+		}
+	}
+	cursor_down(1);
+	cursor_left(6);
+	for (int k=0; k <=4; k++){
+		printf("%c",200);
+	}
+	fgcolor(15);
+}
 
