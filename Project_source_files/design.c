@@ -15,6 +15,7 @@
 #include "stm32f30x_conf.h"
 #include "30010_io.h"
 #include "Header_file.h"
+void hideCursor() {printf("\e[?25l");}
 void text_color_blink(int on) {
 	if (on == 1) {
 		blink(1);
@@ -25,7 +26,6 @@ void text_color_blink(int on) {
 		fgcolor(7);
 	}
 }
-void hideCursor() {printf("\e[?25l");}
 void credits() {
 	gotoxy(2,39);
 	printf("Lavet af Mattias, Ida, Emil & Peter");
@@ -280,15 +280,12 @@ void help_design() {
 	gotoxy(47,23);
 	printf("Avoid obstacles");
 	asteroid(55,25);
-
 }
-
-struct Asteroid {
-    int x;
-    int y;
-};
-
-/ Function to display the big asteroid at a specific location
+	struct Asteroid {
+	    int x;
+	    int y;
+	};
+// Function to display the big asteroid at a specific location
 void displayBigAsteroid(struct Asteroid asteroid) {
     fgcolor(8);
     printf("\033[%d;%dH      .-\"\"\"\"\"\"-.\n", asteroid.y, asteroid.x);
