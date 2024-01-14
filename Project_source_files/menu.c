@@ -28,7 +28,6 @@ void menuHELP() {
 	lcd_resetwrite("Controls and object",1);
 	lcd_write_index("of the game:",2,0);
 	HelpControls();
-
 }
 void menuPLAY() {
 	background();
@@ -36,7 +35,6 @@ void menuPLAY() {
 	asteroid(2,2);
 	asteroid(90,20);
 	lcd_resetwrite("Select a level to play",2);
-	initialize(3000000);
 	//BORDER FOR LEVELS
 	gotoxy(37,15);
 	Smallbox();
@@ -59,7 +57,6 @@ void menuPLAY() {
 	gotoxy(97,23);
 	Smallbox();
 	PlayControls();
-
 
 }
 void menuSCORE() {
