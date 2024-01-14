@@ -296,6 +296,18 @@ int big_asteroid(){
     printf("       '-.______ _.-'\n");
 }
 
+int medium_asteroid(){
+    fgcolor(3);
+    printf("      .--\"\"\"\"\"--.,.\n");
+    printf("    .' o    ()   .   '.\n");
+    printf("   /  .      O     .    \\\n");
+    printf("  :      :     O    o  :\n");
+    printf("  :  o .      ()   .   .:\n");
+    printf("   \\       .     o  . /\n");
+    printf("    '.() o  O   o .   '\n");
+    printf("      '--...__.-:.__ '\n");
+}
+
 
 int small_asteroid(){
 	fgcolor(3);
