@@ -283,40 +283,42 @@ void help_design() {
 
 }
 
-int big_asteroid(){
-	fgcolor(3);
-    printf("      .-\"\"\"\"\"\"-.\n");
-    printf("    .-'   ()       '-.\n");
-    printf("   .'          O       '.\n");
-    printf(" /   O      .    ()       \\\n");
-    printf(":           .           o  :\n");
-    printf(" :  .   ()   .      '    :\n");
-    printf("  \\           .    .    /\n");
-    printf("   '.()   O        o  .'\n");
-    printf("       '-.______ _.-'\n");
+/ Function to display the big asteroid at a specific location
+void displayBigAsteroid(struct Asteroid asteroid) {
+    fgcolor(8);
+    printf("\033[%d;%dH      .-\"\"\"\"\"\"-.\n", asteroid.y, asteroid.x);
+    printf("\033[%d;%dH    .-'   ()       '-.\n", asteroid.y + 1, asteroid.x);
+    printf("\033[%d;%dH   .'          O       '.\n", asteroid.y + 2, asteroid.x);
+    printf("\033[%d;%dH /   O      .    ()       \\\n", asteroid.y + 3, asteroid.x);
+    printf("\033[%d;%dH:           .           o  :\n", asteroid.y + 4, asteroid.x);
+    printf("\033[%d;%dH :  .   ()   .      '    :\n", asteroid.y + 5, asteroid.x);
+    printf("\033[%d;%dH  \\           .    .    /\n", asteroid.y + 6, asteroid.x);
+    printf("\033[%d;%dH   '.()   O        o  .'\n", asteroid.y + 7, asteroid.x);
+    printf("\033[%d;%dH       '-.______ _.-'\n", asteroid.y + 8, asteroid.x);
 }
 
-int medium_asteroid(){
-    fgcolor(3);
-    printf("      .--\"\"\"\"\"--.,.\n");
-    printf("    .' o    ()   .   '.\n");
-    printf("   /  .      O     .    \\\n");
-    printf("  :      :     O    o  :\n");
-    printf("  :  o .      ()   .   .:\n");
-    printf("   \\       .     o  . /\n");
-    printf("    '.() o  O   o .   '\n");
-    printf("      '--...__.-:.__ '\n");
+// Function to display the medium asteroid at a specific location
+void displayMediumAsteroid(struct Asteroid asteroid) {
+    fgcolor(8);
+    printf("\033[%d;%dH      .--\"\"\"\"\"--.,.\n", asteroid.y, asteroid.x);
+    printf("\033[%d;%dH    .' o    ()   .   '.\n", asteroid.y + 1, asteroid.x);
+    printf("\033[%d;%dH   /  .      O     .    \\\n", asteroid.y + 2, asteroid.x);
+    printf("\033[%d;%dH  :      :     O    o  :\n", asteroid.y + 3, asteroid.x);
+    printf("\033[%d;%dH  :  o .      ()   .   .:\n", asteroid.y + 4, asteroid.x);
+    printf("\033[%d;%dH   \\       .     o  . /\n", asteroid.y + 5, asteroid.x);
+    printf("\033[%d;%dH    '.() o  O   o .   '\n", asteroid.y + 6, asteroid.x);
+    printf("\033[%d;%dH      '--...__.-:.__ '\n", asteroid.y + 7, asteroid.x);
 }
 
-
-int small_asteroid(){
-	fgcolor(3);
-    printf("    .- .\"\"_.    \n");
-    printf(" .  .   o     :  \n");
-    printf("/     .  () .   \\ \n");
-    printf(".  ()      o    :\n");
-    printf(".   o  '  .    :\n");
-    printf("\\    ( ) .  o  /\n");
-    printf("  :  .        . \n");
-    printf("   \ () __.. /  \n");
+// Function to display the small asteroid at a specific location
+void displaySmallAsteroid(struct Asteroid asteroid) {
+    fgcolor(8);
+    printf("\033[%d;%dH    .- .\"\"_.    \n", asteroid.y, asteroid.x);
+    printf("\033[%d;%dH .  .   o     :  \n", asteroid.y + 1, asteroid.x);
+    printf("\033[%d;%dH/     .  () .   \\ \n", asteroid.y + 2, asteroid.x);
+    printf("\033[%d;%dH.  ()      o    :\n", asteroid.y + 3, asteroid.x);
+    printf("\033[%d;%dH.   o  '  .    :\n", asteroid.y + 4, asteroid.x);
+    printf("\033[%d;%dH\\    ( ) .  o  /\n", asteroid.y + 5, asteroid.x);
+    printf("\033[%d;%dH  :  .        . \n", asteroid.y + 6, asteroid.x);
+    printf("\033[%d;%dH   \\ () __.. /  \n", asteroid.y + 7, asteroid.x);
 }
