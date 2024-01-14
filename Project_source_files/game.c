@@ -15,7 +15,6 @@
 #include "stm32f30x_conf.h"
 #include "30010_io.h"
 #include "Header_file.h"
-#define MAX_SHOTS 100
 void initialize(int time_between) {
 	gotoxy(60,10);
 	printf("Iniatializing game ");
@@ -72,13 +71,22 @@ void delete_rocket(int x, int y){
 }
 
 
-void initiate_enemies(int x, int y) {
-    fgcolor(1);
+
+
+
+void initiate_enemies(int x, int y,int color) {
+    fgcolor(color);
     gotoxy(x,y);
     printf("%c", 204);
     printf("%c", 219);
     printf("%c", 185);
     fgcolor(15);
+}
+int globalPoints = 0; //GLOBAL VARIABEL
+void points(int points) {
+    globalPoints += points;
+    gotoxy(70, 43);
+    printf("%d", globalPoints);
 }
 
 void clear_enemy(int x, int y) {
@@ -86,55 +94,131 @@ void clear_enemy(int x, int y) {
     printf("   ");
 }
 
-void enemies_down(int total_enemies[][2], int size) {
-    for (int j = 0; j < size; j++) {
-        clear_enemy(total_enemies[j][0], total_enemies[j][1]);
-        total_enemies[j][1]++;
-        initiate_enemies(total_enemies[j][0], total_enemies[j][1]);
-    }
-}
-void enemies() {
-    static int total_enemies[10][2];
-    static int i = 0;
-    int init_pos_y = 0;
+struct enemy {
+    int x;
+    int y;
+    int color;
+};
+struct enemy enemies_level[100];
 
-    if (timer == 10) {
-        total_enemies[i][0] = rand()% 71;
-        total_enemies[i][1] = init_pos_y;
-        initiate_enemies(total_enemies[i][0], total_enemies[i][1]);
-
-        timer = 0;
-        i++;
-        enemies_down(total_enemies, i);
-    }
-}
 
 struct Shot {
     int x;
     int y;
 };
-struct Shot shots[MAX_SHOTS];
-int ScoreControls() {
-	int value = 0;
-	while(1) {value = Joystickport();
-	if (value == 16) {menu();}
-	}
-}
+struct Shot shots[100];
 void addShot(int x, int y) {
-    for (int i = 0; i < MAX_SHOTS; ++i) {
+    for (int i = 0; i < 100; ++i) {
         if (shots[i].x == 0 && shots[i].y == 0) {
             shots[i].x = x;
             shots[i].y = y;
             break;
         }
     }
-    for (int i = 0; i < 300000; ++i) {}
 }
-void updateAndPrintShots() {
-    for (int i = 0; i < MAX_SHOTS; ++i) {
+bool isCollision(int shotX, int shotY, int enemyX, int enemyY) {
+    return (shotX == enemyX || shotX == enemyX + 1 || shotX == enemyX + 2) && (shotY == enemyY);
+}
+
+void enemies(int speed,int level) {
+	int size;
+	if (level >= 1 && level <= 9) {
+	        size = 10 * level;
+	    }
+	int pos_y = 2;
+	static int amount = 0;
+	    if (timer == speed && amount < size) {
+	    	enemies_level[amount].x = rand() % 137 + 2;
+	    	enemies_level[amount].y = pos_y;
+	    	enemies_level[amount].color =rand() % 5 + 1;
+	        initiate_enemies(enemies_level[amount].x, enemies_level[amount].y,enemies_level[amount].color);
+	        timer = 0;
+	        amount++;
+
+	    for (int j = 0; j < amount; j++) {
+	    	if (enemies_level[j].y != 39) {
+	        if (enemies_level[j].x != 0 && enemies_level[j].y != 0) {
+	            // Check if enemy is hit by a shot
+	            for (int i = 0; i < 100; ++i) {
+	                if (shots[i].x != 0 || shots[i].y != 0) {
+	                    if (isCollision(shots[i].x, shots[i].y, enemies_level[j].x, enemies_level[j].y)) {
+	                        // Shot hit an enemy, clear the enemy
+	                        clear_enemy(enemies_level[j].x, enemies_level[j].y);
+	                        enemies_level[j].x = 0;
+	                        enemies_level[j].y = 0;
+	                    }
+	                }
+	            }
+
+	            // Move and print enemies that are not hit
+	            if (enemies_level[j].x != 0 && enemies_level[j].y != 0) {
+	                clear_enemy(enemies_level[j].x, enemies_level[j].y);
+	                enemies_level[j].y++;
+	                initiate_enemies(enemies_level[j].x, enemies_level[j].y,enemies_level[j].color);
+	            }
+	        }
+	    }
+	    	else {
+	    		clear_enemy(enemies_level[j].x, enemies_level[j].y);
+	    		enemies_level[j].x = 0;
+	    		enemies_level[j].y = 0;
+	    		    }
+	    }
+	        timer = 0;
+	    }
+	    if (amount == size && timer == speed) {
+	    	 for (int j = 0; j < amount; j++) {
+	    		 if (enemies_level[j].y != 39) {
+	    		        if (enemies_level[j].x != 0 && enemies_level[j].y != 0) {
+	    		            // Check if enemy is hit by a shot
+	    		            for (int i = 0; i < 100; ++i) {
+	    		                if (shots[i].x != 0 || shots[i].y != 0) {
+	    		                    if (isCollision(shots[i].x, shots[i].y, enemies_level[j].x, enemies_level[j].y)) {
+	    		                        // Shot hit an enemy, clear the enemy
+	    		                        clear_enemy(enemies_level[j].x, enemies_level[j].y);
+	    		                        enemies_level[j].x = 0;
+	    		                        enemies_level[j].y = 0;
+	    		                    }
+	    		                }
+	    		            }
+
+	    		            // Move and print enemies that are not hit
+	    		            if (enemies_level[j].x != 0 && enemies_level[j].y != 0) {
+	    		                clear_enemy(enemies_level[j].x, enemies_level[j].y);
+	    		                enemies_level[j].y++;
+	    		                initiate_enemies(enemies_level[j].x, enemies_level[j].y,enemies_level[j].color);
+	    		            }
+	    		        }
+	    		    }
+	    		 else {
+	    		 	    		clear_enemy(enemies_level[j].x, enemies_level[j].y);
+	    		 	    		enemies_level[j].x = 0;
+	    		 	    		enemies_level[j].y = 0;
+	    		 	    		    }
+	    		        timer = 0;	   	    }}
+	}
+
+void updateAndPrintShots(int pause) {
+    for (int i = 0; i < 100; ++i) {
         if (shots[i].x != 0 || shots[i].y != 0) {
             gotoxy(shots[i].x, shots[i].y);
+            for (int j = 0; j < 100; ++j) {
+                            if (enemies_level[j].x != 0 && enemies_level[j].y != 0 &&
+                                isCollision(shots[i].x, shots[i].y, enemies_level[j].x, enemies_level[j].y)) {
+                                // Shot hit an enemy, clear the enemy
+                            	points(10);
+                                clear_enemy(enemies_level[j].x, enemies_level[j].y);
+                                enemies_level[j].x = 0;
+                                enemies_level[j].y = 0;
 
+                                // Clear the shot
+                                printf(" ");
+                                shots[i].x = 0;
+                                shots[i].y = 0;
+
+                                break;  // No need to check for more collisions
+                            }
+                        }
             if (shots[i].y > 1) {
                 printf("o");
                 cursor_left(1);
@@ -148,10 +232,9 @@ void updateAndPrintShots() {
                 shots[i].y = 0;
             }
         }
-    }
-    for (int i = 0; i < 60000; ++i) {}
+       pause_control(pause);
+	}
 }
-
 void initiate_black_hole(int x,int y){
 	fgcolor(8);
 	gotoxy(x-2,y-1);
@@ -178,4 +261,5 @@ void initiate_black_hole(int x,int y){
 	}
 	fgcolor(15);
 }
+
 
