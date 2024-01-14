@@ -283,6 +283,11 @@ void help_design() {
 
 }
 
+struct Asteroid {
+    int x;
+    int y;
+};
+
 / Function to display the big asteroid at a specific location
 void displayBigAsteroid(struct Asteroid asteroid) {
     fgcolor(8);
