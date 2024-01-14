@@ -322,3 +322,20 @@ void displaySmallAsteroid(struct Asteroid asteroid) {
     printf("\033[%d;%dH  :  .        . \n", asteroid.y + 6, asteroid.x);
     printf("\033[%d;%dH   \\ () __.. /  \n", asteroid.y + 7, asteroid.x);
 }
+
+// Function to print asteroids of diffrent size
+void displayAsteroidBySize(char size, struct Asteroid asteroid) {
+    switch (size) {
+        case 'B':
+            displayBigAsteroid(asteroid);
+            break;
+        case 'M':
+            displayMediumAsteroid(asteroid);
+            break;
+        case 'S':
+            displaySmallAsteroid(asteroid);
+            break;
+        default:
+            printf("Invalid size!\n");
+    }
+}
