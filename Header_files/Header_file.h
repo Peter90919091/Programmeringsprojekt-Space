@@ -72,10 +72,6 @@ void credits();
 void Smallbox();
 void game_border();
 void help_design();
-void displayAsteroidBySize(char size, struct Asteroid asteroid);
-void displaySmallAsteroid(struct Asteroid asteroid);
-void displayMediumAsteroid(struct Asteroid asteroid);
-void displayBigAsteroid(struct Asteroid asteroid);
 
 // #### menu.c ####
 void menuHELP();
