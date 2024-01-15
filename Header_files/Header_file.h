@@ -45,10 +45,8 @@ int levelControls(int difficulty);
 // #### dataread.c ####
 uint16_t Joystickport();
 void lcd_resetwrite(const char* input_string, int line_number);
-void lcd_write_index(const char* input_string, int line_number, int index);
-void lcd_write_array(uint8_t array[], int line_number, int index, int size);
-void write_heart(int line_number, int index);
-void clear_line(int line_number);
+void lcd_write_index(const char* input_string,int line_number, int index);
+void level_lcd(int level, int globalLives, int globalPoints);
 
 
 // #### ansi.c ####
