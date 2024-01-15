@@ -37,6 +37,10 @@ void write_exitplay();
 void write_play_header();
 void write_numbers(int number,int x,int y);
 void asteroid(int x, int y);
+void write_gameover(int x, int y);
+void write_colon(int x,int y,int colour);
+void write_yourendscore(int x,int y, int colour);
+void skull(int x, int y, int colour);
 
 
 // #### Controls.c ####
@@ -52,7 +56,7 @@ uint16_t Joystickport();
 void lcd_resetwrite(const char* input_string, int line_number);
 void lcd_write_index(const char* input_string,int line_number, int index);
 void level_lcd(int level, int globalLives, int globalPoints);
-void menuGAMEOVER();
+
 
 
 // #### ansi.c ####
@@ -84,6 +88,7 @@ void menuHELP();
 void menuSCORE();
 void menuPLAY();
 void menu();
+void menuGAMEOVER();
 
 //initiate_gameplay.c
 void initiate_rocket(int x1, int y1);
