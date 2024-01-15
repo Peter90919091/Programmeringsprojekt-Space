@@ -233,10 +233,8 @@ void enemies(int speed,int level) {
 		for (int i = 0; i< size; i++){enemies_level[i].x = 0;enemies_level[i].y = 0;enemies_level[i].color = 0;}
 		amount = 0;
 		update_score(globalPoints);
-		globalPoints = 0;
-		globalLives = 3;
 		clearallshots();
-		menu();
+		menuGAMEOVER();
 	}
 	}
 void clearallshots() {
@@ -254,7 +252,7 @@ void updateAndPrintShots(int pause, int level) {
 	        once = 1;
 	    }
 
-	if (enemies == 0) {
+	if (enemies == 0 || enemies == 1 && globalLives == 2 || enemies == 2 && globalLives == 1) {
 		update_score(globalPoints);
 		globalPoints = 0;
 		globalLives = 3;
