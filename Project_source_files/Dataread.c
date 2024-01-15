@@ -191,9 +191,15 @@ void lcd_resetwrite(const char* input_string, int line_number) {
     while (*input_string) {
         //Finds the index in the charactermap
         int char_index = *input_string - 32;
-
+        //Making sure the letter wont go out of index
+        if (buffer_index>120){
+        	if (buffer_index<128) {
+        		buffer_index = 128;
+        	}
+        }
         //Puts the characters in the array based on hexadecimal
         for (int i = 0; i < 5; i++) {
+
             buffer[buffer_index++] = character_data[char_index][i];
         }
 
@@ -322,7 +328,7 @@ void level_lcd(int level, int globalLives, int globalPoints) {
 
 //Sending number of lives left to LCD
 	//Doing each line on their own and *9 for each heart required
-	for(int i=0;i<globalLives;i++)
+	for(int i=0;i<globalLives;i++) {
 		array[256+9*i]=0x0;
 		array[257+9*i]=0xC;
 		array[258+9*i]=0x1E;
