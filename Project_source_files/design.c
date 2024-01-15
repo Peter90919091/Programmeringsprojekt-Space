@@ -341,3 +341,19 @@ void displayAsteroidBySize(char size, struct Asteroid asteroid) {
             printf("Invalid size!\n");
     }
 }
+void attempt_small_gravity() {
+    printf("  __,_\n");
+    printf("/ o .   \\\n");
+    printf("( .  o   |\n");
+    printf(" \\ .._o/\n");
+    printf("    \\::)\n");
+}
+void attempt_large_gravity() {
+	printf("  ___\n");
+	printf(" /  ..    \\ \n");
+	printf("/    .   o  \\\n");
+	printf("(  o.    :     )\n");
+	printf("\\  o ..  o/\n");
+	printf(" \\ o_  / \n");
+	printf("       \n");
+}
