@@ -69,7 +69,13 @@ void menuSCORE() {
 	write_exit();
 	write_highscore();
 	lcd_resetwrite("Look at your highscore!",2);
+	gotoxy(40,20);
+		for (int i = 0; i< 10; i++) {
+			gotoxy(40,20+i);
+			printf("nr. %d Score is %lu",i+1,scores[i].score_count);
+		}
 	ScoreControls();
+	//display scores:
 }
 void menu() {
 	ClearScreen();
