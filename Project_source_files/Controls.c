@@ -20,7 +20,7 @@ int levelControls(int difficulty) {
 	int speed = 0;
 	int level = 0;
 	int pause = 0;
-	if (difficulty == 1) {speed = 10;level = 1;pause = 3000;}
+	if (difficulty == 1) {speed = 10;level = 1;pause = 3000;Asteroid1(0, 20, 20);Asteroid1(1, 70, 30);}
 	if (difficulty == 2) {speed = 10;level = 2;pause = 2000;}
 	if (difficulty == 3) {speed = 9;level = 3;pause = 1500;}
 	if (difficulty == 4) {speed = 9;level = 4;pause = 1000;}
@@ -28,7 +28,7 @@ int levelControls(int difficulty) {
 	if (difficulty == 6) {speed = 8;level = 6;pause = 500;}
 	if (difficulty == 7) {speed = 7;level = 7;pause = 500;}
 	if (difficulty == 8) {speed = 7;level = 8;pause = 500;}
-	if (difficulty == 9) {speed = 7;level = 9;pause = 300;}
+	if (difficulty == 9) {speed = 7;level = 9;pause = 300;Asteroid1(0, 20, 20);Asteroid1(1, 70, 30);Asteroid2(0, 30, 25);Asteroid2(1, 40, 15);Asteroid3(0, 100, 20);Asteroid3(1, 70, 30);Asteroid4(0, 57, 17);Asteroid4(1, 89, 10);Asteroid5(0, 20, 20);Asteroid5(1, 10, 30);}
 
 	int cursor_leftright = 38;
 	int prev_cursor_leftright = 3;
@@ -38,7 +38,7 @@ int levelControls(int difficulty) {
 	text_color_blink(0);
 	int shot = 0;
 	while(1) {
-	level_lcd(difficulty,globalLives,globalPoints);
+		level_lcd(difficulty,globalLives,globalPoints);
 		gotoxy(0,0);
 		printf("%lu",timer);
 		enemies(speed,level);
@@ -71,6 +71,7 @@ int levelControls(int difficulty) {
 		shot_y = 35;
 		shot = 1;
 		addShot(shot_x, shot_y);
+		prevShot(shot_x, shot_y);
 		pause_control(200000);
 		}
 	if (shot == 1) {
