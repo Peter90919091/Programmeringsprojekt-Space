@@ -13,7 +13,10 @@
 #include "system_stm32f30x.h"
 #include "stm32f30x_conf.h"
 #include "30010_io.h"
+//Global Variables
 volatile uint32_t timer;
+int globalLives;
+int globalPoints;
 
 /* Exported types -------------------------------------------------------*/
 /* Exported constants ---------------------------------------------------*/
