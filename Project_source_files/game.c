@@ -240,6 +240,7 @@ void updateAndPrintShots(int pause, int level) {
     for (int i = 0; i < 100; ++i) {
         if (shots[i].x != 0 || shots[i].y != 0) {
             gotoxy(shots[i].x, shots[i].y);
+            for (int loop= 0; loop < 100; loop++) {
             for (int j = 0; j < 100; ++j) {
                             if (enemies_level[j].x != 0 && enemies_level[j].y != 0 &&
                                 isCollision(shots[i].x, shots[i].y, enemies_level[j].x, enemies_level[j].y)) {
@@ -276,7 +277,7 @@ void updateAndPrintShots(int pause, int level) {
                                 shots[i].x = 0;
                                 shots[i].y = 0;
                                 break;  // No need to check for more collisions
-                            }
+                            }}
                             }
                         }
             if (shots[i].y > 1) {
@@ -320,4 +321,5 @@ void initiate_black_hole(int x,int y){
 	}
 	fgcolor(15);
 }
+
 
