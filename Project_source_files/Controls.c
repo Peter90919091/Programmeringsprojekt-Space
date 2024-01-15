@@ -351,3 +351,10 @@ int MenuControls() {
 	if (value != 0) {
 	pause_control(1000000);}}
 }
+
+void GAMEOVERControls() {
+	int value = 0;
+	while(1) {value = Joystickport();
+		if (value == 16) {menu();}
+		}
+}
