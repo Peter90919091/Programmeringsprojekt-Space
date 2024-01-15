@@ -96,13 +96,13 @@ void initiate_enemies(int x, int y,int color) {
     printf("%c", 185);
     fgcolor(15);
 }
-int globalPoints = 0; //GLOBAL VARIABEL
+
 void points(int points) {
     globalPoints += points;
     gotoxy(70, 43);
     printf("%d", globalPoints);
 }
-int globalLives = 3; //GLOBAL VARIABEL
+
 void lives(int damage) {
     globalLives -= damage;
     gotoxy(70, 46);
@@ -127,6 +127,7 @@ struct Shot {
     int y;
 };
 struct Shot shots[100];
+struct Shot oldshots[100];
 void addShot(int x, int y) {
     for (int i = 0; i < 100; ++i) {
         if (shots[i].x == 0 && shots[i].y == 0) {
@@ -136,9 +137,36 @@ void addShot(int x, int y) {
         }
     }
 }
+void prevShot(int x, int y) {
+    for (int i = 0; i < 100; ++i) {
+        if (oldshots[i].x == 0 && shots[i].y == 0) {
+            oldshots[i].x = x;
+            oldshots[i].y = y;
+            break;
+        }
+    }
+}
 bool isCollision(int shotX, int shotY, int enemyX, int enemyY) {
     return (shotX == enemyX || shotX == enemyX + 1 || shotX == enemyX + 2) && (shotY == enemyY);
 }
+bool isAstroidCollision(int shotX, int shotY, int asteroidX, int asteroidY) {
+    return (shotX == asteroidX && shotY == asteroidY);
+}
+int gravity(int shotX, int shotY, int asteroidX, int asteroidY) {
+	for (int i = 0; i < 1; i++){
+    if (abs(shotX - asteroidX) <= 8 && abs(shotY - asteroidY) == 0 ) {
+        if (shotX < asteroidX) {
+            return +1;
+        }
+        else if (shotX > asteroidX) {
+            return -1;
+        }
+        else {
+        	return 0;}}
+
+    else {
+            	return 0;}
+    }}
 
 void enemies(int speed,int level) {
 	lives(0);
@@ -220,6 +248,7 @@ void clearallshots() {
 void updateAndPrintShots(int pause, int level) {
 	static int once = 0;
 	static int enemies = 0;
+	int gravityResult;
 	if (!once) {
 	        enemies = level * 10;
 	        once = 1;
@@ -238,63 +267,183 @@ void updateAndPrintShots(int pause, int level) {
 		clearallshots();
 	}
     for (int i = 0; i < 100; ++i) {
-        if (shots[i].x != 0 || shots[i].y != 0) {
-            gotoxy(shots[i].x, shots[i].y);
-            for (int loop= 0; loop < 100; loop++) {
-            for (int j = 0; j < 100; ++j) {
+    	        if (shots[i].x != 0 || shots[i].y != 0) {
+    	        	oldshots[i].x = shots[i].x;
+    	        	oldshots[i].y = shots[i].y;
+    	        	if (shots[i].y > 2) {
+    	        		for (int j = 0; j< 21; j++) {
+    	        			if (level > 0) {
+    	        			gravityResult = gravity(shots[i].x, shots[i].y, very_small_asteroid1[j].x, very_small_asteroid1[j].y);}
+    	    	        			if (level > 1)	{gravityResult +=gravity(shots[i].x, shots[i].y, very_small_asteroid2[j].x, very_small_asteroid2[j].y);}
+		    	        			if (level > 2)	{gravityResult +=gravity(shots[i].x, shots[i].y, very_small_asteroid3[j].x, very_small_asteroid3[j].y);}
+		    	        			if (level > 3)	{gravityResult +=gravity(shots[i].x, shots[i].y, very_small_asteroid4[j].x, very_small_asteroid4[j].y);}
+		    	        			if (level > 4)	{gravityResult +=gravity(shots[i].x, shots[i].y, very_small_asteroid5[j].x, very_small_asteroid5[j].y);}
+    	        			    if (gravityResult != 0) {
+    	        			        shots[i].x += gravityResult;
+    	        			        break;
+    	        			    }
+    	        		 }
+    	        		for (int j = 0; j< 37; j++) {
+    	        			if (level > 0) {
+    	        			gravityResult = gravity(shots[i].x, shots[i].y, small_asteroid1[j].x, small_asteroid1[j].y);}
+    	        			if (level > 1) {gravityResult += gravity(shots[i].x, shots[i].y, small_asteroid2[j].x, small_asteroid2[j].y);}
+    	        			if (level > 2) {gravityResult +=gravity(shots[i].x, shots[i].y, small_asteroid3[j].x, small_asteroid3[j].y);}
+    	    	        	if (level > 3){gravityResult +=gravity(shots[i].x, shots[i].y, small_asteroid4[j].x, small_asteroid4[j].y);}
+    	        			if (level > 4){gravityResult +=gravity(shots[i].x, shots[i].y, small_asteroid5[j].x, small_asteroid5[j].y);}
+    	        			    if (gravityResult != 0) {
+    	        			        shots[i].x += gravityResult;
+    	        			        break;
+    	        			    }
+    	        		}
+    	        		--shots[i].y;
+    	        		gotoxy(shots[i].x, shots[i].y);
+    	        		printf("o");
+    	        		gotoxy(oldshots[i].x, oldshots[i].y);
+    	        		printf(" ");
+    	        			} else {
+    	        				gotoxy(oldshots[i].x, oldshots[i].y);
+        	            	 printf(" ");
+        	                shots[i].x = 0;
+        	                shots[i].y = 0;
+        	                oldshots[i].x = 0;
+        	                oldshots[i].y = 0;
+        	                break;
+        	            }
+
+    	        	for (int j = 0; j < 21; ++j) {
+    	        		if (level > 0) {
+    	        	    if (isAstroidCollision(shots[i].x, shots[i].y, very_small_asteroid1[j].x, very_small_asteroid1[j].y)) {
+    	        	        gotoxy(shots[i].x, shots[i].y + 1);
+    	        	        printf(" ");
+    	        	        shots[i].x = 0;
+    	        	        shots[i].y = 0;
+    	        	        break;
+    	        	    }}
+    	        		if (level > 1) {
+    	        	    if (isAstroidCollision(shots[i].x, shots[i].y, very_small_asteroid2[j].x, very_small_asteroid2[j].y)) {
+    	        	        	        	        gotoxy(shots[i].x, shots[i].y + 1);
+    	        	        	        	        printf(" ");
+    	        	        	        	        shots[i].x = 0;
+    	        	        	        	        shots[i].y = 0;
+    	        	        	        	        break;
+    	        	        	        	    }}
+    	        		if (level > 2) {
+    	        	    if (isAstroidCollision(shots[i].x, shots[i].y, very_small_asteroid3[j].x, very_small_asteroid3[j].y)) {
+    	        	        	        	        gotoxy(shots[i].x, shots[i].y + 1);
+    	        	        	        	        printf(" ");
+    	        	        	        	        shots[i].x = 0;
+    	        	        	        	        shots[i].y = 0;
+    	        	        	        	        break;
+    	        	        	        	    }}
+    	        	    if (level > 3) {
+    	        	    if (isAstroidCollision(shots[i].x, shots[i].y, very_small_asteroid4[j].x, very_small_asteroid4[j].y)) {
+    	        	        	        	        gotoxy(shots[i].x, shots[i].y + 1);
+    	        	        	        	        printf(" ");
+    	        	        	        	        shots[i].x = 0;
+    	        	        	        	        shots[i].y = 0;
+    	        	        	        	        break;
+    	        	        	        	    }}
+    	        	    if (level > 4) {
+    	        	    if (isAstroidCollision(shots[i].x, shots[i].y, very_small_asteroid5[j].x, very_small_asteroid5[j].y)) {
+    	        	        	        	        gotoxy(shots[i].x, shots[i].y + 1);
+    	        	        	        	        printf(" ");
+    	        	        	        	        shots[i].x = 0;
+    	        	        	        	        shots[i].y = 0;
+    	        	        	        	        break;
+    	        	        	        	    }}
+    	        	}
+
+    	        	for (int j = 0; j < 37; ++j) {
+    	        		if (level > 0) {
+    	        	    if (isAstroidCollision(shots[i].x, shots[i].y, small_asteroid1[j].x, small_asteroid1[j].y)) {
+    	        	        gotoxy(shots[i].x, shots[i].y + 1);
+    	        	        printf(" ");
+    	        	        shots[i].x = 0;
+    	        	        shots[i].y = 0;
+    	        	        break;
+    	        	    }}
+    	        		if (level > 1) {
+    	        	    if (isAstroidCollision(shots[i].x, shots[i].y, small_asteroid2[j].x, small_asteroid2[j].y)) {
+    	        	        	        	        gotoxy(shots[i].x, shots[i].y + 1);
+    	        	        	        	        printf(" ");
+    	        	        	        	        shots[i].x = 0;
+    	        	        	        	        shots[i].y = 0;
+    	        	        	        	        break;
+    	        	        	        	    }}
+    	        		if (level > 2) {
+    	        	    if (isAstroidCollision(shots[i].x, shots[i].y, small_asteroid3[j].x, small_asteroid3[j].y)) {
+    	        	        	        	        gotoxy(shots[i].x, shots[i].y + 1);
+    	        	        	        	        printf(" ");
+    	        	        	        	        shots[i].x = 0;
+    	        	        	        	        shots[i].y = 0;
+    	        	        	        	        break;
+    	        	        	        	    }}
+    	        		if (level > 3) {
+    	        	    if (isAstroidCollision(shots[i].x, shots[i].y, small_asteroid4[j].x, small_asteroid4[j].y)) {
+    	        	        	        	        gotoxy(shots[i].x, shots[i].y + 1);
+    	        	        	        	        printf(" ");
+    	        	        	        	        shots[i].x = 0;
+    	        	        	        	        shots[i].y = 0;
+    	        	        	        	        break;
+    	        	        	        	    }}
+    	        		if (level > 4) {
+    	        	    if (isAstroidCollision(shots[i].x, shots[i].y, small_asteroid5[j].x, small_asteroid5[j].y)) {
+    	        	        	        	        gotoxy(shots[i].x, shots[i].y + 1);
+    	        	        	        	        printf(" ");
+    	        	        	        	        shots[i].x = 0;
+    	        	        	        	        shots[i].y = 0;
+    	        	        	        	        break;
+    	        	        	        	    }}
+    	        	}
+
+            for (int loop= 0; loop < 20; loop++) {
+            for (int j = 0; j < 90; ++j) {
                             if (enemies_level[j].x != 0 && enemies_level[j].y != 0 &&
                                 isCollision(shots[i].x, shots[i].y, enemies_level[j].x, enemies_level[j].y)) {
                                 // Shot hit an enemy, clear the enemy
                             	if (enemies_level[j].color == 1) {
                             	points(2);
                             	enemies -= 1;
+
                             	}
                             	if (enemies_level[j].color == 2) {
                             	                            	points(4);
                             	                            	enemies -= 1;
+
                             	                            	}
                             	if (enemies_level[j].color == 3) {
                             	                            	points(6);
                             	                            	enemies -= 1;
+
                             	                            	}
                             	if (enemies_level[j].color == 4) {
                             	                            	points(8);
                             	                            	enemies -= 1;
+
                             	                            	}
                             	if (enemies_level[j].color == 5) {
                             	                            	points(10);
                             	                            	enemies -= 1;
+
                             	                            	}
-                                clear_enemy(enemies_level[j].x, enemies_level[j].y);
-                                enemies_level[j].x = 0;
-                                enemies_level[j].y = 0;
+                            	clear_enemy(enemies_level[j].x, enemies_level[j].y);
+                            	enemies_level[j].x = 0;
+                            	enemies_level[j].y = 0;
+
 
 
                                 // Clear the shot
-                                gotoxy(shots[i].x,shots[i].y);
-                                cursor_down(1);
+                                gotoxy(shots[i].x,shots[i].y+1);
                                 printf(" ");
                                 shots[i].x = 0;
                                 shots[i].y = 0;
-                                break;  // No need to check for more collisions
+                                  // No need to check for more collisions
                             }}
                             }
-                        }
-            if (shots[i].y > 1) {
-                printf("o");
-                cursor_left(1);
-                cursor_down(1);
-                printf(" ");
-                --shots[i].y;
-            } else {
-            	 gotoxy(shots[i].x, ++shots[i].y);
-            	 printf(" ");
-                shots[i].x = 0;
-                shots[i].y = 0;
-            }
-        }
+           }
        pause_control(pause);
 	}
+}
 void initiate_black_hole(int x,int y){
 	fgcolor(8);
 	gotoxy(x-2,y-1);
@@ -321,5 +470,5 @@ void initiate_black_hole(int x,int y){
 	}
 	fgcolor(15);
 }
-
-
+}
+}
