@@ -44,6 +44,7 @@ int HelpControls();
 int MenuControls();
 int PlayControls();
 int levelControls(int difficulty);
+void GAMEOVERControls();
 
 // #### dataread.c ####
 uint16_t Joystickport();
@@ -79,6 +80,7 @@ void menuHELP();
 void menuSCORE();
 void menuPLAY();
 void menu();
+void menuGAMEOVER();
 
 //initiate_gameplay.c
 void initiate_rocket(int x1, int y1);
