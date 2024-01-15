@@ -29,7 +29,7 @@ void write_play();
 void write_menu();
 void write_help();
 void write_help_header();
-void write_score_header();
+void write_score_header(int x, int y, int colour);
 void write_exit();
 void write_Welcome();
 void write_highscore();
