@@ -13,10 +13,10 @@
 #include "system_stm32f30x.h"
 #include "stm32f30x_conf.h"
 #include "30010_io.h"
-//Global Variables
-volatile uint32_t timer;
+// GLOBAL VARIABLER
 int globalLives;
 int globalPoints;
+volatile uint32_t timer;
 
 /* Exported types -------------------------------------------------------*/
 /* Exported constants ---------------------------------------------------*/
@@ -38,6 +38,7 @@ void write_play_header();
 void write_numbers(int number,int x,int y);
 void asteroid(int x, int y);
 
+
 // #### Controls.c ####
 int ScoreControls();
 int HelpControls();
@@ -51,11 +52,12 @@ uint16_t Joystickport();
 void lcd_resetwrite(const char* input_string, int line_number);
 void lcd_write_index(const char* input_string,int line_number, int index);
 void level_lcd(int level, int globalLives, int globalPoints);
+void menuGAMEOVER();
 
 
 // #### ansi.c ####
 void fgcolor(uint8_t foreground);
-void blink();
+void blink(uint8_t on);
 void voidgotoxy();
 void ClearScreen();
 void cursor_up(int amount);
@@ -74,13 +76,14 @@ void credits();
 void Smallbox();
 void game_border();
 void help_design();
+void Asteroid(int size, const int x, const int y);
+
 
 // #### menu.c ####
 void menuHELP();
 void menuSCORE();
 void menuPLAY();
 void menu();
-void menuGAMEOVER();
 
 //initiate_gameplay.c
 void initiate_rocket(int x1, int y1);
@@ -100,8 +103,15 @@ void pause_control(int time_between);
 void points(int points);
 void addShot(int x, int y);
 bool isCollision(int shotX, int shotY, int enemyX, int enemyY);
-void updateAndPrintShots(int pause);
+void updateAndPrintShots(int pause, int level);
 void initiate_black_hole(int x,int y);
+struct Score {
+    long int score_count;
+};
+
+extern struct Score scores[10];
+
+void update_score(long int score);
 
 //#### levels.c ####
 void level_1();
@@ -114,6 +124,21 @@ void level_7();
 void level_8();
 void level_9();
 
+//#### astroids.c ####
+struct Asteroid {
+	    int x;
+	    int y;
+	};
+struct Asteroid very_small_asteroid1[21];
+struct Asteroid very_small_asteroid2[21];
+struct Asteroid very_small_asteroid3[21];
+struct Asteroid very_small_asteroid4[21];
+struct Asteroid very_small_asteroid5[21];
+struct Asteroid small_asteroid1[37];
+struct Asteroid small_asteroid2[37];
+struct Asteroid small_asteroid3[37];
+struct Asteroid small_asteroid4[37];
+struct Asteroid small_asteroid5[37];
+
 /*void addWhateverFunctionsYouNeed( type parameter );*/
 #endif // _HEADER_FILE_H_
-
