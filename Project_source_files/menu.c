@@ -25,8 +25,7 @@ void menuHELP() {
 	write_help_header();
 	write_exit();
 	help_design();
-	lcd_resetwrite("Controls and object",1);
-	lcd_write_index("of the game:",2,0);
+	lcd_resetwrite("Controls and object of the game!",1);
 	HelpControls();
 }
 void menuPLAY() {
@@ -34,7 +33,7 @@ void menuPLAY() {
 	border();
 	asteroid(2,2);
 	asteroid(90,20);
-	lcd_resetwrite("Select a level to play",2);
+	lcd_resetwrite("Select a level to play!",1);
 	//BORDER FOR LEVELS
 	gotoxy(37,15);
 	Smallbox();
@@ -68,7 +67,7 @@ void menuSCORE() {
 	box();
 	write_exit();
 	write_highscore();
-	lcd_resetwrite("Look at your highscore!",2);
+	lcd_resetwrite("Look at your highscore!",1);
 	gotoxy(40,20);
 		for (int i = 0; i< 10; i++) {
 			gotoxy(40,20+i);
@@ -85,7 +84,7 @@ void menu() {
 	asteroid(90,20);
 	write_Welcome();
 	menubox();
-	lcd_resetwrite("Please select a menu", 3);
+	lcd_resetwrite("Please select a menu", 1);
 	credits();
 	int value = MenuControls();
 	if (value == 1) {
