@@ -63,7 +63,7 @@ void menuSCORE() {
 	border();
 	asteroid(2,2);
 	asteroid(90,20);
-	write_score_header();
+	write_score_header(54,8,2);
 	box();
 	write_exit();
 	write_highscore();
@@ -76,6 +76,7 @@ void menuSCORE() {
 	ScoreControls();
 	//display scores:
 }
+
 void menu() {
 	ClearScreen();
 	background(); //FØRST
@@ -97,4 +98,23 @@ void menu() {
 	if (value == 3) {
 		menuPLAY();
 		}
+}
+
+void menuGAMEOVER() {
+	ClearScreen();
+	background(); //FØRST
+	border();
+	write_exit();
+	write_gameover(37,5);
+	write_score(50,15,1);
+	write_colon(75,16,1);
+	write_yourendscore(77,14,1);
+	globalPoints = 0;
+	globalLives = 3;
+	skull(67,22,7);
+	lcd_resetwrite("",1);
+	lcd_write_index("GAME",2,50);
+	lcd_write_index("OVER!",3,50);
+	lcd_write_index("   ",1,0);
+	GAMEOVERControls();
 }
