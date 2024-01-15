@@ -258,6 +258,7 @@ void lcd_write_index(const char* input_string, int line_number, int index) {
 		    // Push the buffer to the LCD
 		    lcd_push_buffer(buffer);
 		}
+}
 
 void lcd_write_array(uint8_t array[], int line_number, int index, int size) {
     if (line_number < 1 || line_number > 4) {
@@ -280,7 +281,7 @@ void lcd_write_array(uint8_t array[], int line_number, int index, int size) {
     }
 
     // Calculate the starting index based on the line_number and index
-    int buffer_index = (line_number - 1) * 128 + index;
+    int buffer_index = (line_number - 1) * 128;
 
     // Add the new array to the buffer
     for (int i = 0; i < size; i++) {
@@ -325,8 +326,23 @@ void clear_line(int line_number) {
 	 lcd_push_buffer(bufferclear);
 }
 
-
-
+void LCD(int antal){
+	int i;
+	unsigned char graphicBuffer [512];
+	memset(graphicBuffer,0x00,512);
+	for(i=0;i<antal;i++){//fills the array with "antal" hearts
+	graphicBuffer[128+9*i]=0x0;
+	graphicBuffer[129+9*i]=0xC;
+	graphicBuffer[130+9*i]=0x1E;
+	graphicBuffer[131+9*i]=0x03E;
+	graphicBuffer[132+9*i]=0x7C;
+	graphicBuffer[133+9*i]=0x3E;
+	graphicBuffer[134+9*i]=0x1E;
+	graphicBuffer[135+9*i]=0xC;
+	graphicBuffer[136+9*i]=0x0;
+	}
+	lcd_push_buffer(graphicBuffer);//update the display
+}
 
 
 
