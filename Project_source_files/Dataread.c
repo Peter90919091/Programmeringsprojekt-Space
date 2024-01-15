@@ -171,53 +171,46 @@ const char character_data[95][5] = {
   {0x00, 0x00, 0x7F, 0x00, 0x00},
   {0x00, 0x41, 0x36, 0x08, 0x00},
   {0x08, 0x04, 0x08, 0x10, 0x08}};
-// Function to write a string to the LCD
 
-// Function to write a string to the LCD on a specified line
+//Resets the LCD and writes the input string on line number:
 void lcd_resetwrite(const char* input_string, int line_number) {
-    // Ensure that the line_number is within a valid range (adjust as needed)
+    //Checks for errors on line number
     if (line_number < 1 || line_number > 4) {
-        // Handle error or choose a default line
-        return;
+    	return;
     }
 
-    // Set the cursor position based on the line_number
-
-    // Create a buffer to store the pixel data for the string
-    uint8_t buffer[512]; // Adjust the buffer size based on your LCD resolution
+    // Creates the array in which the characters are stored
+    uint8_t buffer[512]; //128(pixels wide) * 4 (lines) = 512
+    //Puts 0's in each element in the buffer
     memset(buffer,0x00,512);
 
-    // Initialize the buffer with zeros
-    for (int i = 0; i < sizeof(buffer); i++) {
-        buffer[i] = 0x00;
-    }
-
-    // Calculate the starting index based on the line_number
+    //Finds the index based on the line number
     int buffer_index = (line_number - 1) * 128;
 
-    // Iterate through each character in the input string
+    //Looks through each letter in the input string
     while (*input_string) {
-        // Find the index of the character in the character_data array
-        int char_index = *input_string - 32; // Assuming ASCII characters starting from space (32)
+        //Finds the index in the charactermap
+        int char_index = *input_string - 32;
 
-        // Copy the character data to the buffer
+        //Puts the characters in the array based on hexadecimal
         for (int i = 0; i < 5; i++) {
             buffer[buffer_index++] = character_data[char_index][i];
         }
 
-        // Add a space between characters
+        //Puts a space between characters
         buffer[buffer_index++] = 0x00;
 
-        // Move to the next character in the input string
+        //Go to the next letter in the string
         input_string++;
     }
 
-    // Push the buffer to the LCD
+    //Pushing the buffer to the LCD
     lcd_push_buffer(buffer);
 }
 
+//Writes the string at given line and index without resetting the LCD
 void lcd_write_index(const char* input_string, int line_number, int index) {
-	// Ensure that the line_number is within a valid range (adjust as needed)
+	//Checks for errors on line number
 		    if (line_number < 1 || line_number > 4) {
 		        // Handle error or choose a default line
 		        return;
@@ -225,125 +218,141 @@ void lcd_write_index(const char* input_string, int line_number, int index) {
 
 		    // Set the cursor position based on the line_number
 
-		    // Create a buffer to store the pixel data for the string
-		    uint8_t buffer[512]; // Adjust the buffer size based on your LCD resolution
+		    // Creates the array in which the characters are stored
+		    uint8_t buffer[512]; //128(pixels wide) * 4 (lines) = 512
 
-		    // Initialize the buffer with zeros
+
+		    //Checks the buffer for existing data, else put 0
 		    for (int i = 0; i < sizeof(buffer); i++) {
 		    	if (buffer[i] != 0) {;}
 		    	else {
 		    		buffer[i] = 0x00;
 		    }
 
-		    // Calculate the starting index based on the line_number
+		    //Finds the buffer index based on the line number and index
 		    int buffer_index = (line_number - 1) * 128+index;
 
-		    // Iterate through each character in the input string
+		    //Looks through each letter in the input string
 		    while (*input_string) {
-		        // Find the index of the character in the character_data array
-		        int char_index = *input_string - 32; // Assuming ASCII characters starting from space (32)
+		    	//Finds the index in the charactermap
+		        int char_index = *input_string - 32;
 
-		        // Copy the character data to the buffer
+		        //Puts the characters in the array based on hexadecimal
 		        for (int i = 0; i < 5; i++) {
 		            buffer[buffer_index++] = character_data[char_index][i];
 		        }
 
-		        // Add a space between characters
+		        //Puts a space between characters
 		        buffer[buffer_index++] = 0x00;
 
-		        // Move to the next character in the input string
+		        //Go to the next letter in the string
 		        input_string++;
 		    }
 
-		    // Push the buffer to the LCD
+		    //Pushing the buffer to the LCD
 		    lcd_push_buffer(buffer);
 		}
 }
 
-void lcd_write_array(uint8_t array[], int line_number, int index, int size) {
-    if (line_number < 1 || line_number > 4) {
-        // Handle error or choose a default line
-        return;
-    }
+void level_lcd(int level, int globalLives, int globalPoints) {
+	uint8_t array[512];
+	memset(array,0x00,512);
 
-    // Initialize buffer of 512 bytes
-    uint8_t bufferarray[512];
+	int index = 45;
+	char* leveltext = "Level";
 
-    // Preserve the existing contents of the buffer
-    for (int i = 0; i < sizeof(bufferarray); i++) {
-        // You may want to add logic here to check if the buffer[i] is not part of the existing content
-        if (bufferarray[i] != 0) {
-            ;
-        }
-        else {
-            bufferarray[i] = 0x00;
-        }
-    }
+//Writing Level
+	while (*leveltext) {
+      //Finds the index
+	   int char_index = *leveltext - 32;
+	    //Puts the characters in the array based on hexadecimal
+	   for (int i = 0; i < 5; i++) {
+		   array[index++] = character_data[char_index][i];
+	   }
 
-    // Calculate the starting index based on the line_number and index
-    int buffer_index = (line_number - 1) * 128;
+	   //Puts a space between the characters
+	   array[index++] = 0x00;
 
-    // Add the new array to the buffer
-    for (int i = 0; i < size; i++) {
-        bufferarray[buffer_index++] = array[i];
-    }
+	   //Go to the next character
+        leveltext++;
+			    }
 
+//Writing the level number
+		char buffernum[20];
+		sprintf(buffernum,"%d",level);
+			switch (buffernum[0]) {
+			case '0' ... '9':
+				index++;
+			for (int i = 0; i<5;i++) {
+				array[index++]=character_data[buffernum[0]-32][i];
 
+			}
 
-    // Push the buffer to the LCD
-    lcd_push_buffer(bufferarray);
-}
+			}
 
-void write_heart(int line_number, int index) {
-	uint8_t heartl1[17] ={0x38,0x7C,0xFE,0xFF,0xFF,0xFF,0xFE,0xFC,0xF8,0xFC,0xFE,0xFF,0xFF,0xFF,0xFE,0x7C,0x38};
-	uint8_t heartl2[11]= {0x01,0x03,0x07,0x0F,0x01F,0x3F,0x1F,0x0F,0x07,0x03,0x01};
-	lcd_write_array(heartl1,line_number,index,17);
-	lcd_write_array(heartl2,line_number+1,index+3,11);
-}
+//Writing "Lives:" and "Score:"
+		char* livestext = "Lives:";
+		index = 128;
+		while (*livestext) {
+		//Finding the index in charactermap
+		int charindex = *livestext-32;
+			for (int i = 0; i<5;i++) {
+				array[index++]=character_data[charindex][i];
+			}
+		//Making a space between the characters:
+		array[index++]=0x00;
 
-void clear_line(int line_number) {
-	 if (line_number < 1 || line_number > 4) {
-	        // Handle error or choose a default line
-	        return;
-	    }
-	 uint8_t bufferclear[512];
-	 int buffer_index = (line_number - 1)*128;
-	 for (int i =0 ; i<sizeof(bufferclear); i++) {
-	         // You may want to add logic here to check if the buffer[i] is not part of the existing content
-	         if (bufferclear[i] != 0) {
-	             ;
-	         }
-	         else {
-	             bufferclear[i] = 0x00;
-	         }
-	     }
-	 for (int i = 0; i < 128; i++) {
-	         bufferclear[buffer_index++] = 0x00;
-	     }
-	 for (int i = 0; i< 50;i++) {
-		 printf("%d\n", bufferclear[i]);
-	 }
-	 lcd_push_buffer(bufferclear);
-}
-
-void LCD(int antal){
-	int i;
-	unsigned char graphicBuffer [512];
-	memset(graphicBuffer,0x00,512);
-	for(i=0;i<antal;i++){//fills the array with "antal" hearts
-	graphicBuffer[128+9*i]=0x0;
-	graphicBuffer[129+9*i]=0xC;
-	graphicBuffer[130+9*i]=0x1E;
-	graphicBuffer[131+9*i]=0x03E;
-	graphicBuffer[132+9*i]=0x7C;
-	graphicBuffer[133+9*i]=0x3E;
-	graphicBuffer[134+9*i]=0x1E;
-	graphicBuffer[135+9*i]=0xC;
-	graphicBuffer[136+9*i]=0x0;
+		//Taking the next letter:
+		livestext++;
 	}
-	lcd_push_buffer(graphicBuffer);//update the display
-}
 
+	char* scoretext = "Score:";
+	index = 220;
+	while (*scoretext) {
+	int charindex = *scoretext-32;
+		for (int i = 0; i<5;i++) {
+			array[index++]=character_data[charindex][i];
+		}
+		//Creating a space between the characters:
+		array[index++]=0x00;
+		//Taking the next letter in the text
+		scoretext++;
+	}
+
+
+//Sending number of lives left to LCD
+	//Doing each line on their own and *9 for each heart required
+	for(int i=0;i<globalLives;i++)
+		array[256+9*i]=0x0;
+		array[257+9*i]=0xC;
+		array[258+9*i]=0x1E;
+		array[259+9*i]=0x03E;
+		array[260+9*i]=0x7C;
+		array[261+9*i]=0x3E;
+		array[262+9*i]=0x1E;
+		array[263+9*i]=0xC;
+		array[264+9*i]=0x0;
+		}
+//Writing the score which updates
+	char buffer[20];
+	sprintf(buffer,"%d", globalPoints);
+	index = 360;
+	for (int i = 0;i<3;i++) {
+		switch (buffer[i]){
+		case '0' ... '9':
+		for (int j = 0;j<5;j++) {
+			array[index++]=character_data[buffer[i]-32][j];
+
+			}
+		index++;
+		break;
+			default:
+				break;
+		}
+	}
+
+	lcd_push_buffer(array);
+}
 
 
 
