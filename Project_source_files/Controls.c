@@ -50,11 +50,11 @@ int levelControls(int difficulty) {
 
 	if (cursor_leftright > 3 && value == 4 ) { //LEFT
 						if (cursor_leftright> 3) {cursor_leftright -= 1;}
-						pause_control(50000);
+						pause_control(pause<<2);
 					}
 			if (cursor_leftright < 139 && value == 8) { //RIGHT
 						if (cursor_leftright< 139) {cursor_leftright += 1;}
-						pause_control(50000);
+						pause_control(pause<<2);
 					}
 	if (cursor_leftright != prev_cursor_leftright) {
 						blink(0);
@@ -62,7 +62,6 @@ int levelControls(int difficulty) {
 						delete_rocket(prev_cursor_leftright , 0);
 						prev_cursor_leftright = cursor_leftright;
 						initiate_rocket(cursor_leftright, 0);
-						pause_control(100000);
 							}
 
 	if (value == 16) { //SKUD
