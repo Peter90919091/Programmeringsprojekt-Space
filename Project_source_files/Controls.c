@@ -25,10 +25,10 @@ int levelControls(int difficulty) {
 	if (difficulty == 3) {speed = 9;level = 3;pause = 1500;}
 	if (difficulty == 4) {speed = 9;level = 4;pause = 1000;}
 	if (difficulty == 5) {speed = 8;level = 5;pause = 1000;}
-	if (difficulty == 6) {speed = 8;level = 6;pause = 1000;}
-	if (difficulty == 7) {speed = 7;level = 7;pause = 1000;}
-	if (difficulty == 8) {speed = 7;level = 8;pause = 1000;}
-	if (difficulty == 9) {speed = 7;level = 9;pause = 1000;}
+	if (difficulty == 6) {speed = 8;level = 6;pause = 500;}
+	if (difficulty == 7) {speed = 7;level = 7;pause = 500;}
+	if (difficulty == 8) {speed = 7;level = 8;pause = 500;}
+	if (difficulty == 9) {speed = 7;level = 9;pause = 300;}
 
 	int cursor_leftright = 38;
 	int prev_cursor_leftright = 3;
@@ -75,7 +75,7 @@ int levelControls(int difficulty) {
 		pause_control(200000);
 		}
 	if (shot == 1) {
-	        updateAndPrintShots(1000);
+	        updateAndPrintShots(pause,level);
 	    }
 	}
 }
@@ -351,4 +351,3 @@ int MenuControls() {
 	if (value != 0) {
 	pause_control(1000000);}}
 }
-
