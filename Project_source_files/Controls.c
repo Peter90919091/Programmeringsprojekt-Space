@@ -38,7 +38,7 @@ int levelControls(int difficulty) {
 	text_color_blink(0);
 	int shot = 0;
 	while(1) {
-
+	level_lcd(difficulty,globalLives,globalPoints);
 		gotoxy(0,0);
 		printf("%lu",timer);
 		enemies(speed,level);
