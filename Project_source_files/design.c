@@ -281,12 +281,9 @@ void help_design() {
 	printf("Avoid obstacles");
 	asteroid(55,25);
 }
-	struct Asteroid {
-	    int x;
-	    int y;
-	};
+/*
 // Function to display the big asteroid at a specific location
-void displayBigAsteroid(struct Asteroid asteroid) {
+void displayBigAsteroid(struct astroid asteroid) {
     fgcolor(8);
     printf("\033[%d;%dH      .-\"\"\"\"\"\"-.\n", asteroid.y, asteroid.x);
     printf("\033[%d;%dH    .-'   ()       '-.\n", asteroid.y + 1, asteroid.x);
@@ -300,7 +297,7 @@ void displayBigAsteroid(struct Asteroid asteroid) {
 }
 
 // Function to display the medium asteroid at a specific location
-void displayMediumAsteroid(struct Asteroid asteroid) {
+void displayMediumAsteroid(struct astroid asteroid) {
     fgcolor(8);
     printf("\033[%d;%dH      .--\"\"\"\"\"--.,.\n", asteroid.y, asteroid.x);
     printf("\033[%d;%dH    .' o    ()   .   '.\n", asteroid.y + 1, asteroid.x);
@@ -313,7 +310,7 @@ void displayMediumAsteroid(struct Asteroid asteroid) {
 }
 
 // Function to display the small asteroid at a specific location
-void displaySmallAsteroid(struct Asteroid asteroid) {
+void displaySmallAsteroid(struct astroid asteroid) {
     fgcolor(8);
     printf("\033[%d;%dH    .- .\"\"_.    \n", asteroid.y, asteroid.x);
     printf("\033[%d;%dH .  .   o     :  \n", asteroid.y + 1, asteroid.x);
@@ -326,7 +323,7 @@ void displaySmallAsteroid(struct Asteroid asteroid) {
 }
 
 // Function to print asteroids of diffrent size
-void displayAsteroidBySize(char size, struct Asteroid asteroid) {
+void displayAsteroidBySize(char size, struct astroid asteroid) {
     switch (size) {
         case 'B':
             displayBigAsteroid(asteroid);
@@ -341,6 +338,8 @@ void displayAsteroidBySize(char size, struct Asteroid asteroid) {
             printf("Invalid size!\n");
     }
 }
+
+*/
 void attempt_small_gravity() {
     printf("  __,_\n");
     printf("/ o .   \\\n");
