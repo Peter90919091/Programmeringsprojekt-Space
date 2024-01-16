@@ -130,6 +130,7 @@ void menuWIN(int level) {
 	write_score(55,15,1);
 	write_colon(80,16,1);
 	write_yourendscore(82,14,1);
+	globalPoints = 0;
 	int value = GAMEWINControls();
 	if (value == 1) {
 		switch (level) {
