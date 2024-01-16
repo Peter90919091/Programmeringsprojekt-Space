@@ -34,7 +34,6 @@ void pause_control(int time_between) {
 	while (first < time_between) {first += 1;}
 }
 void initiate_rocket(int x, int y){
-	y =38;
 	gotoxy(x,(y-1));
 	printf("%c",186);
 	gotoxy(x,y);
