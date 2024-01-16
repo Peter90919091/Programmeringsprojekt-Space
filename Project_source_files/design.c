@@ -220,6 +220,7 @@ void Smallbox() {
 }
 void help_design() {
 	box();
+	fgcolor(15);
 	gotoxy(47,18);
 	printf("Move the spaceship right or left using joystick");
 	gotoxy(47,23);
