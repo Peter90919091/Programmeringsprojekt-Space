@@ -19,7 +19,6 @@ void menuHELP() {
 	background();
 	lives(0);
 	asteroid(2,2);
-	asteroid(90,20);
 	border();
 	box();
 	write_help_header();
