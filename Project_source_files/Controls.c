@@ -37,6 +37,11 @@ int levelControls(int difficulty) {
 	text_color_blink(0);
 	int shot = 0;
 	while(1) {
+		//Boss key start
+		if (uart_get_char() == 0x1B){
+			boss_key_function();
+		}
+		//Boss key slut
 		level_lcd(difficulty,globalLives,globalPoints);
 		gotoxy(0,0);
 		printf("%lu",timer);
@@ -79,7 +84,13 @@ int levelControls(int difficulty) {
 
 int HelpControls() {
 	int value = 0;
-	while(1) {value = Joystickport();
+	while(1) {
+	//Boss key start
+	if (uart_get_char() == 0x1B){
+		boss_key_function();
+	}
+	//Boss key slut
+	value = Joystickport();
 	if (value == 16) {menu();}
 	}
 }
@@ -217,6 +228,11 @@ int PlayControls() {
     write_numbers(9, 85, 24);
 
     while (1) {
+	//Boss key start
+	if (uart_get_char() == 0x1B){
+		boss_key_function();
+	}
+	//Boss key slut
         int value = Joystickport();
 // ALLE DISSE FUNKTIONER ER LAVET OG BENYTTES FORDI VI ER LØBET TØR FOR PLADS TIL AT LEGE MED STORE TAL
         // cursor bevægelse
@@ -244,7 +260,13 @@ int PlayControls() {
 
 int ScoreControls() {
 	int value = 0;
-	while(1) {value = Joystickport();
+	while(1) {
+	//Boss key start
+	if (uart_get_char() == 0x1B){
+		boss_key_function();
+	}
+	//Boss key slut
+	value = Joystickport();
 	if (value == 16) {menu();}
 	}
 }
@@ -261,6 +283,11 @@ int MenuControls() {
 			gotoxy(63,29);
 			write_play();
 	while(1) {
+	//Boss key start
+	if (uart_get_char() == 0x1B){
+		boss_key_function();
+	}
+	//Boss key slut
 	int value = Joystickport();
 	if (value == 1 || value == 5 || value== 9 || value == 17 || value == 21 || value == 25) { //UP
 		if (cursor_placement> 0) {cursor_placement -= 1;}
@@ -316,11 +343,22 @@ int MenuControls() {
 }
 void GAMEOVERControls() {
 	int value = 0;
-	while(1) {value = Joystickport();
+	while(1) {
+		//Boss key start
+		if (uart_get_char() == 0x1B){
+		boss_key_function();
+		}
+		//Boss key slut
+		value = Joystickport();
 		if (value == 16) {menu();}
 		}
 }
 int GAMEWINControls() {
+	//Boss key start
+	if (uart_get_char() == 0x1B){
+		boss_key_function();
+	}
+	//Boss key slut
 	int cursor_placement = 0;
 	int prev_cursor_placement = 0;
 	int stop = 100;
