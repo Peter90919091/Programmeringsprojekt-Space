@@ -126,8 +126,12 @@ int gravity(struct Shot shot_values, struct Asteroid asteroid_values) {
         return 0;
     }
 }
-void enemies(int speed,int level) {
-	static int amount = 0;
+
+void enemiesbegin(int speed,int level, int resetAmount) {
+	static int amount;
+	if (resetAmount) {
+	        amount = 0;
+	    }
 	int size = (level >=1 && level <= 9) ? 10 * level : 0;
 	if (globalLives != 0) {
 		gotoxy(0,0);
@@ -242,6 +246,7 @@ void updateAndPrintShots(int pause, int level) {
 	    }
 
 	if ((enemies == 0) || ((enemies == 1) && (globalLives == 2)) || ((enemies == 2) && (globalLives == 1))) {
+		enemiesbegin(10,level,1);
 		for (int i = 0; i< 100; i++) {clear_enemy(enemies_level[i].x,enemies_level[i].y);enemies_level[i].x = 0;enemies_level[i].y = 0;enemies_level[i].color = 0;}
 		update_score(globalPoints);
 		globalPoints = 0;
@@ -250,6 +255,7 @@ void updateAndPrintShots(int pause, int level) {
 		menu();
 	}
 	if (globalLives == 0) {
+		enemiesbegin(10,level,1);
 		for (int i = 0; i< 100; i++) {clear_enemy(enemies_level[i].x,enemies_level[i].y);enemies_level[i].x = 0;enemies_level[i].y = 0;enemies_level[i].color = 0;}
 		once = 0;
 		clearallshots();
@@ -358,13 +364,13 @@ void updateAndPrintShots(int pause, int level) {
     		  	  }
     		  }
     	  }
+    	  if (enemy_down == 1) {
+    	          enemies -= 1;
+    	          enemy_down = 0;
+    	       }
     	}
     	pause_control(pause);
     }
-    if (enemy_down == 1) {
-        enemies -= 1;
-        enemy_down = 0;
-     }
 }
 
 void initiate_black_hole(int x,int y){
