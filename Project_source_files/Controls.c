@@ -9,7 +9,6 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include <math.h>
 #include <unistd.h>
 #include "system_stm32f30x.h"
 #include "stm32f30x_conf.h"
@@ -28,7 +27,7 @@ int levelControls(int difficulty) {
 	if (difficulty == 6) {speed = 8;level = 6;pause = 500;}
 	if (difficulty == 7) {speed = 7;level = 7;pause = 500;}
 	if (difficulty == 8) {speed = 7;level = 8;pause = 500;}
-	if (difficulty == 9) {speed = 7;level = 9;pause = 300;Asteroid1(0, 20, 20);Asteroid1(1, 70, 30);Asteroid2(0, 30, 25);Asteroid2(1, 40, 15);Asteroid3(0, 100, 20);Asteroid3(1, 70, 30);Asteroid4(0, 57, 17);Asteroid4(1, 89, 10);Asteroid5(0, 20, 20);Asteroid5(1, 10, 30);}
+	if (difficulty == 9) {speed = 7;level = 9;pause = 300;Asteroid1(0, 20, 20);Asteroid1(1, 70, 30);Asteroid2(0, 30, 25);Asteroid2(1, 40, 15);Asteroid3(0, 100, 20);Asteroid3(1, 70, 30);Asteroid4(0, 57, 17);Asteroid4(1, 89, 10);}
 
 	int cursor_leftright = 38;
 	int prev_cursor_leftright = 3;
@@ -65,10 +64,8 @@ int levelControls(int difficulty) {
 							}
 
 	if (value == 16) { //SKUD
-		gotoxy(cursor_leftright,35);
-		printf("o");
 		shot_x = cursor_leftright;
-		shot_y = 35;
+		shot_y = 36;
 		shot = 1;
 		addShot(shot_x, shot_y);
 		prevShot(shot_x, shot_y);
@@ -87,195 +84,164 @@ int HelpControls() {
 	}
 }
 
-
-int PlayControls() {
-		int cursor_updown = 0;
-		int cursor_leftright = 0;
-		int prev_cursor_updown = 0;
-		int prev_cursor_leftright = 0;
-		int stop = 100;
-		text_color_blink(0);
-					write_exitplay();
-					write_play_header();
-					write_numbers(1,40,16);
-					write_numbers(2,55,16);
-					write_numbers(3,70,16);
-					write_numbers(4,85,16);
-					write_numbers(5,100,16);
-					write_numbers(6,40,24);
-					write_numbers(7,55,24);
-					write_numbers(8,70,24);
-					write_numbers(9,85,24);
-		while(1) {
-		int value = Joystickport();
-		/// CURSOR MOVEMENT
-		if (value == 1) { //UP
-			if (cursor_updown> 0) {cursor_updown -= 1;}
-		}
-		if (value == 2 ) { //DOWN
-			if (cursor_updown< 4) {cursor_updown += 1;}
-		}
-		if (value == 4 ) { //LEFT
-					if (cursor_leftright> 0) {cursor_leftright -= 1;}
-				}
-		if (value == 8) { //RIGHT
-					if (cursor_leftright< 4) {cursor_leftright += 1;}
-				}
-		/// CURSORPUSH level 1-4
-		if (value == 16 && cursor_updown == 1 && cursor_leftright== 0 )  { //LEVEL1
-			ClearScreen();
-			level_1();
-		}
-		if (value == 16 && cursor_updown == 1 && cursor_leftright== 1 )  { //LEVEL2
-					ClearScreen();
-					level_2();
-				}
-		if (value == 16 && cursor_updown == 1 && cursor_leftright== 2 )  { //LEVEL3
-					ClearScreen();
-					level_3();
-				}
-		if (value == 16 && cursor_updown == 1 && cursor_leftright== 3 )  { //LEVEL4
-					ClearScreen();
-					level_4();
-				}
-		if (value == 16 && cursor_updown == 1 && cursor_leftright== 3 )  { //LEVEL5
-							ClearScreen();
-							level_5();
-						}
-		/// CURSORPUSH level 5-8
-				if (value == 16 && cursor_updown == 2 && cursor_leftright== 0 )  { //LEVEL6
-					ClearScreen();
-					level_6();
-				}
-				if (value == 16 && cursor_updown == 2 && cursor_leftright== 1 )  { //LEVEL7
-							ClearScreen();
-							level_7();
-						}
-				if (value == 16 && cursor_updown == 2 && cursor_leftright== 2 )  { //LEVEL8
-							ClearScreen();
-							level_8();
-						}
-				if (value == 16 && cursor_updown == 2 && cursor_leftright== 3 )  { //LEVEL9
-							ClearScreen();
-							level_9();
-						}
-		/// CURSOR PLAY
-				if (value == 16 && cursor_updown == 0  )  { //PLAY
-											ClearScreen();
-										}
-				if (value == 16 && cursor_updown == 3  )  { //EXIT
-															ClearScreen();
-															menu();
-														}
-
-		if (cursor_leftright != prev_cursor_leftright ||cursor_updown != prev_cursor_updown ) {
-			text_color_blink(0);
-			write_exitplay();
-			write_play_header();
-			write_numbers(1,40,16);
-			write_numbers(2,55,16);
-			write_numbers(3,70,16);
-			write_numbers(4,85,16);
-			write_numbers(5,100,16);
-			write_numbers(6,40,24);
-			write_numbers(7,55,24);
-			write_numbers(8,70,24);
-			write_numbers(9,85,24);
-				}
-		if (cursor_updown == 0) {
-			if (stop != 0) {
-		prev_cursor_updown = cursor_updown;
-		text_color_blink(1);
-		write_play_header();
-		text_color_blink(0);
-		stop = 0;
-			}
-		}
-		if (cursor_updown == 3) {
-			if (stop != 3) {
-			prev_cursor_updown = cursor_updown;
-			text_color_blink(1);
-			write_exitplay();
-			text_color_blink(0);
-			stop = 3;}
-				}
-		if (cursor_updown == 1 && cursor_leftright == 0) {
-			if (stop != 10) {
-			prev_cursor_updown = cursor_updown;
-			prev_cursor_leftright = cursor_leftright;
-			text_color_blink(1);
-					write_numbers(1,40,16);
-					text_color_blink(0);
-					stop = 10;}
-						}
-		if (cursor_updown == 1 && cursor_leftright == 1) {
-			if (stop != 11) {
-			prev_cursor_updown = cursor_updown;
-			prev_cursor_leftright = cursor_leftright;
-			text_color_blink(1);
-							write_numbers(2,55,16);
-							text_color_blink(0);
-							stop = 11;}
-								}
-		if (cursor_updown == 1 && cursor_leftright == 2 ) {
-			if (stop != 12) {
-		prev_cursor_updown = cursor_updown;
-		prev_cursor_leftright = cursor_leftright;
-		text_color_blink(1);
-		write_numbers(3,70,16);
-		text_color_blink(0);
-		stop = 12;}	}
-		if (cursor_updown == 1 && cursor_leftright == 3 ) {
-			if (stop != 13) {
-		prev_cursor_updown = cursor_updown;
-		prev_cursor_leftright = cursor_leftright;
-		text_color_blink(1);
-		write_numbers(4,85,16);
-		text_color_blink(0);
-		stop = 13;}	}
-		if (cursor_updown == 1 && cursor_leftright == 4 ) {
-			if (stop != 14) {
-		prev_cursor_updown = cursor_updown;
-		prev_cursor_leftright = cursor_leftright;
-		text_color_blink(1);
-		write_numbers(5,100,16);
-		text_color_blink(0);
-		stop = 14;}	}
-		if (cursor_updown == 2 && cursor_leftright == 0 ) {
-			if (stop != 20) {
-		prev_cursor_updown = cursor_updown;
-		prev_cursor_leftright = cursor_leftright;
-		text_color_blink(1);
-		write_numbers(6,40,24);
-		text_color_blink(0);
-		stop = 20;}	}
-		if (cursor_updown == 2 && cursor_leftright == 1 ) {
-			if (stop != 21) {
-			prev_cursor_updown = cursor_updown;
-			prev_cursor_leftright = cursor_leftright;
-			text_color_blink(1);
-			write_numbers(7,55,24);
-			text_color_blink(0);
-			stop = 21;}	}
-		if (cursor_updown == 2 && cursor_leftright == 2 ) {
-			if (stop != 22) {
-		prev_cursor_updown = cursor_updown;
-		prev_cursor_leftright = cursor_leftright;
-		text_color_blink(1);
-		write_numbers(8,70,24);
-		text_color_blink(0);
-		stop = 22;}	}
-		if (cursor_updown == 2 && cursor_leftright == 3 ) {
-			if (stop != 23) {
-		prev_cursor_updown = cursor_updown;
-		prev_cursor_leftright = cursor_leftright;
-		text_color_blink(1);
-		write_numbers(9,85,24);
-		text_color_blink(0);
-		stop = 23;}	}
-		if (value != 0) {
-			pause_control(1000000);}}
+//################## FUNKTIONER TIL PLAYMENU##################################
+// DE ER LAVET FORDI VI BRUGTE FOR MEGET PLADS
+// funktion for cursor bevægelse
+void cursor_movement(int value, int *cursorUpDown, int *cursorLeftRight) {
+    if (value == 1 && *cursorUpDown > 0) { // UP
+        (*cursorUpDown)--;
+    } else if (value == 2 && *cursorUpDown < 4) { // DOWN
+        (*cursorUpDown)++;
+    } else if (value == 4 && *cursorLeftRight > 0) { // LEFT
+        (*cursorLeftRight)--;
+    } else if (value == 8 && *cursorLeftRight < 4) { // RIGHT
+        (*cursorLeftRight)++;
+    }
 }
+
+// funktion for at bestemme level
+void level_selection(int value, int cursorUpDown, int cursorLeftRight) {
+    if (value == 16) {
+        ClearScreen();
+        switch (cursorUpDown) {
+            case 1:
+                switch (cursorLeftRight) {
+                    case 0: level_1(); break;
+                    case 1: level_2(); break;
+                    case 2: level_3(); break;
+                    case 3: level_4(); break;
+                    case 4: level_5(); break;
+                }
+                break;
+            case 2:
+                switch (cursorLeftRight) {
+                    case 0: level_6(); break;
+                    case 1: level_7(); break;
+                    case 2: level_8(); break;
+                    case 3: level_9(); break;
+                }
+                break;
+        }
+    }
+}
+
+// funktion til hvis der trykkes på exit eller play
+void playexit(int value, int cursorUpDown) {
+    if (value == 16) {
+        ClearScreen();
+        if (cursorUpDown == 0) { // PLAY
+        } else if (cursorUpDown == 3) { // EXIT
+            menu();
+        }
+    }
+}
+
+// opdater skærmen
+void updateScreen(int cursorUpDown, int cursorLeftRight, int prevCursorUpDown, int prevCursorLeftRight) {
+    if (cursorLeftRight != prevCursorLeftRight || cursorUpDown != prevCursorUpDown) {
+        text_color_blink(0);
+        write_exit();
+        write_play_header();
+        write_numbers(1, 40, 16);
+        write_numbers(2, 55, 16);
+        write_numbers(3, 70, 16);
+        write_numbers(4, 85, 16);
+        write_numbers(5, 100, 16);
+        write_numbers(6, 40, 24);
+        write_numbers(7, 55, 24);
+        write_numbers(8, 70, 24);
+        write_numbers(9, 85, 24);
+    }
+}
+
+// hader switches
+void show_cursor_pos(int cursorUpDown, int cursorLeftRight) {
+		switch (cursorLeftRight) {
+			case 0: switch (cursorUpDown) {
+				case 0:text_color_blink(1);write_play_header();text_color_blink(0); 		break;
+				case 1:text_color_blink(1);write_numbers(1, 40, 16);text_color_blink(0);	break;
+				case 2:text_color_blink(1);write_numbers(6, 40, 24);text_color_blink(0);	break;
+				case 3:text_color_blink(1);write_exit();text_color_blink(0); 				break;
+				}
+			break;
+			case 1: switch (cursorUpDown) {
+				case 0:text_color_blink(1);write_play_header();text_color_blink(0); 		break;
+				case 1:text_color_blink(1);write_numbers(2, 55, 16);text_color_blink(0);	break;
+				case 2:text_color_blink(1);write_numbers(7, 55, 24);text_color_blink(0);	break;
+				case 3:text_color_blink(1);write_exit();text_color_blink(0); 				break;
+				}
+			break;
+			case 2: switch (cursorUpDown) {
+				case 0:text_color_blink(1);write_play_header();text_color_blink(0); 		break;
+				case 1:text_color_blink(1);write_numbers(3, 70, 16);text_color_blink(0);	break;
+				case 2:text_color_blink(1);write_numbers(8, 70, 24);text_color_blink(0);	break;
+				case 3:text_color_blink(1);write_exit();text_color_blink(0); 				break;
+				}
+			break;
+			case 3: switch (cursorUpDown) {
+				case 0:text_color_blink(1);write_play_header();text_color_blink(0); 		break;
+				case 1:text_color_blink(1);write_numbers(4, 85, 16);text_color_blink(0);	break;
+				case 2:text_color_blink(1);write_numbers(9, 85, 24);text_color_blink(0);	break;
+				case 3:text_color_blink(1);write_exit();text_color_blink(0); 				break;
+				}
+			break;
+			case 4: switch (cursorUpDown) {
+				case 0:text_color_blink(1);write_play_header();text_color_blink(0); 		break;
+				case 1:text_color_blink(1);write_numbers(5, 100, 16);text_color_blink(0);	break;
+				case 2:text_color_blink(1);text_color_blink(0);								break;
+				case 3:text_color_blink(1);write_exit();text_color_blink(0); 				break;
+				}
+			break;
+	}
+}
+
+// PlayControls
+int PlayControls() {
+    int cursorUpDown = 0;
+    int cursorLeftRight = 0;
+    int prevCursorUpDown = 0;
+    int prevCursorLeftRight = 0;
+
+    // Vis normal skærm
+    text_color_blink(0);
+    write_exit();
+    write_play_header();
+    write_numbers(1, 40, 16);
+    write_numbers(2, 55, 16);
+    write_numbers(3, 70, 16);
+    write_numbers(4, 85, 16);
+    write_numbers(5, 100, 16);
+    write_numbers(6, 40, 24);
+    write_numbers(7, 55, 24);
+    write_numbers(8, 70, 24);
+    write_numbers(9, 85, 24);
+
+    while (1) {
+        int value = Joystickport();
+// ALLE DISSE FUNKTIONER ER LAVET OG BENYTTES FORDI VI ER LØBET TØR FOR PLADS TIL AT LEGE MED STORE TAL
+        // cursor bevægelse
+        cursor_movement(value, &cursorUpDown, &cursorLeftRight);
+
+        // levels
+        level_selection(value, cursorUpDown, cursorLeftRight);
+
+        // hvis cursor er over play eller exit
+        playexit(value, cursorUpDown);
+
+        // Fremvis poisition for cursor
+        show_cursor_pos(cursorUpDown, cursorLeftRight);
+
+        // opdater skærmen hvis cursor skifter position
+        updateScreen(cursorUpDown, cursorLeftRight, prevCursorUpDown, prevCursorLeftRight);
+        prevCursorUpDown = cursorUpDown;
+        prevCursorLeftRight = cursorLeftRight;
+        // pause
+        if (value != 0) {
+            pause_control(1000000);
+        }
+    }
+}
+
 int ScoreControls() {
 	int value = 0;
 	while(1) {value = Joystickport();
@@ -291,8 +257,7 @@ int MenuControls() {
 	text_color_blink(0);
 			gotoxy(62,17);
 			write_help();
-			gotoxy(60,23);
-			write_score();
+			write_score(60,23,7);
 			gotoxy(63,29);
 			write_play();
 	while(1) {
@@ -316,8 +281,7 @@ int MenuControls() {
 		text_color_blink(0);
 		gotoxy(62,17);
 		write_help();
-		gotoxy(60,23);
-		write_score();
+		write_score(60,23,7);
 		gotoxy(63,29);
 		write_play();
 	}
@@ -333,9 +297,8 @@ int MenuControls() {
 	if (cursor_placement == 1) {
 		if (stop != 1) {
 		prev_cursor_placement = cursor_placement;
-			gotoxy(60,23);
 			text_color_blink(1);
-			write_score();
+			write_score(60,23,1);
 			text_color_blink(0);;
 				stop = 1;}
 	}
@@ -351,7 +314,6 @@ int MenuControls() {
 	if (value != 0) {
 	pause_control(1000000);}}
 }
-
 void GAMEOVERControls() {
 	int value = 0;
 	while(1) {value = Joystickport();
