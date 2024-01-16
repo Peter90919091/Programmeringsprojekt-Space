@@ -248,7 +248,6 @@ void updateAndPrintShots(int pause, int level) {
 		enemiesbegin(10,level,1);
 		for (int i = 0; i< 100; i++) {clear_enemy(enemies_level[i].x,enemies_level[i].y);enemies_level[i].x = 0;enemies_level[i].y = 0;enemies_level[i].color = 0;}
 		update_score(globalPoints);
-		globalPoints = 0;
 		once = 0;
 		clearallshots();
 		menuWIN(level);
