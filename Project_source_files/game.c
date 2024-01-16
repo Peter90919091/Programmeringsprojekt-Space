@@ -251,7 +251,7 @@ void updateAndPrintShots(int pause, int level) {
 		globalPoints = 0;
 		once = 0;
 		clearallshots();
-		menu();
+		menuWIN(level);
 	}
 	if (globalLives == 0) {
 		enemiesbegin(10,level,1);
