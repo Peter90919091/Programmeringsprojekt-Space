@@ -585,8 +585,8 @@ void write_numbers(int number,int x,int y) {
 		}
 		else if (number == 0) {
 			cursor_down(1);printf("%c", 219);cursor_down(1);cursor_left(1);printf("%c", 219);cursor_down(1);cursor_left(1);printf("%c", 219);
-			cursor_down(1);printf("%c", 219);printf("%c", 219);cursor_up(1);printf("%c", 219);cursor_up(1);cursor_left(1);
-			printf("%c", 219);cursor_left(1);cursor_up(1);printf("%c", 219);cursor_up(1);cursor_left(3);printf("%c", 219);printf("%c", 219);
+			cursor_down(1);printf("%c", 219);printf("%c", 219);printf("%c", 219);cursor_up(1);printf("%c", 219);cursor_up(1);cursor_left(1);
+			printf("%c", 219);cursor_left(1);cursor_up(1);printf("%c", 219);cursor_up(1);cursor_left(4);printf("%c", 219);printf("%c", 219);printf("%c", 219);
 		}
 }
 void asteroid(int x, int y){
