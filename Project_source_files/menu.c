@@ -64,20 +64,19 @@ void menuPLAY() {
 void menuSCORE() {
 	background();
 	border();
-	lives(0);
 	asteroid(2,2);
 	asteroid(90,20);
 	write_score_header(54,8,2);
 	box();
-	text_color_blink(1);
 	write_exit();
-	text_color_blink(0);
 	write_highscore();
-	lcd_resetwrite("Look at your highscore!",2);
-	gotoxy(40,20);
+	lcd_resetwrite("Look at your highscore!",1);
+	gotoxy(50,15);
 		for (int i = 0; i< 10; i++) {
-			gotoxy(40,20+i);
-			printf("nr. %d Score is %lu",i+1,scores[i].score_count);
+		int scorearray[2] = {0,scores[i].score_count};
+			gotoxy(50,15+(i<<1));
+			if (scorearray[0]== 0) {printf("nr. %d Score ..........................",i+1);}
+			printf("%d",scorearray[1]);
 		}
 	ScoreControls();
 	//display scores:
