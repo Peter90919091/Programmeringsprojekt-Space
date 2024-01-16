@@ -8,7 +8,6 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include <math.h>
 #include <unistd.h>
 #include "system_stm32f30x.h"
 #include "stm32f30x_conf.h"
@@ -62,7 +61,7 @@ void level_lcd(int level, int globalLives, int globalPoints);
 // #### ansi.c ####
 void fgcolor(uint8_t foreground);
 void blink(uint8_t on);
-void voidgotoxy();
+void gotoxy();
 void ClearScreen();
 void cursor_up(int amount);
 void cursor_down(int amount);
@@ -80,7 +79,8 @@ void credits();
 void Smallbox();
 void game_border();
 void help_design();
-void Asteroid(int size, const int x, const int y);
+void small_gravity(int x, int y);
+void large_gravity(int x, int y);
 
 
 // #### menu.c ####
@@ -107,16 +107,26 @@ void display_screen();
 void pause_control(int time_between);
 void points(int points);
 void addShot(int x, int y);
-bool isCollision(int shotX, int shotY, int enemyX, int enemyY);
 void updateAndPrintShots(int pause, int level);
 void initiate_black_hole(int x,int y);
 struct Score {
     long int score_count;
 };
-
 extern struct Score scores[10];
-
 void update_score(long int score);
+void lives(int damage);
+struct enemy {
+    int x;
+    int y;
+    int color;
+};
+struct Shot {
+    int x;
+    int y;
+};
+void prevShot(int x, int y);
+
+void clearallshots();
 
 //#### levels.c ####
 void level_1();
@@ -144,6 +154,10 @@ struct Asteroid small_asteroid2[37];
 struct Asteroid small_asteroid3[37];
 struct Asteroid small_asteroid4[37];
 struct Asteroid small_asteroid5[37];
+void Asteroid1(int size, const int x, const int y);
+void Asteroid2(int size, const int x, const int y);
+void Asteroid3(int size, const int x, const int y);
+void Asteroid4(int size, const int x, const int y);
 
 /*void addWhateverFunctionsYouNeed( type parameter );*/
 #endif // _HEADER_FILE_H_
