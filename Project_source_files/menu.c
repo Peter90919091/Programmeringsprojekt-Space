@@ -122,3 +122,20 @@ void menuGAMEOVER() {
 	lcd_write_index("   ",1,0);
 	GAMEOVERControls();
 }
+void menuWIN() {
+	ClearScreen();
+	background(); //FØRST
+	border();
+	write_youwin(46,5,2);
+	write_score(55,15,1);
+	write_colon(80,16,1);
+	write_yourendscore(82,14,1);
+	int value = GAMEWINControls();
+	if (value == 1) {
+		//next level
+	}
+	if (value == 2) {
+		menu();
+	}
+
+}
