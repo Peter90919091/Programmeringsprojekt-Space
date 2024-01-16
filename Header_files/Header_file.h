@@ -92,7 +92,7 @@ void menuSCORE();
 void menuPLAY();
 void menu();
 void menuGAMEOVER();
-void menuWIN();
+void menuWIN(int level);
 
 //initiate_gameplay.c
 void initiate_rocket(int x1, int y1);
