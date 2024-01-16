@@ -355,8 +355,6 @@ void write_help_header() {
 void write_exit() {
 	//Setting cursor
 	gotoxy(62,36);
-	blink(1);
-	fgcolor(1);
 	//Print E
 		cursor_right(1);cursor_up(1);printf("%c", 219);cursor_down(1);cursor_left(1);printf("%c", 219);cursor_down(1);cursor_left(1);printf("%c", 219);cursor_down(1);cursor_left(1);printf("%c", 219);
 		printf("%c", 219);printf("%c", 219);printf("%c", 219);
@@ -587,8 +585,8 @@ void write_numbers(int number,int x,int y) {
 		}
 		else if (number == 0) {
 			cursor_down(1);printf("%c", 219);cursor_down(1);cursor_left(1);printf("%c", 219);cursor_down(1);cursor_left(1);printf("%c", 219);
-			cursor_down(1);printf("%c", 219);printf("%c", 219);printf("%c", 219);cursor_up(1);printf("%c", 219);cursor_up(1);cursor_left(1);
-			printf("%c", 219);cursor_left(1);cursor_up(1);printf("%c", 219);cursor_up(1);cursor_left(4);printf("%c", 219);printf("%c", 219);printf("%c", 219);
+			cursor_down(1);printf("%c", 219);printf("%c", 219);cursor_up(1);printf("%c", 219);cursor_up(1);cursor_left(1);
+			printf("%c", 219);cursor_left(1);cursor_up(1);printf("%c", 219);cursor_up(1);cursor_left(3);printf("%c", 219);printf("%c", 219);
 		}
 }
 void asteroid(int x, int y){
@@ -762,4 +760,3 @@ void skull(int x, int y, int colour){
 	cursor_left(7);cursor_down(1);for (int i = 0;i<5;i++){printf("%c", 219);}
 	cursor_down(1);cursor_left(5);for(int i = 0;i<3;i++){printf("%c", 219);cursor_right(1);}
 }
-
