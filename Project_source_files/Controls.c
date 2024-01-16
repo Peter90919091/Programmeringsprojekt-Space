@@ -320,3 +320,50 @@ void GAMEOVERControls() {
 		if (value == 16) {menu();}
 		}
 }
+int GAMEWINControls() {
+	int cursor_placement = 0;
+	int prev_cursor_placement = 0;
+	int stop = 100;
+	text_color_blink(0);
+	write_nextlevel(47,25,15);
+	write_exit(60,23,15);
+	while (1) {
+		int value = Joystickport();
+		if (value == 1 || value == 5 || value== 9 || value == 17 || value == 21 || value == 25) { //UP
+			if (cursor_placement> 0) {cursor_placement -= 1;}
+		}
+		if (value == 2 || value == 6 || value == 10 || value == 18 || value == 22 || value == 26) { //DOWN
+			if (cursor_placement< 1) {cursor_placement += 1;}
+		}
+		if (value == 16 && cursor_placement == 0)  { //NEXT LEVEL
+			ClearScreen();
+			return 1;}
+		if (value == 16 && cursor_placement == 1)  { //MENU
+			ClearScreen();
+			return 2;}
+		if (cursor_placement != prev_cursor_placement) {
+				text_color_blink(0);
+				write_nextlevel(47,25,15);
+				write_exit(60,23,15);
+			}
+		if (cursor_placement == 0) {
+			if (stop != 0) {
+			prev_cursor_placement = cursor_placement;
+
+			text_color_blink(1);
+			write_nextlevel(47,25,1);
+			text_color_blink(0);
+			stop = 0;}
+		}
+		if (cursor_placement == 1) {
+			if (stop != 1) {
+			prev_cursor_placement = cursor_placement;
+				text_color_blink(1);
+				write_exit(60,23,1);
+				text_color_blink(0);;
+					stop = 1;}
+		}
+		if (value != 0) {
+			pause_control(1000000);}
+	}
+}
