@@ -760,3 +760,106 @@ void skull(int x, int y, int colour){
 	cursor_left(7);cursor_down(1);for (int i = 0;i<5;i++){printf("%c", 219);}
 	cursor_down(1);cursor_left(5);for(int i = 0;i<3;i++){printf("%c", 219);cursor_right(1);}
 }
+void write_youwin(int x, int y, int colour) {
+	//Sets cursor
+	gotoxy(x,y);
+	//Colour:
+	fgcolor(colour);
+	//"Y"
+		for (int i = 0;i<3;i++){printf("%c", 219);printf("%c", 219);cursor_down(1);cursor_left(2);}
+		cursor_right(1); for (int i = 0;i<5;i++){printf("%c", 219);}cursor_down(1);cursor_left(4);
+		printf("%c", 219);printf("%c", 219);cursor_down(1);cursor_left(2);printf("%c", 219);printf("%c", 219);
+		cursor_left(1);cursor_down(1);printf("%c", 219);printf("%c", 219);cursor_up(4);
+		for (int i = 0;i<3;i++){printf("%c", 219);printf("%c", 219);cursor_up(1);cursor_left(2);}
+
+	//"O"
+		cursor_right(4);cursor_down(2);for (int i = 0;i<5;i++) {printf("%c", 219);cursor_down(1);cursor_left(1);}
+		cursor_right(1);for(int i = 0;i<7;i++) {printf("%c", 219);cursor_up(1);cursor_left(1);}cursor_right(1);cursor_down(1);
+		for (int i = 0;i<4;i++) {printf("%c", 219);}
+		for (int i = 0; i<6;i++) {cursor_down(1);cursor_left(1);printf("%c", 219);}cursor_left(4);
+		printf("%c", 219);printf("%c", 219);printf("%c", 219);cursor_right(1);cursor_up(1);
+		for (int i = 0;i<5;i++) {printf("%c", 219);cursor_up(1);cursor_left(1);}
+
+	//"U"
+		cursor_right(3);for(int i =0;i<6;i++){printf("%c", 219);printf("%c", 219);cursor_down(1);cursor_left(2);}
+		cursor_right(1);for(int i = 0;i<5;i++){printf("%c", 219);}cursor_up(1);cursor_left(1);
+		for(int i = 0;i<6;i++){printf("%c", 219);printf("%c", 219);cursor_up(1);cursor_left(2);}
+
+	//Space
+		cursor_right(8);
+
+	//"W"
+		cursor_down(1);for (int i = 0;i<7;i++){printf("%c", 219);printf("%c", 219);cursor_down(1);cursor_left(2);}
+		cursor_right(2);cursor_up(1);printf("%c", 219);cursor_up(1);cursor_left(1);printf("%c", 219);printf("%c", 219);cursor_up(1);cursor_left(1);printf("%c", 219);
+		cursor_down(1);printf("%c", 219);cursor_down(1);cursor_left(1);printf("%c", 219);
+		for (int i = 0;i<7;i++){printf("%c", 219);printf("%c", 219);cursor_up(1);cursor_left(2);}
+
+	//"I"
+		cursor_right(4);cursor_down(1);for (int i = 0;i<7;i++){printf("%c", 219);}cursor_down(1);cursor_left(4);
+		printf("%c", 219);printf("%c", 219);cursor_down(1);cursor_left(2);printf("%c", 219);printf("%c", 219);
+		cursor_down(1);cursor_left(3);printf("%c", 219);printf("%c", 219);printf("%c", 219);cursor_down(1);cursor_left(3);
+		printf("%c", 219);printf("%c", 219);cursor_left(2);cursor_down(1);printf("%c", 219);printf("%c", 219);
+		cursor_down(1);cursor_left(4);for(int i =0;i<7;i++){printf("%c", 219);}
+
+	//"N"
+		cursor_up(6);cursor_right(2);for (int i = 0;i<7;i++){printf("%c", 219);printf("%c", 219);cursor_down(1);cursor_left(2);}
+		cursor_up(7);cursor_right(2);printf("%c", 219);printf("%c", 219);printf("%c", 219);
+		cursor_down(1);for (int i = 0;i<6;i++){printf("%c", 219);printf("%c", 219);cursor_down(1);cursor_left(2);}
+
+	//"!"
+		cursor_up(7);cursor_right(4);for(int i = 0;i<5;i++){printf("%c", 219);printf("%c", 219);cursor_down(1);cursor_left(2);}
+		cursor_down(1);printf("%c", 219);printf("%c", 219);
+}
+
+
+void write_nextlevel(int x, int y, int colour) {
+	//Sets cursor
+	gotoxy(x,y);
+	//Colour
+	fgcolor(colour);
+
+	//"N"
+		for (int i = 0;i<5;i++){printf("%c", 219);cursor_down(1);cursor_left(1);}cursor_up(4);cursor_right(1);
+		for (int i = 0;i<4;i++){printf("%c", 219);cursor_down(1);}cursor_left(1);cursor_up(2);
+		for (int i = 0;i<4;i++){printf("%c", 219);cursor_left(1);cursor_up(1);}
+
+	//"E"
+		cursor_right(2);cursor_down(1);for (int i = 0;i<5;i++){printf("%c", 219);}cursor_down(1);cursor_left(5);
+		for (int i = 0;i<4;i++){printf("%c", 219);cursor_down(1);cursor_left(1);}cursor_up(1);cursor_right(1);
+		for (int i = 0;i<4;i++){printf("%c", 219);}cursor_up(2);cursor_left(4);printf("%c", 219);printf("%c", 219);printf("%c", 219);
+
+	//"X"
+		cursor_right(2);cursor_up(2);for (int i = 0;i<5;i++){printf("%c", 219);cursor_down(1);}cursor_up(1);cursor_left(5);
+		for (int i = 0;i<5;i++){printf("%c", 219);cursor_up(1);}
+
+	//"T"
+		cursor_down(1),cursor_right(1);for (int i = 0;i<5;i++){printf("%c", 219);}cursor_down(1);cursor_left(3);
+		for (int i = 0;i<4;i++){printf("%c", 219);cursor_down(1);cursor_left(1);}
+
+	//Space
+		cursor_right(6);cursor_up(5);
+
+	//"L"
+		for (int i = 0;i<5;i++){printf("%c", 219);cursor_down(1);cursor_left(1);}cursor_up(1);cursor_right(1);
+		for (int i = 0;i<4;i++){printf("%c", 219);}
+
+	//"E"
+		cursor_right(1);cursor_up(4);for (int i = 0;i<5;i++){printf("%c", 219);}cursor_down(1);cursor_left(5);
+		for (int i = 0;i<4;i++){printf("%c", 219);cursor_down(1);cursor_left(1);}cursor_up(1);cursor_right(1);
+		for (int i = 0;i<4;i++){printf("%c", 219);}cursor_up(2);cursor_left(4);printf("%c", 219);printf("%c", 219);printf("%c", 219);
+
+	//"V"
+		cursor_right(2);cursor_up(2);for (int i =0;i<3;i++){printf("%c", 219);cursor_down(1);cursor_left(1);}
+		cursor_right(1);printf("%c", 219);cursor_down(1);printf("%c", 219);cursor_up(1);printf("%c", 219);cursor_up(1);
+		for (int i = 0;i<3;i++){printf("%c", 219);cursor_up(1);cursor_left(1);}
+
+	//"E"
+		cursor_right(2);cursor_down(1);for (int i = 0;i<5;i++){printf("%c", 219);}cursor_down(1);cursor_left(5);
+		for (int i = 0;i<4;i++){printf("%c", 219);cursor_down(1);cursor_left(1);}cursor_up(1);cursor_right(1);
+		for (int i = 0;i<4;i++){printf("%c", 219);}cursor_up(2);cursor_left(4);printf("%c", 219);printf("%c", 219);printf("%c", 219);
+
+	//"L"
+		cursor_right(2);cursor_up(2);
+		for (int i = 0;i<5;i++){printf("%c", 219);cursor_down(1);cursor_left(1);}cursor_up(1);cursor_right(1);
+		for (int i = 0;i<4;i++){printf("%c", 219);}
+}
