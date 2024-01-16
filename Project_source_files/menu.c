@@ -122,7 +122,7 @@ void menuGAMEOVER() {
 	lcd_write_index("   ",1,0);
 	GAMEOVERControls();
 }
-void menuWIN() {
+void menuWIN(int level) {
 	ClearScreen();
 	background(); //FØRST
 	border();
@@ -132,7 +132,28 @@ void menuWIN() {
 	write_yourendscore(82,14,1);
 	int value = GAMEWINControls();
 	if (value == 1) {
-		//next level
+		switch (level) {
+		case 1:
+			level_2();
+		case 2:
+			level_3();
+		case 3:
+			level_4();
+		case 4:
+			level_5();
+		case 5:
+			level_6();
+		case 6:
+			level_7();
+		case 7:
+			level_8();
+		case 8:
+			level_9();
+		case 9:
+			menuPLAY();
+		default:
+			menu();
+		}
 	}
 	if (value == 2) {
 		menu();
