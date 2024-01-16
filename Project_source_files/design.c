@@ -9,7 +9,6 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include <math.h>
 #include <unistd.h>
 #include "system_stm32f30x.h"
 #include "stm32f30x_conf.h"
@@ -36,7 +35,6 @@ void border() {
 			//Værdier vi benytter:
 			int  toplength = 138; //trukket 2 fra for at have hjørner med
 			int  sidelength = 40;
-			int  bottomlength = 138;
 			gotoxy(0,0);
 			//toppen
 			printf("%c",201);
@@ -59,57 +57,7 @@ void border() {
 						}
 			printf("%c",188);
 }
-void game_border() {
-	fgcolor(7);
-	// 140x40
-			//Værdier vi benytter:
-			int  toplength = 138; //trukket 2 fra for at have hjørner med
-			int  sidelength = 40;
-			int  bottomlength = 138;
-			gotoxy(0,0);
-			//toppen
-			printf("%c",201);
-			for (int j = 0; j <= (toplength)/4 - 1; j++) {
-				printf("%c",205);
-			}
-			printf("%c",203);
-			for (int j = 0; j <= (toplength)/2-1; j++) {
-							printf("%c",205);
-						}
-			printf("%c",203);
-						for (int j = 0; j <= (toplength)/4 - 1; j++) {
-										printf("%c",205);
-									}
-			printf("%c",187);
-			//Sider
-			for (int i = 2; i< sidelength;i++) {
-				gotoxy(toplength/4+2,i);
-				printf("%c",186);
-				gotoxy(toplength/4+toplength/2+3,i);
-				printf("%c",186);
-			}
-			for (int i = 2; i< sidelength;i++) {
-							gotoxy(0,i);
-							printf("%c",186);
-							gotoxy(141,i);
-							printf("%c",186);
-						}
-			//bund
-			gotoxy(1,40);
-			printf("%c",200);
-						for (int j = 0; j <= (toplength)/4 - 1; j++) {
-							printf("%c",205);
-						}
-						printf("%c",202);
-						for (int j = 0; j <= (toplength)/2-1; j++) {
-										printf("%c",205);
-									}
-						printf("%c",202);
-									for (int j = 0; j <= (toplength)/4 - 1; j++) {
-													printf("%c",205);
-												}
-			printf("%c",188);
-}
+
 
 void background() {
 	fgcolor(7);
@@ -191,7 +139,6 @@ void menubox() {
 				//Værdier vi benytter:
 				int  toplength = 51; //trukket 2 fra for at have hjørner med
 				int  sidelength = 39;
-				int  bottomlength = 45;
 				gotoxy(45,9);
 				//toppen
 				printf("%c",201);
@@ -220,7 +167,6 @@ void box() {
 	//Værdier vi benytter:
 					int  toplength = 51; //trukket 2 fra for at have hjørner med
 					int  sidelength = 39;
-					int  bottomlength = 45;
 					gotoxy(45,9);
 					//toppen
 					printf("%c",201);
@@ -248,7 +194,6 @@ void Smallbox() {
 	//Værdier vi benytter:
 					int  toplength = 8; //trukket 2 fra for at have hjørner med
 					int  sidelength = 5;
-					int  bottomlength = 8;
 					//toppen
 					printf("%c",201);
 					for (int j = 0; j <= (toplength); j++) {
@@ -340,19 +285,31 @@ void displayAsteroidBySize(char size, struct astroid asteroid) {
 }
 
 */
-void attempt_small_gravity() {
-    printf("  __,_\n");
-    printf("/ o .   \\\n");
-    printf("( .  o   |\n");
-    printf(" \\ .._o/\n");
-    printf("    \\::)\n");
+void small_gravity(int x, int y) {
+	fgcolor(3);
+	gotoxy(x+1,y);
+    printf("___");
+    gotoxy(x,y-1);
+    printf("/o. |");
+    gotoxy(x,y-2);
+    printf("(. o|");
+    gotoxy(x,y-3);
+    printf("\\. /");
+    gotoxy(x+1,y-4);
+    printf("---");
 }
-void attempt_large_gravity() {
-	printf("  ___\n");
-	printf(" /  ..    \\ \n");
-	printf("/    .   o  \\\n");
-	printf("(  o.    :     )\n");
-	printf("\\  o ..  o/\n");
-	printf(" \\ o_  / \n");
-	printf("       \n");
+void large_gravity(int x, int y) {
+	fgcolor(3);
+	gotoxy(x+2,y);
+	printf("___");
+	gotoxy(x+1,y-1);
+	printf("/ ..|");
+	gotoxy(x,y-2);;
+	printf("/  .o\\");
+	gotoxy(x,y-3);
+	printf("(o. : )");
+	gotoxy(x+1,y-4);
+	printf("\\oo/");
+	gotoxy(x+2,y-5);
+	printf("---");
 }
