@@ -163,5 +163,9 @@ void Asteroid2(int size, const int x, const int y);
 void Asteroid3(int size, const int x, const int y);
 void Asteroid4(int size, const int x, const int y);
 
+
+//#### boss_key.c ###
+void boss_spreadsheet();
+void boss_key_function();
 /*void addWhateverFunctionsYouNeed( type parameter );*/
 #endif // _HEADER_FILE_H_
