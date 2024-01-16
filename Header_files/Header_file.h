@@ -40,6 +40,8 @@ void write_gameover(int x, int y);
 void write_colon(int x,int y,int colour);
 void write_yourendscore(int x,int y, int colour);
 void skull(int x, int y, int colour);
+void write_youwin(int x, int y, int colour);
+void write_nextlevel(int x, int y, int colour);
 
 
 // #### Controls.c ####
