@@ -67,11 +67,6 @@ void delete_rocket(int x, int y){
 	gotoxy((x+1),(y+1));
 	printf(" ");
 }
-
-
-
-
-
 void initiate_enemies(int x, int y,int color) {
     fgcolor(color);
     gotoxy(x,y);
@@ -80,15 +75,12 @@ void initiate_enemies(int x, int y,int color) {
     printf("%c", 185);
     fgcolor(15);
 }
-
 void points(int points) {
     globalPoints += points;
 }
-
 void lives(int damage) {
     globalLives -= damage;
 }
-
 void clear_enemy(int x, int y) {
     gotoxy(x, y);
     printf("   ");
@@ -134,7 +126,6 @@ int gravity(struct Shot shot_values, struct Asteroid asteroid_values) {
         return 0;
     }
 }
-
 void enemies(int speed,int level) {
 	static int amount = 0;
 	int size = (level >=1 && level <= 9) ? 10 * level : 0;
@@ -158,19 +149,11 @@ void enemies(int speed,int level) {
 	    				initiate_enemies(enemies_level[j].x, enemies_level[j].y,enemies_level[j].color);
 	    		}
 	    	}else {
-	    		if (globalLives > 1) {
-				 //enemy er nået bunden og skal fjernes
-				clear_enemy(enemies_level[j].x, enemies_level[j].y);
-				enemies_level[j].x = 0;
-				enemies_level[j].y = 0;
-				lives(1);
-				} else {
-				clear_enemy(enemies_level[j].x, enemies_level[j].y);
-				enemies_level[j].x = 0;
-				enemies_level[j].y = 0;
-				amount = 0;
-				lives(1);
-				}
+	    			// Enemy er nået bunden
+	    			clear_enemy(enemies_level[j].x, enemies_level[j].y);
+	    			enemies_level[j].x = 0;
+	    			enemies_level[j].y = 0;
+					lives(1);
 	    		}
 	    	}
 	    timer = 0;
@@ -186,19 +169,11 @@ void enemies(int speed,int level) {
 							initiate_enemies(enemies_level[j].x, enemies_level[j].y,enemies_level[j].color);
 						  }
 	    			 } else {
-	    			if (globalLives > 1) {
 	    			 //enemy er nået bunden og skal fjernes
 					clear_enemy(enemies_level[j].x, enemies_level[j].y);
 					enemies_level[j].x = 0;
 					enemies_level[j].y = 0;
 					lives(1);
-	    			} else {
-					clear_enemy(enemies_level[j].x, enemies_level[j].y);
-					enemies_level[j].x = 0;
-					enemies_level[j].y = 0;
-					amount = 0;
-					lives(1);
-	    			}
 	    		 }
 	    	 }
 	    	 timer = 0;
@@ -254,14 +229,14 @@ void updateAndPrintShots(int pause, int level) {
 	int gravityResult;
 
 	if (!once) {
-			if (level > 1) {small_gravity(very_small_asteroid1[2].x-2, very_small_asteroid1[2].y+2);}
-			if (level > 2) {small_gravity(very_small_asteroid2[2].x-2, very_small_asteroid2[2].y+2);}
-			if (level > 4) {small_gravity(very_small_asteroid3[2].x-2, very_small_asteroid3[2].y+2);}
-			if (level > 6) {small_gravity(very_small_asteroid4[2].x-2, very_small_asteroid4[2].y+2);}
-			if (level > 1) {large_gravity(small_asteroid1[0].x-3, small_asteroid1[0].y+3);}
-			if (level > 2) {large_gravity(small_asteroid2[0].x-3, small_asteroid2[0].y+3);}
-			if (level > 4) {large_gravity(small_asteroid3[0].x-3, small_asteroid3[0].y+3);}
-			if (level > 6) {large_gravity(small_asteroid4[0].x-3, small_asteroid4[0].y+3);}
+			if (level > 0) {small_gravity(very_small_asteroid1[2].x-2, very_small_asteroid1[2].y+2);}
+			if (level > 1) {small_gravity(very_small_asteroid2[2].x-2, very_small_asteroid2[2].y+2);}
+			if (level > 2) {small_gravity(very_small_asteroid3[2].x-2, very_small_asteroid3[2].y+2);}
+			if (level > 3) {small_gravity(very_small_asteroid4[2].x-2, very_small_asteroid4[2].y+2);}
+			if (level > 0) {large_gravity(small_asteroid1[0].x-3, small_asteroid1[0].y+3);}
+			if (level > 1) {large_gravity(small_asteroid2[0].x-3, small_asteroid2[0].y+3);}
+			if (level > 2) {large_gravity(small_asteroid3[0].x-3, small_asteroid3[0].y+3);}
+			if (level > 3) {large_gravity(small_asteroid4[0].x-3, small_asteroid4[0].y+3);}
 	        enemies = level * 10;
 	        once = 1;
 	    }
@@ -287,20 +262,20 @@ void updateAndPrintShots(int pause, int level) {
     	    oldshots[i].y = shots[i].y;
     	    	if (shots[i].y > 2) {
     	    		for (int j = 0; j< 21; j++) {
-    	    				if (level > 1) {gravityResult = gravity(shots[i], very_small_asteroid1[j]);}
-    	    	        	if (level > 2) {gravityResult +=gravity(shots[i], very_small_asteroid2[j]);}
-    	    	        	if (level > 4) {gravityResult +=gravity(shots[i], very_small_asteroid3[j]);}
-		    	        	if (level > 6) {gravityResult +=gravity(shots[i], very_small_asteroid4[j]);}
+    	    				if (level > 0) {gravityResult = gravity(shots[i], very_small_asteroid1[j]);}
+    	    	        	if (level > 1) {gravityResult +=gravity(shots[i], very_small_asteroid2[j]);}
+    	    	        	if (level > 2) {gravityResult +=gravity(shots[i], very_small_asteroid3[j]);}
+		    	        	if (level > 3) {gravityResult +=gravity(shots[i], very_small_asteroid4[j]);}
 		    	        	if (gravityResult != 0) {
 		    	        		shots[i].x += gravityResult;
     	        			    break;
     	        			    }
     	        		 }
     	        	for (int j = 0; j< 37; j++) {
-    	        			if (level > 1) {gravityResult = gravity(shots[i], small_asteroid1[j]);}
-    	        			if (level > 2) {gravityResult += gravity(shots[i], small_asteroid2[j]);}
-    	        			if (level > 4) {gravityResult +=gravity(shots[i], small_asteroid3[j]);}
-    	    	        	if (level > 6) {gravityResult +=gravity(shots[i], small_asteroid4[j]);}
+    	        			if (level > 0) {gravityResult = gravity(shots[i], small_asteroid1[j]);}
+    	        			if (level > 1) {gravityResult += gravity(shots[i], small_asteroid2[j]);}
+    	        			if (level > 2) {gravityResult +=gravity(shots[i], small_asteroid3[j]);}
+    	    	        	if (level > 3) {gravityResult +=gravity(shots[i], small_asteroid4[j]);}
     	        			if (gravityResult != 0) {
     	        				shots[i].x += gravityResult;
     	        				break;
@@ -324,25 +299,25 @@ void updateAndPrintShots(int pause, int level) {
         	            }
 
     	        for (int j = 0; j < 21; ++j) {
-    	        	if (level > 1 && isAstroidCollision(shots[i], very_small_asteroid1[j])) {
+    	        	if (level > 0 && isAstroidCollision(shots[i], very_small_asteroid1[j])) {
     	        	    shots[i].x = 0;
     	        	    shots[i].y = 0;
     	        	    small_gravity(very_small_asteroid1[2].x-2, very_small_asteroid1[2].y+2);
     	        	    break;
     	        	    }
-    	        	if (level > 2 && isAstroidCollision(shots[i], very_small_asteroid2[j])) {
+    	        	if (level > 1 && isAstroidCollision(shots[i], very_small_asteroid2[j])) {
 						shots[i].x = 0;
 						shots[i].y = 0;
 						small_gravity(very_small_asteroid2[2].x-2, very_small_asteroid2[2].y+2);
 						break;
     	        	    }
-    	        	if (level > 4 && isAstroidCollision(shots[i], very_small_asteroid3[j])) {
+    	        	if (level > 2 && isAstroidCollision(shots[i], very_small_asteroid3[j])) {
 						shots[i].x = 0;
 						shots[i].y = 0;
 						small_gravity(very_small_asteroid3[2].x-2, very_small_asteroid3[2].y+2);
 						break;
 						}
-    	        	if (level > 6 && isAstroidCollision(shots[i], very_small_asteroid4[j])) {
+    	        	if (level > 3 && isAstroidCollision(shots[i], very_small_asteroid4[j])) {
 						shots[i].x = 0;
 						shots[i].y = 0;
 						small_gravity(very_small_asteroid4[2].x-2, very_small_asteroid4[2].y+2);
@@ -350,25 +325,25 @@ void updateAndPrintShots(int pause, int level) {
 						}
     	        	}
     	        for (int j = 0; j < 37; ++j) {
-    	        	if (level > 1 && isAstroidCollision(shots[i], small_asteroid1[j])) {
+    	        	if (level > 0 && isAstroidCollision(shots[i], small_asteroid1[j])) {
 						shots[i].x = 0;
 						shots[i].y = 0;
 						large_gravity(small_asteroid1[0].x-3, small_asteroid1[0].y+3);
 						break;
 						}
-    	        	if (level > 2 && isAstroidCollision(shots[i], small_asteroid2[j])) {
+    	        	if (level > 1 && isAstroidCollision(shots[i], small_asteroid2[j])) {
 						shots[i].x = 0;
 						shots[i].y = 0;
 						large_gravity(small_asteroid2[0].x-3, small_asteroid2[0].y+3);
 						break;
 						}
-    	        	if (level > 4 && isAstroidCollision(shots[i], small_asteroid3[j])) {
+    	        	if (level > 2 && isAstroidCollision(shots[i], small_asteroid3[j])) {
 						shots[i].x = 0;
 						shots[i].y = 0;
 						large_gravity(small_asteroid3[0].x-3, small_asteroid3[0].y+3);
 						break;
     	        		}
-    	        	if (level > 6 && isAstroidCollision(shots[i], small_asteroid4[j])) {
+    	        	if (level > 3 && isAstroidCollision(shots[i], small_asteroid4[j])) {
 						shots[i].x = 0;
 						shots[i].y = 0;
 						large_gravity(small_asteroid4[0].x-3, small_asteroid4[0].y+3);
@@ -418,4 +393,3 @@ void initiate_black_hole(int x,int y){
 	}
 	fgcolor(15);
 }
-
