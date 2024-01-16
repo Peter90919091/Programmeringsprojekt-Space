@@ -21,12 +21,12 @@ int levelControls(int difficulty) {
 	int pause = 0;
 	if (difficulty == 1) {speed = 10;level = 1;pause = 3000;Asteroid1(0,10,10); Asteroid1(1, 80,20);}
 	if (difficulty == 2) {speed = 10;level = 2;pause = 2000;Asteroid1(0, 20, 12);Asteroid1(1, 70, 7);Asteroid2(0,90,6);Asteroid2(1,50,9);}
-	if (difficulty == 3) {speed = 9;level = 3;pause = 1500;Asteroid1(0,10,15); Asteroid1(1, 80, 7);Asteroid2(0,90,20);Asteroid2(1,32,18);Asteroid3(0,70,10);Asteroid3(1,70,15);}
-	if (difficulty == 4) {speed = 9;level = 4;pause = 1000;Asteroid1(0,10,15); Asteroid1(1, 80, 7);Asteroid2(0,90,20);Asteroid2(1,32,18);Asteroid3(0,70,10);Asteroid3(1,70,15); Asteroid4(0,70,20); Asteroid4(1,10,15);}
-	if (difficulty == 5) {speed = 8;level = 5;pause = 1000;Asteroid1(0,10,7); Asteroid1(1, 10, 14);Asteroid2(0,50,10);Asteroid2(1,90,10);Asteroid3(0,110,10);Asteroid3(1,70,10); Asteroid4(0,130,10); Asteroid4(1,70,25);}
-	if (difficulty == 6) {speed = 8;level = 6;pause = 500;Asteroid1(0,10,6); Asteroid1(1, 10, 12);Asteroid2(0,10,18);Asteroid2(1,10,24);Asteroid3(0,130,6);Asteroid3(1,130,12); Asteroid4(0,130,18); Asteroid4(1,130,28);}
-	if (difficulty == 7) {speed = 7;level = 7;pause = 500;Asteroid1(0,10,13); Asteroid1(1, 10, 14);Asteroid2(0,50,23);Asteroid2(1,90,8);Asteroid3(0,110,17);Asteroid3(1,70,10); Asteroid4(0,130,13); Asteroid4(1,70,23);}
-	if (difficulty == 8) {speed = 7;level = 8;pause = 500;Asteroid1(0,65,5); Asteroid1(1, 75, 5);Asteroid2(0,50,10);Asteroid2(1,90,10);Asteroid3(0,35,15);Asteroid3(1,105,15); Asteroid4(0,20,20); Asteroid4(1,120,20);}
+	if (difficulty == 3) {speed = 9;level = 3;pause = 1500;Asteroid1(0,12,15); Asteroid1(1, 80, 7);Asteroid2(0,90,20);Asteroid2(1,32,18);Asteroid3(0,70,10);Asteroid3(1,70,15);}
+	if (difficulty == 4) {speed = 9;level = 4;pause = 1000;Asteroid1(0,12,15); Asteroid1(1, 80, 7);Asteroid2(0,90,20);Asteroid2(1,32,18);Asteroid3(0,70,10);Asteroid3(1,70,15); Asteroid4(0,70,20); Asteroid4(1,10,15);}
+	if (difficulty == 5) {speed = 8;level = 5;pause = 1000;Asteroid1(0,12,7); Asteroid1(1, 12, 14);Asteroid2(0,50,10);Asteroid2(1,90,10);Asteroid3(0,110,10);Asteroid3(1,70,10); Asteroid4(0,130,10); Asteroid4(1,70,25);}
+	if (difficulty == 6) {speed = 8;level = 6;pause = 500;Asteroid1(0,12,6); Asteroid1(1, 12, 12);Asteroid2(0,12,18);Asteroid2(1,12,24);Asteroid3(0,130,6);Asteroid3(1,130,12); Asteroid4(0,130,18); Asteroid4(1,130,28);}
+	if (difficulty == 7) {speed = 7;level = 7;pause = 500;Asteroid1(0,12,13); Asteroid1(1, 12, 14);Asteroid2(0,50,23);Asteroid2(1,90,8);Asteroid3(0,110,17);Asteroid3(1,70,10); Asteroid4(0,130,13); Asteroid4(1,70,23);}
+	if (difficulty == 8) {speed = 7;level = 8;pause = 500;Asteroid1(0,65,5); Asteroid1(1, 75, 5);Asteroid2(0,50,10);Asteroid2(1,90,12);Asteroid3(0,35,15);Asteroid3(1,105,15); Asteroid4(0,20,20); Asteroid4(1,120,20);}
 	if (difficulty == 9) {speed = 7;level = 9;pause = 300;Asteroid1(0, 20, 20);Asteroid1(1, 70, 30);Asteroid2(0, 30, 25);Asteroid2(1, 40, 15);Asteroid3(0, 100, 20);Asteroid3(1, 70, 30);Asteroid4(0, 57, 17);Asteroid4(1, 89, 10);}
 
 	int cursor_leftright = 38;
