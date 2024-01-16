@@ -66,7 +66,9 @@ void menuSCORE() {
 	asteroid(90,20);
 	write_score_header(54,8,2);
 	box();
+	text_color_blink(1);
 	write_exit();
+	text_color_blink(0);
 	write_highscore();
 	lcd_resetwrite("Look at your highscore!",1);
 	gotoxy(50,15);
