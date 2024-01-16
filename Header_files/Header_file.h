@@ -98,7 +98,7 @@ void initiate_rocket(int x, int y);
 void initiate_enemies(int x, int y,int color);
 void clear_enemy(int x, int y);
 void config_timer();
-void enemies(int speed,int level);
+void enemiesbegin(int speed,int level, int resetAmount);
 void initialize(int time_between);
 void delete_rocket(int x, int y);
 void initiate_shot(int x, int y);
