@@ -223,8 +223,20 @@ void help_design() {
 	gotoxy(47,18);
 	printf("Move the spaceship right or left using joystick");
 	gotoxy(47,23);
-	printf("Avoid obstacles");
-	asteroid(55,25);
+	printf("Obstacles have gravitational pull");
+	small_gravity(85,25);
+	fgcolor(15);
+	gotoxy(94,26);printf("o");cursor_up(1);cursor_left(1);printf("o");
+	cursor_up(1);cursor_left(2);printf("o");cursor_up(1);cursor_left(1);printf("o");cursor_up(1);cursor_left(2);printf("o");
+	cursor_up(1);cursor_left(2);printf("o");cursor_up(1);cursor_left(2);printf("o");
+	gotoxy(47,27);
+	printf("Shoot enemies by pressing center");
+	initiate_enemies(80,27,6);initiate_enemies(85,27,2);initiate_enemies(90,27,11);
+	initiate_rocket(94,30);
+	gotoxy(94,27);printf("o");cursor_down(1);cursor_left(1);printf("o");
+	gotoxy(47,31);printf("Play through the levels");
+	gotoxy(47,32);printf("and beat your own highscore!");
+
 }
 /*
 // Function to display the big asteroid at a specific location
