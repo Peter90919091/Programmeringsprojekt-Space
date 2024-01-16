@@ -33,7 +33,7 @@ int levelControls(int difficulty) {
 	int prev_cursor_leftright = 3;
 	int shot_x = 0;
 	int shot_y = 0;
-	initiate_rocket(cursor_leftright, 0);
+	initiate_rocket(cursor_leftright, 38);
 	text_color_blink(0);
 	int shot = 0;
 	while(1) {
@@ -60,7 +60,7 @@ int levelControls(int difficulty) {
 						fgcolor(7);
 						delete_rocket(prev_cursor_leftright , 0);
 						prev_cursor_leftright = cursor_leftright;
-						initiate_rocket(cursor_leftright, 0);
+						initiate_rocket(cursor_leftright, 38);
 							}
 
 	if (value == 16) { //SKUD
