@@ -14,8 +14,6 @@
 
 void boss_spreadsheet(){
 	int row = 0;
-	int counter1 = 0;
-	int counter2 = 0;
 
 	gotoxy(2,2);
 	while (row <=37){
