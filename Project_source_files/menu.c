@@ -26,7 +26,7 @@ void menuHELP() {
 	write_exit();
 	text_color_blink(0);
 	help_design();
-	llcd_resetwrite("Controls and object of the game!",1);
+	lcd_resetwrite("Controls and object of the game!",1);
 	HelpControls();
 }
 void menuPLAY() {
