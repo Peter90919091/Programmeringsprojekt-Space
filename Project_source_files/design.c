@@ -61,45 +61,13 @@ void border() {
 
 void background() {
 	fgcolor(7);
-	printf("\n");
-	printf("                                                                                                                                             \n");
-	printf("                                                     *     *                                 *                        *                      \n");
-	printf("          *           *     *  *                                                      *                             *                        \n");
-	printf("            *           * *     *                   *                                                                                *       \n");
-	printf("                *                         *                                                                                                  \n");
-	printf("                                                                *                                              *                             \n");
-	printf("                           * *                                              *    *        *          *               *                       \n");
-	printf("     *                                                                               *                                                       \n");
-	printf("             *       *                            *                                                                       *                  \n");
-	printf("                                                                                                                   **  *                     \n");
-	printf("         **        *         *    *                          *                                  ***    *                         *           \n");
-	printf("                                    *                           *                     *                                 *           **       \n");
-	printf("                          **  **                                                                  *                                          \n");
-	printf("                                                                                *                                *                           \n");
-	printf("           *                        *    *            *                       *                           *                     *            \n");
-	printf("                 *                                       *              *                 *                                                  \n");
-	printf("                                               *  *                                       *      *           *         *    *                \n");
-	printf("                                                                                         *                             **                    \n");
-	printf("                     *                                         *   *         *           *    *                    *     *                   \n");
-	printf("             *         *                    *             * *                   *                                                            \n");
-	printf("       *                      *                                * *  **  *            *                *                  *                   \n");
-	printf("                 *                                                                *                                *           *      *      \n");
-	printf("                *            *         *         *            *                                                                              \n");
-	printf("             *                                                                                                                               \n");
-	printf("                                                        *                                                                                    \n");
-	printf("       *                                  **           *                                                                              *      \n");
-	printf("                         *         *                          *   *                             *              *   *                         \n");
-	printf("            * *          *                        *                 *        *   *                                                           \n");
-	printf("                                  *                         *                             *     *                                            \n");
-	printf("               *          *                                        *          *  *                                                   *       \n");
-	printf("                                  **    *         *                                     *                                  *                 \n");
-	printf("                                          *                        *                                                                         \n");
-	printf("             *         *  * *         *      *  *        **                                              *   *     *              *          \n");
-	printf("             *          *                *  *    *                 *         *      *                                                     *  \n");
-	printf("                     *                               *                                 *        *                                            \n");
-	printf("                                                                 *       *            *           *                                          \n");
-	printf("            *        *                         *                * *                           *                        *       *             \n");
-	printf("                    *            *   *                       *   *                        *                                                  \n");
+	for (int i = 0; i<40; i++) {
+		for (int j = 0; j < 8; j++) {
+			int x_value = rand()% 140;
+			gotoxy(x_value,i);
+			printf("*");
+		}
+	}
 /*
 
     int x_value = 0; // Initialize x_value
@@ -237,7 +205,6 @@ void help_design() {
 	gotoxy(94,27);printf("o");cursor_down(1);cursor_left(1);printf("o");
 	gotoxy(47,31);printf("Play through the levels");
 	gotoxy(47,32);printf("and beat your own highscore!");
-
 }
 /*
 // Function to display the big asteroid at a specific location
