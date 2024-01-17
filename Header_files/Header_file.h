@@ -43,7 +43,6 @@ void skull(int x, int y, int colour);
 void write_youwin(int x, int y, int colour);
 void write_nextlevel(int x, int y, int colour);
 
-
 // #### Controls.c ####
 int ScoreControls();
 int HelpControls();
@@ -102,7 +101,7 @@ void initiate_rocket(int x, int y);
 void initiate_enemies(int x, int y,int color);
 void clear_enemy(int x, int y);
 void config_timer();
-void enemiesbegin(int speed,int level, int resetAmount);
+void enemiesbegin(int speed,int level, int reset);
 void initialize(int time_between);
 void delete_rocket(int x, int y);
 void initiate_shot(int x, int y);
@@ -111,7 +110,7 @@ void display_screen();
 void pause_control(int time_between);
 void points(int points);
 void addShot(int x, int y);
-void updateAndPrintShots(int pause, int level);
+void updateAndPrintShots(int pause, int level,int speed);
 void initiate_black_hole(int x,int y);
 struct Score {
     long int score_count;
@@ -163,9 +162,5 @@ void Asteroid2(int size, const int x, const int y);
 void Asteroid3(int size, const int x, const int y);
 void Asteroid4(int size, const int x, const int y);
 
-
-//#### boss_key.c ###
-void boss_spreadsheet();
-void boss_key_function();
 /*void addWhateverFunctionsYouNeed( type parameter );*/
 #endif // _HEADER_FILE_H_
