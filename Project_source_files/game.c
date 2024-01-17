@@ -50,7 +50,6 @@ void initiate_rocket(int x, int y){
 	printf("%c",92);
 }
 void delete_rocket(int x, int y){
-	y = 38;
 	gotoxy(x,(y-1));
 	printf(" ");
 	gotoxy(x,y);
@@ -66,6 +65,7 @@ void delete_rocket(int x, int y){
 	gotoxy((x+1),(y+1));
 	printf(" ");
 }
+
 void initiate_enemies(int x, int y,int color) {
     fgcolor(color);
     gotoxy(x,y);
@@ -74,6 +74,8 @@ void initiate_enemies(int x, int y,int color) {
     printf("%c", 185);
     fgcolor(15);
 }
+
+
 void points(int points) {
     globalPoints += points;
 }
@@ -86,6 +88,7 @@ void clear_enemy(int x, int y) {
 }
 
 struct enemy enemies_level[100];
+struct enemy old_enemies_level[100];
 struct Shot shots[100];
 struct Shot oldshots[100];
 void addShot(int x, int y) {
@@ -97,6 +100,21 @@ void addShot(int x, int y) {
         }
     }
 }
+
+int gravityenemy(struct enemy enemy_values, struct Asteroid asteroid_values) {
+    if (abs(enemy_values.x - asteroid_values.x) <= 8 && enemy_values.y == asteroid_values.y) {
+        if (enemy_values.x < asteroid_values.x) {
+            return -1;
+        } else if (enemy_values.x > asteroid_values.x) {
+            return +1;
+        } else {
+            return 0;
+        }
+    } else {
+        return 0;
+    }
+}
+
 void prevShot(int x, int y) {
     for (int i = 0; i < 100; ++i) {
         if (oldshots[i].x == 0 && shots[i].y == 0) {
@@ -126,9 +144,10 @@ int gravity(struct Shot shot_values, struct Asteroid asteroid_values) {
     }
 }
 
-void enemiesbegin(int speed,int level, int resetAmount) {
+void enemiesbegin(int speed,int level, int reset) {
+	int gravityResult = 0;
 	static int amount;
-	if (resetAmount) {
+	if (reset) {
 	        amount = 0;
 	    }
 	int size = (level >=1 && level <= 9) ? 10 * level : 0;
@@ -140,15 +159,36 @@ void enemiesbegin(int speed,int level, int resetAmount) {
 	    	enemies_level[amount].x = rand() % 137 + 2;
 	    	enemies_level[amount].y = 2;
 	    	enemies_level[amount].color =rand() % 5 + 1;
-
+	    	old_enemies_level[amount].x = enemies_level[amount].x;
 	        initiate_enemies(enemies_level[amount].x, enemies_level[amount].y,enemies_level[amount].color);
 	        amount++;
 	    for (int j = 0; j < amount; j++) {
 	    	if (enemies_level[j].y != 39) {
 	    		if (enemies_level[j].x != 0 && enemies_level[j].y != 0) {
+	    			for (int i = 0; i< 21; i++) {
+					if (level > 0) {gravityResult = gravityenemy(enemies_level[j], very_small_asteroid1[i]);}
+					if (level > 1) {gravityResult +=gravityenemy(enemies_level[j], very_small_asteroid2[i]);}
+					if (level > 2) {gravityResult +=gravityenemy(enemies_level[j], very_small_asteroid3[i]);}
+					if (level > 3) {gravityResult +=gravityenemy(enemies_level[j], very_small_asteroid4[i]);}
+					if (gravityResult != 0) {
+						enemies_level[j].x += gravityResult;
+						break;
+						}
+				 }
+			for (int i = 0; i< 37; i++) {
+					if (level > 0) {gravityResult = gravityenemy(enemies_level[j], small_asteroid1[i]);}
+					if (level > 1) {gravityResult += gravityenemy(enemies_level[j], small_asteroid2[i]);}
+					if (level > 2) {gravityResult +=gravityenemy(enemies_level[j], small_asteroid3[i]);}
+					if (level > 3) {gravityResult +=gravityenemy(enemies_level[j], small_asteroid4[i]);}
+					if (gravityResult != 0) {
+						enemies_level[j].x += gravityResult;
+						break;
+						}
+				}
 	    			// ryk enemy hvis den ikke er ramt
-	    				clear_enemy(enemies_level[j].x, enemies_level[j].y);
+	    				clear_enemy(old_enemies_level[j].x, enemies_level[j].y);
 	    				enemies_level[j].y++;
+	    				old_enemies_level[j].x = enemies_level[j].x;
 	    				initiate_enemies(enemies_level[j].x, enemies_level[j].y,enemies_level[j].color);
 	    		}
 	    	}else {
@@ -160,16 +200,38 @@ void enemiesbegin(int speed,int level, int resetAmount) {
 	    		}
 	    	}
 	    timer = 0;
-	    }
+		}
 		//Tjek hvis alle enemies har nået bunden
 	    if (amount == size && timer == speed) {
 	    	 for (int j = 0; j < amount; j++) {
 	    		 if (enemies_level[j].y != 39) {
 	    			 if (enemies_level[j].x != 0 && enemies_level[j].y != 0) {
 						// Ryk og print enemies som ikke er døde
-							clear_enemy(enemies_level[j].x, enemies_level[j].y);
-							enemies_level[j].y++;
-							initiate_enemies(enemies_level[j].x, enemies_level[j].y,enemies_level[j].color);
+	    				 for (int i = 0; i< 21; i++) {
+	    				 					if (level > 0) {gravityResult = gravityenemy(enemies_level[j], very_small_asteroid1[i]);}
+	    				 					if (level > 1) {gravityResult +=gravityenemy(enemies_level[j], very_small_asteroid2[i]);}
+	    				 					if (level > 2) {gravityResult +=gravityenemy(enemies_level[j], very_small_asteroid3[i]);}
+	    				 					if (level > 3) {gravityResult +=gravityenemy(enemies_level[j], very_small_asteroid4[i]);}
+	    				 					if (gravityResult != 0) {
+	    				 						enemies_level[j].x += gravityResult;
+	    				 						break;
+	    				 						}
+	    				 				 }
+	    				 			for (int i = 0; i< 37; i++) {
+	    				 					if (level > 0) {gravityResult = gravityenemy(enemies_level[j], small_asteroid1[i]);}
+	    				 					if (level > 1) {gravityResult += gravityenemy(enemies_level[j], small_asteroid2[i]);}
+	    				 					if (level > 2) {gravityResult +=gravityenemy(enemies_level[j], small_asteroid3[i]);}
+	    				 					if (level > 3) {gravityResult +=gravityenemy(enemies_level[j], small_asteroid4[i]);}
+	    				 					if (gravityResult != 0) {
+	    				 						enemies_level[j].x += gravityResult;
+	    				 						break;
+	    				 						}
+	    				 				}
+	    				 	    			// ryk enemy hvis den ikke er ramt
+	    				 	    				clear_enemy(old_enemies_level[j].x, enemies_level[j].y);
+	    				 	    				enemies_level[j].y++;
+	    				 	    				old_enemies_level[j].x = enemies_level[j].x;
+	    				 	    				initiate_enemies(enemies_level[j].x, enemies_level[j].y,enemies_level[j].color);
 						  }
 	    			 } else {
 	    			 //enemy er nået bunden og skal fjernes
@@ -180,10 +242,8 @@ void enemiesbegin(int speed,int level, int resetAmount) {
 	    		 }
 	    	 }
 	    	 timer = 0;
-	    	}
-	    } else {
-	    	//ikke flere liv, alt skal genstartes
 
+	    	}
 	    }
 }
 void clearallshots() {
@@ -192,7 +252,7 @@ void clearallshots() {
 		shots[j].y = 0;
 	}
 }
-void handleEnemyCollision(int i,int j) {
+void handleEnemyCollision(int i,int j,int level) {
     if (enemies_level[j].x != 0 && enemies_level[j].y != 0) {
 
         int pointsEarned = 0;
@@ -225,12 +285,14 @@ void handleEnemyCollision(int i,int j) {
         enemies_level[j].y = 0;
     }
 }
-void updateAndPrintShots(int pause, int level) {
+void updateAndPrintShots(int pause, int level,int speed) {
 	static int once = 0;
 	static int enemies = 0;
 	int enemy_down;
 	int gravityResult;
-
+	if (once != 1) {
+		enemiesbegin(speed,level, 1);
+	}
 	if (!once) {
 			if (level > 0) {small_gravity(very_small_asteroid1[2].x-2, very_small_asteroid1[2].y+2);}
 			if (level > 1) {small_gravity(very_small_asteroid2[2].x-2, very_small_asteroid2[2].y+2);}
@@ -240,10 +302,12 @@ void updateAndPrintShots(int pause, int level) {
 			if (level > 1) {large_gravity(small_asteroid2[0].x-3, small_asteroid2[0].y+3);}
 			if (level > 2) {large_gravity(small_asteroid3[0].x-3, small_asteroid3[0].y+3);}
 			if (level > 3) {large_gravity(small_asteroid4[0].x-3, small_asteroid4[0].y+3);}
+
 	        enemies = level * 10;
 	        once = 1;
 	    }
-
+	gotoxy(10,40);
+	printf("%d",enemies);
 	if ((enemies == 0) || ((enemies == 1) && (globalLives == 2)) || ((enemies == 2) && (globalLives == 1))) {
 		enemiesbegin(10,level,1);
 		for (int i = 0; i< 100; i++) {clear_enemy(enemies_level[i].x,enemies_level[i].y);enemies_level[i].x = 0;enemies_level[i].y = 0;enemies_level[i].color = 0;}
@@ -356,9 +420,11 @@ void updateAndPrintShots(int pause, int level) {
     	        	}
     	  for (int loop = 0; loop < 20; loop++) {
     		  for (int j = 0; j < 90; ++j) {
+    			  if(enemies_level[j].x!=0 && enemies_level[j].y!=0) {
     			  if (isCollision(shots[i], enemies_level[j])) {
-    				  	  handleEnemyCollision(i,j);
+    				  	  handleEnemyCollision(i,j,level);
     				  	  enemy_down = 1;
+    			  }
     		  	  }
     		  }
     	  }
