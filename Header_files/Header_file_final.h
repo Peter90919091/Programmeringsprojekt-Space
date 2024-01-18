@@ -109,7 +109,7 @@ uint8_t readKeyboard();
 void lcd_resetwrite(const char* input_string, int line_number);
 void lcd_write_index(const char* input_string,int line_number, int index);
 void level_lcd(int level, int globalLives, int globalPoints);
-void setLed(int value);
+void LED(int colour);
 
 
 // #### ansi.c ####
@@ -126,7 +126,7 @@ void hideCursor();
 
 // #### design.c ####
 void border();
-void text_color_blink(int on);
+void text_color_blink(int on,int colour);
 void background();
 void box();
 void credits();
@@ -212,6 +212,7 @@ void print_big_asteroid(int x, int y);
 //BOSS KEY
 void boss_key_function();
 void boss_spreadsheet();
+
 
 /*void addWhateverFunctionsYouNeed( type parameter );*/
 #endif // _HEADER_FILE_H_
