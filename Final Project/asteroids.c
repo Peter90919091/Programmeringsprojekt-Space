@@ -100,7 +100,7 @@ void print_small_asteroid(int x, int y) {
     gotoxy(x,y+4);
     printf(" ---");
 }
-void large_gravity(int x, int y) {
+void print_big_asteroid(int x, int y) {
 	fgcolor(3);
 	gotoxy(x,y);
 	printf("  ___");
