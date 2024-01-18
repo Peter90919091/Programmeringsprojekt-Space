@@ -148,7 +148,7 @@ void ChooseUserInput() {
 	static int once = 0;
 	uint8_t value = readKeyboard();
 	gotoxy(50,10);
-	printf("Press 'x' for keyboard controls. Wait for box to turn red, then press 'p'.");
+	printf("Press 'x' for keyboard controls. Wait for box to turn red, then press 'p'. (IN BETA)");
 	gotoxy(55,11);
 	printf("For joystick controls press 'p'");
 	if (value == 'x') {
