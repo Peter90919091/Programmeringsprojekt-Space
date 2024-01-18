@@ -72,7 +72,7 @@ void cursor_left(int amount);
 
 // #### design.c ####
 void border();
-void text_color_blink(int on);
+void text_color_blink(int on,int colour);
 void background();
 void menubox();
 void box();
@@ -162,5 +162,7 @@ void Asteroid2(int size, const int x, const int y);
 void Asteroid3(int size, const int x, const int y);
 void Asteroid4(int size, const int x, const int y);
 
+//#### LED.c ####
+void LED(int colour);
 /*void addWhateverFunctionsYouNeed( type parameter );*/
 #endif // _HEADER_FILE_H_
