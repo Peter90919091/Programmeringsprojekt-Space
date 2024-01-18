@@ -542,7 +542,7 @@ void write_numbers(int number,int x,int y) {
 			printf("%c", 219);cursor_left(1);cursor_up(1);printf("%c", 219);cursor_up(1);cursor_left(4);printf("%c", 219);printf("%c", 219);printf("%c", 219);
 		}
 }
-void write_ asteroid(int x, int y){
+void write_asteroid(int x, int y){
 	fgcolor(3);
 	gotoxy(x,y);
     printf("      .-\"\"\"\"\"\"-.\n");
@@ -695,7 +695,7 @@ void write_yourendscore(int x,int y, int colour) {
 		}
 }
 
-void skull(int x, int y, int colour){
+void write_skull(int x, int y, int colour){
 	//Sets cursor
 	gotoxy(x,y);
 	//Sets Colour
