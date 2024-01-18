@@ -153,8 +153,8 @@ void help_design() {
 	printf("Use black holes to teleport shots");
 	gotoxy(47,12);
 	printf("Collect TNT or a Heart for powerup");
-	bomb_power(50,15);heart_power(56,15);initiate_black_hole(59,14);print_black_hole(59,14);heart_power(65,15);bomb_power(68,15);heart_power(74,15);
-	initiate_black_hole(77,14);print_black_hole(77,14);heart_power(83,15);bomb_power(86,15);heart_power(92,15);fgcolor(15);
+	bomb_power(50,15);heart_power(56,15);initiate_worm_hole(59,14);print_worm_hole(59,14);heart_power(65,15);bomb_power(68,15);heart_power(74,15);
+	initiate_worm_hole(77,14);print_worm_hole(77,14);heart_power(83,15);bomb_power(86,15);heart_power(92,15);fgcolor(15);
 	gotoxy(47,18);
 	printf("Move the spaceship right or left using joystick");
 	gotoxy(47,23);
