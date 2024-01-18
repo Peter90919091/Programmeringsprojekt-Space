@@ -1,9 +1,3 @@
-/*
- * menu.c
- *
- *  Created on: 10. jan. 2024
- *      Author: Matti
- */
 #include <string.h>
 #include <stdio.h>
 #include <stdint.h>
@@ -21,9 +15,8 @@ void menuHELP() {
 	write_asteroid(2,2);
 	border();
 	box();
-	text_color_blink(1);
-	write_exit();
-	text_color_blink(0);
+	text_color_blink(1,4);
+	text_color_blink(0,4);
 	help_design();
 	lcd_resetwrite("Controls and object of the game!",1);
 	HelpControls();
@@ -44,9 +37,9 @@ void menuSCORE() {
 	write_asteroid(2,2);
 	write_asteroid(90,20);
 	box();
-	text_color_blink(1);
+	text_color_blink(1,5);
 	write_exit();
-	text_color_blink(0);
+	text_color_blink(0,5);
 	write_highscore();
 	lcd_resetwrite("Look at your highscore!",1);
 	gotoxy(50,15);
@@ -90,9 +83,9 @@ void menuGAMEOVER() {
 	ClearScreen();
 	background(); //FØRST
 	border();
-	text_color_blink(1);
+	text_color_blink(1,1);
 	write_exit();
-	text_color_blink(0);
+	text_color_blink(0,1);
 	write_gameover(37,5);
 	write_score(50,15,1);
  	write_colon(75,16,1);
@@ -156,10 +149,10 @@ void ChooseUserInput() {
 	gotoxy(55,11);
 	printf("For joystick controls press 'p'");
 	if (value == 'x') {
-		text_color_blink(1);
+		text_color_blink(1,1);
 		gotoxy(67,15);
 		Smallbox();
-		text_color_blink(0);
+		text_color_blink(0,1);
 		gotoxy(0,0);
 		printf("keyboard controls activated");
 		UserPlayMode = 1;
