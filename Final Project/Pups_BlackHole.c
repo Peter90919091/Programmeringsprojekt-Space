@@ -75,3 +75,90 @@ void print_black_hole(int x, int y) {
 	fgcolor(7);
 	}
 }
+void powerUpHeart() {
+	int x_pos = rand() % 139 + 2;
+	heart_power(x_pos, 38);
+	for (int i = 0; i< 2; i++) {
+		gotoxy(heart[i].x,heart[i].y);
+		fgcolor(1);
+		if (i == 0) {printf("<");}
+		if (i == 1) {printf("3");}
+	}
+}
+void powerUpBomb() {
+	int x_pos = rand() % 139 + 2;
+	int y_pos = 3;
+	bomb_power(x_pos, y_pos);
+	for (int i = 0; i< 10; i++) {
+		gotoxy(bomb[i].x,bomb[i].y);
+		fgcolor(1);
+		underline(1);
+		switch(i) {
+		case 0:{printf(":");} break;
+		case 1:{printf("T");} break;
+		case 2:{printf("N");} break;
+		case 3:{printf("T");} break;
+		case 4:{printf(":");} break;
+		case 5:{printf(" ");} break;
+		case 6:{printf(" ");} break;
+		case 7:{printf(" ");} break;
+		case 8:{printf(" ");} break;
+		case 9:{printf(" ");} break;
+		}
+		underline(0);
+		fgcolor(7);
+	}
+}
+void deletepowerUpBomb() {
+	for (int i = 0; i< 10; i++) {
+		gotoxy(bomb[i].x,bomb[i].y);
+		printf(" ");
+		bomb[i].x = 0;
+		bomb[i].y = 0;
+ }
+}
+int hitpowerupBomb(struct vector_t shot_values,int level) {
+	int hit_bomb = 0;
+	int enemies_down = 0;
+		for (int i = 0; i< 10; i++) {
+			if (hit_bomb == 0) {
+			if (shot_values.x == bomb[i].x && shot_values.y == bomb[i].y) {
+				setLed(1);
+				hit_bomb = 1;
+				deletepowerUpBomb();
+				clearallshots();
+				for (int j = 0; j < 100; j++) {
+					if (enemies_level[j].x != 0 && enemies_level[j].y != 0) {
+											enemies_down += 1;
+										}
+					handleEnemyCollision(0,j,level);
+				}
+				callreturn(1);
+			}
+		}
+	}
+		setLed(0);
+		return enemies_down;
+}
+void deletepowerUpHeart() {
+	for (int i = 0; i< 2; i++) {
+		gotoxy(heart[i].x,heart[i].y);
+		printf(" ");
+		heart[i].x = 0;
+		heart[i].y = 0;
+ }
+}
+int hitpowerupHeart(int pos) {
+	int ekstra_liv = 0;
+	for (int i = 0; i < 2; i ++) {
+		if (pos == heart[i].x) {
+			setLed(2);
+			ekstra_liv = 1;
+		}
+	}
+	if (ekstra_liv == 1) {
+		deletepowerUpHeart();
+	}
+	setLed(0);
+    return (ekstra_liv);
+}
