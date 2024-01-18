@@ -10,6 +10,7 @@
 #include "Header_file.h"
 volatile uint32_t timer;
 
+//Takes the level as input and changes the speed and layout of the map
 int levelControls(int difficulty) {
 	LED(8);
 	int rocket_position = 38;
@@ -31,7 +32,7 @@ int levelControls(int difficulty) {
 	int shot_x = 0;
 	int shot_y = 0;
 	initiate_rocket(cursor_leftright, 38);
-	text_color_blink(0,0);
+	text_color_blink(0,8);
 	int shot = 0;
 	uint8_t value;
 	while(1) {
@@ -85,6 +86,8 @@ int levelControls(int difficulty) {
 	    }
 	}
 }
+
+//Functions for controls in the help menu
 int HelpControls() {
 	LED(8);
 	uint8_t value = 0;
@@ -269,6 +272,7 @@ int PlayControls() {
     }
 }
 
+//Function for controls in Score menu
 int ScoreControls() {
 	LED(8);
 	uint8_t value = 0;
@@ -287,7 +291,7 @@ int ScoreControls() {
 	}
 }
 
-
+//Function for controls in main menu
 int MenuControls() {
 	int cursor_placement = 0;
 	int prev_cursor_placement = 0;
@@ -362,6 +366,8 @@ int MenuControls() {
 	if (value != 0 && UserPlayMode == 0) {
 	pause_control(1000000);}}
 }
+
+//Controls when you lose
 void GAMEOVERControls() {
 	uint8_t value;
 	while(1) {
@@ -379,6 +385,8 @@ void GAMEOVERControls() {
 		if ((value == 16 || value == ' ')) {menu();}
 		}
 }
+
+//Controls when you win
 int GAMEWINControls() {
 	//Boss key start
 	if (uart_get_char() == 0x1B){
