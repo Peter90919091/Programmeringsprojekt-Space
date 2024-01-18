@@ -15,12 +15,39 @@
 #include "30010_io.h"
 #include "Header_file.h"
 void hideCursor() {printf("\e[?25l");}
-void text_color_blink(int on) {
+//Function for blinking text based on colour index, will also turn on the led for given colour
+void text_color_blink(int on, int colour) {
 	if (on == 1) {
+		LED(colour);
 		blink(1);
-		fgcolor(1);
+		switch (colour) {
+		case 1:
+			fgcolor(1);
+			break;
+		case 2:
+			fgcolor(2);
+			break;
+		case 3:
+			fgcolor(4);
+			break;
+		case 4:
+			fgcolor(6);
+			break;
+		case 5:
+			fgcolor(11);
+			break;
+		case 6:
+			fgcolor(5);
+			break;
+		case 7:
+			fgcolor(15);
+			break;
+		default:
+			break;
+		}
 	}
 	else if (on != 1) {
+		LED(colour);
 		blink(0);
 		fgcolor(7);
 	}
