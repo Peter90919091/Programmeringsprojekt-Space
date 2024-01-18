@@ -45,7 +45,7 @@ int gravityenemy(struct enemy enemy_values, struct vector_t asteroid_values) {
 }
 void handleEnemyCollision(int i,int j,int level) {
     if (enemies_level[j].x != 0 && enemies_level[j].y != 0) {
-    	setLed(1);
+    	LED(3);
 
         int pointsEarned = 0;
 
@@ -77,7 +77,7 @@ void handleEnemyCollision(int i,int j,int level) {
         shots[i].y = 0;
         enemies_level[j].x = 0;
         enemies_level[j].y = 0;
-        setLed(0);
+        LED(8);
     }
 }
 void enemiesbegin(int speed,int level, int reset) {
@@ -134,12 +134,12 @@ void enemiesbegin(int speed,int level, int reset) {
 	    		}
 	    	}else {
 	    			// Enemy er nået bunden
-	    		setLed(3);
+	    		LED(1);
 	    			clear_enemy(enemies_level[j].x, enemies_level[j].y);
 	    			enemies_level[j].x = 0;
 	    			enemies_level[j].y = 0;
 					lives(1);
-					setLed(0);
+					LED(8);
 	    		}
 	    	}
 	    timer = 0;
@@ -178,12 +178,12 @@ void enemiesbegin(int speed,int level, int reset) {
 						  }
 	    			 } else {
 	    			 //enemy er nået bunden og skal fjernes
-	    				 setLed(3);
+	    				 LED(1);
 					clear_enemy(enemies_level[j].x, enemies_level[j].y);
 					enemies_level[j].x = 0;
 					enemies_level[j].y = 0;
 					lives(1);
-					setLed(0);
+					LED(8);
 	    		 }
 	    	 }
 	    	 timer = 0;
