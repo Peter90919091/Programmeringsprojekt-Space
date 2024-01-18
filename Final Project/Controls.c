@@ -1,10 +1,3 @@
-/*
- * Controls.c
- *
- *  Created on: 10. jan. 2024
- *      Author: Matti
- */
-
 #include <string.h>
 #include <stdio.h>
 #include <stdint.h>
@@ -16,8 +9,9 @@
 #include "30010_io.h"
 #include "Header_file.h"
 volatile uint32_t timer;
+
 int levelControls(int difficulty) {
-	setLed(0);
+	LED(8);
 	int rocket_position = 38;
 	int speed = 0;
 	int level = 0;
@@ -92,7 +86,7 @@ int levelControls(int difficulty) {
 	}
 }
 int HelpControls() {
-	setLed(0);
+	LED(8);
 	uint8_t value = 0;
 	while(1) {
 	//Boss key start
@@ -276,7 +270,7 @@ int PlayControls() {
 }
 
 int ScoreControls() {
-	Led(8);
+	LED(8);
 	uint8_t value = 0;
 	while(1) {
 	//Boss key start
@@ -371,7 +365,7 @@ int MenuControls() {
 void GAMEOVERControls() {
 	uint8_t value;
 	while(1) {
-		setLed(0);
+		LED(8);
 		//Boss key start
 		if (uart_get_char() == 0x1B){
 		boss_key_function();
