@@ -1,3 +1,20 @@
+/*
+ * game.c
+ *
+ *  Created on: 10. jan. 2024
+ *      Author: Matti
+ */
+#include <string.h>
+#include <stdio.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <math.h>
+#include <unistd.h>
+#include "system_stm32f30x.h"
+#include "stm32f30x_conf.h"
+#include "30010_io.h"
+#include "Header_file.h"
 // Function to push buffer to LCD (assuming this function is already defined)
 const char character_data[95][5] = {
   {0x00, 0x00, 0x00, 0x00, 0x00},
