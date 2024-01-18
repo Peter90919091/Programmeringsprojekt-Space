@@ -1,9 +1,3 @@
-/*
- * timer.c
- *
- *  Created on: 14. jan. 2024
- *      Author: Matti
- */
 #include <string.h>
 #include <stdio.h>
 #include <stdint.h>
