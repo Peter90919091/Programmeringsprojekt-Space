@@ -123,7 +123,7 @@ int hitpowerupBomb(struct vector_t shot_values,int level) {
 		for (int i = 0; i< 10; i++) {
 			if (hit_bomb == 0) {
 			if (shot_values.x == bomb[i].x && shot_values.y == bomb[i].y) {
-				setLed(1);
+				LED(3);
 				hit_bomb = 1;
 				deletepowerUpBomb();
 				clearallshots();
@@ -137,7 +137,7 @@ int hitpowerupBomb(struct vector_t shot_values,int level) {
 			}
 		}
 	}
-		setLed(0);
+		LED(8);
 		return enemies_down;
 }
 void deletepowerUpHeart() {
@@ -152,13 +152,13 @@ int hitpowerupHeart(int pos) {
 	int ekstra_liv = 0;
 	for (int i = 0; i < 2; i ++) {
 		if (pos == heart[i].x) {
-			setLed(2);
+			LED(2);
 			ekstra_liv = 1;
 		}
 	}
 	if (ekstra_liv == 1) {
 		deletepowerUpHeart();
 	}
-	setLed(0);
+	LED(8);
     return (ekstra_liv);
 }
