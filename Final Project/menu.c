@@ -113,6 +113,10 @@ void menuWIN(int level) {
 	write_score(55,15,1);
 	write_colon(80,16,1);
 	write_yourendscore(82,14,1);
+	lcd_resetwrite("",1);
+	lcd_write_index("YOU WIN!",2,45);
+	lcd_write_index("Quit or play again!",3,15);
+	lcd_write_index("   ",1,0);
 	globalPoints = 0;
 	int value = GAMEWINControls();
 	if (value == 1) {
