@@ -33,7 +33,7 @@ int levelControls(int difficulty) {
 	int shot_x = 0;
 	int shot_y = 0;
 	initiate_rocket(cursor_leftright, 38);
-	text_color_blink(0);
+	text_color_blink(0,0);
 	int shot = 0;
 	while(1) {
 		//Boss key start
@@ -146,7 +146,7 @@ void playexit(int value, int cursorUpDown) {
 // opdater skærmen
 void updateScreen(int cursorUpDown, int cursorLeftRight, int prevCursorUpDown, int prevCursorLeftRight) {
     if (cursorLeftRight != prevCursorLeftRight || cursorUpDown != prevCursorUpDown) {
-        text_color_blink(0);
+        text_color_blink(0,0);
         write_exit();
         write_play_header();
         write_numbers(1, 40, 16);
@@ -161,42 +161,42 @@ void updateScreen(int cursorUpDown, int cursorLeftRight, int prevCursorUpDown, i
     }
 }
 
-// hader switches
+//Switches for cursor pos
 void show_cursor_pos(int cursorUpDown, int cursorLeftRight) {
 		switch (cursorLeftRight) {
 			case 0: switch (cursorUpDown) {
-				case 0:text_color_blink(1);write_play_header();text_color_blink(0); 		break;
-				case 1:text_color_blink(1);write_numbers(1, 40, 16);text_color_blink(0);	break;
-				case 2:text_color_blink(1);write_numbers(6, 40, 24);text_color_blink(0);	break;
-				case 3:text_color_blink(1);write_exit();text_color_blink(0); 				break;
+				case 0:text_color_blink(1,1);write_play_header();text_color_blink(0,1); 		break;
+				case 1:text_color_blink(1,1);write_numbers(1, 40, 16);text_color_blink(0,1);	break;
+				case 2:text_color_blink(1,1);write_numbers(6, 40, 24);text_color_blink(0,1);	break;
+				case 3:text_color_blink(1,1);write_exit();text_color_blink(0,1); 				break;
 				}
 			break;
 			case 1: switch (cursorUpDown) {
-				case 0:text_color_blink(1);write_play_header();text_color_blink(0); 		break;
-				case 1:text_color_blink(1);write_numbers(2, 55, 16);text_color_blink(0);	break;
-				case 2:text_color_blink(1);write_numbers(7, 55, 24);text_color_blink(0);	break;
-				case 3:text_color_blink(1);write_exit();text_color_blink(0); 				break;
+				case 0:text_color_blink(1,1);write_play_header();text_color_blink(0,1); 		break;
+				case 1:text_color_blink(1,1);write_numbers(2, 55, 16);text_color_blink(0,1);	break;
+				case 2:text_color_blink(1,1);write_numbers(7, 55, 24);text_color_blink(0,1);	break;
+				case 3:text_color_blink(1,1);write_exit();text_color_blink(0,1); 				break;
 				}
 			break;
 			case 2: switch (cursorUpDown) {
-				case 0:text_color_blink(1);write_play_header();text_color_blink(0); 		break;
-				case 1:text_color_blink(1);write_numbers(3, 70, 16);text_color_blink(0);	break;
-				case 2:text_color_blink(1);write_numbers(8, 70, 24);text_color_blink(0);	break;
-				case 3:text_color_blink(1);write_exit();text_color_blink(0); 				break;
+				case 0:text_color_blink(1,1);write_play_header();text_color_blink(0,1); 		break;
+				case 1:text_color_blink(1,1);write_numbers(3, 70, 16);text_color_blink(0,1);	break;
+				case 2:text_color_blink(1,1);write_numbers(8, 70, 24);text_color_blink(0,1);	break;
+				case 3:text_color_blink(1,1);write_exit();text_color_blink(0,1); 				break;
 				}
 			break;
 			case 3: switch (cursorUpDown) {
-				case 0:text_color_blink(1);write_play_header();text_color_blink(0); 		break;
-				case 1:text_color_blink(1);write_numbers(4, 85, 16);text_color_blink(0);	break;
-				case 2:text_color_blink(1);write_numbers(9, 85, 24);text_color_blink(0);	break;
-				case 3:text_color_blink(1);write_exit();text_color_blink(0); 				break;
+				case 0:text_color_blink(1,1);write_play_header();text_color_blink(0,1); 		break;
+				case 1:text_color_blink(1,1);write_numbers(4, 85, 16);text_color_blink(0,1);	break;
+				case 2:text_color_blink(1,1);write_numbers(9, 85, 24);text_color_blink(0,1);	break;
+				case 3:text_color_blink(1,1);write_exit();text_color_blink(0,1); 				break;
 				}
 			break;
 			case 4: switch (cursorUpDown) {
-				case 0:text_color_blink(1);write_play_header();text_color_blink(0); 		break;
-				case 1:text_color_blink(1);write_numbers(5, 100, 16);text_color_blink(0);	break;
-				case 2:text_color_blink(1);text_color_blink(0);								break;
-				case 3:text_color_blink(1);write_exit();text_color_blink(0); 				break;
+				case 0:text_color_blink(1,1);write_play_header();text_color_blink(0,1); 		break;
+				case 1:text_color_blink(1,1);write_numbers(5, 100, 16);text_color_blink(0,1);	break;
+				case 2:text_color_blink(1,1);text_color_blink(0,1);								break;
+				case 3:text_color_blink(1,1);write_exit();text_color_blink(0,1); 				break;
 				}
 			break;
 	}
@@ -210,7 +210,7 @@ int PlayControls() {
     int prevCursorLeftRight = 0;
 
     // Vis normal skærm
-    text_color_blink(0);
+    text_color_blink(0,8);
     write_exit();
     write_play_header();
     write_numbers(1, 40, 16);
@@ -272,7 +272,7 @@ int MenuControls() {
 	int cursor_placement = 0;
 	int prev_cursor_placement = 0;
 	int stop = 100;
-	text_color_blink(0);
+	text_color_blink(0,0);
 			gotoxy(62,17);
 			write_help();
 			write_score(60,23,7);
@@ -301,7 +301,7 @@ int MenuControls() {
 		ClearScreen();
 		return 3;}
 	if (cursor_placement != prev_cursor_placement) {
-		text_color_blink(0);
+		text_color_blink(0,8);
 		gotoxy(62,17);
 		write_help();
 		write_score(60,23,7);
@@ -312,26 +312,26 @@ int MenuControls() {
 		if (stop != 0) {
 		prev_cursor_placement = cursor_placement;
 		gotoxy(62,17);
-		text_color_blink(1);
+		text_color_blink(1,1);
 		write_help();
-		text_color_blink(0);
+		text_color_blink(0,1);
 		stop = 0;}
 	}
 	if (cursor_placement == 1) {
 		if (stop != 1) {
 		prev_cursor_placement = cursor_placement;
-			text_color_blink(1);
+			text_color_blink(1,2);
 			write_score(60,23,1);
-			text_color_blink(0);;
+			text_color_blink(0,2);;
 				stop = 1;}
 	}
 	if (cursor_placement == 2) {
 		if (stop != 2) {
 			prev_cursor_placement = cursor_placement;
 			gotoxy(63,29);
-			text_color_blink(1);
+			text_color_blink(1,3);
 			write_play();
-			text_color_blink(0);
+			text_color_blink(0,3);
 			stop = 2;}
 		}
 	if (value != 0) {
@@ -358,7 +358,7 @@ int GAMEWINControls() {
 	int cursor_placement = 0;
 	int prev_cursor_placement = 0;
 	int stop = 100;
-	text_color_blink(0);
+	text_color_blink(0,6);
 	write_nextlevel(47,25,15);
 	write_exit(60,23,15);
 	while (1) {
@@ -376,7 +376,7 @@ int GAMEWINControls() {
 			ClearScreen();
 			return 2;}
 		if (cursor_placement != prev_cursor_placement) {
-				text_color_blink(0);
+				text_color_blink(0,1);
 				write_nextlevel(47,25,15);
 				write_exit(60,23,15);
 			}
@@ -384,7 +384,7 @@ int GAMEWINControls() {
 			if (stop != 0) {
 			prev_cursor_placement = cursor_placement;
 
-			text_color_blink(1);
+			text_color_blink(1,5);
 			write_nextlevel(47,25,1);
 			text_color_blink(0);
 			stop = 0;}
@@ -392,7 +392,7 @@ int GAMEWINControls() {
 		if (cursor_placement == 1) {
 			if (stop != 1) {
 			prev_cursor_placement = cursor_placement;
-				text_color_blink(1);
+				text_color_blink(1,4);
 				write_exit(60,23,1);
 				text_color_blink(0);;
 					stop = 1;}
