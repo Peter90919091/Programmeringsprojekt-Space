@@ -14,7 +14,7 @@ TIM2->SR &= ~0x0001; // Clear interrupt bit
 }
 
 void initTimer2() {
-	//Taken from exercise 8
+	//Taken from exercise 9
 
 	RCC -> APB1ENR |= RCC_APB1Periph_TIM2 ; // Enable clock line to timer 2;
 	// RCC - > AHBENR |= RCC_AHBPeriph_GPIOA | RCC_AHBPeriph_GPIOB |RCC_AHBPeriph_GPIOC ; // Enable clock for GPIO Port A
