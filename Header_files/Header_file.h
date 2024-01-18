@@ -56,15 +56,6 @@ volatile uint32_t timer;
 
 
 
-
-
-
-
-
-/* Exported types -------------------------------------------------------*/
-/* Exported constants ---------------------------------------------------*/
-/* Exported macro -------------------------------------------------------*/
-/* #define			 // Whatever needs to be defined < */
 /* Exported functions -------------------------------------------------- */
 // #### MENU_TEXT.c ####
 void write_score();
@@ -72,7 +63,7 @@ void write_play();
 void write_menu();
 void write_help();
 void write_help_header();
-void write_score_header(int x, int y, int colour);
+void write_score_header(int x, int y, int color);
 void write_exit();
 void write_Welcome();
 void write_highscore();
@@ -81,11 +72,11 @@ void write_play_header();
 void write_numbers(int number,int x,int y);
 void write_asteroid(int x, int y);
 void write_gameover(int x, int y);
-void write_colon(int x,int y,int colour);
-void write_yourendscore(int x,int y, int colour);
-void write_skull(int x, int y, int colour);
-void write_youwin(int x, int y, int colour);
-void write_nextlevel(int x, int y, int colour);
+void write_colon(int x,int y,int color);
+void write_yourendscore(int x,int y, int color);
+void write_skull(int x, int y, int color);
+void write_youwin(int x, int y, int color);
+void write_nextlevel(int x, int y, int color);
 
 // #### Controls.c ####
 int ScoreControls();
@@ -109,7 +100,7 @@ uint8_t readKeyboard();
 void lcd_resetwrite(const char* input_string, int line_number);
 void lcd_write_index(const char* input_string,int line_number, int index);
 void level_lcd(int level, int globalLives, int globalPoints);
-void LED(int colour);
+void LED(int color);
 
 
 // #### ansi.c ####
@@ -126,7 +117,7 @@ void hideCursor();
 
 // #### design.c ####
 void border();
-void text_color_blink(int on,int colour);
+void text_color_blink(int on,int color);
 void background();
 void box();
 void credits();
@@ -213,6 +204,4 @@ void print_big_asteroid(int x, int y);
 void boss_key_function();
 void boss_spreadsheet();
 
-
-/*void addWhateverFunctionsYouNeed( type parameter );*/
 #endif // _HEADER_FILE_H_
