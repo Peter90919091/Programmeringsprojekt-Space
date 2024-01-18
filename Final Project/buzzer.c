@@ -16,8 +16,6 @@ TIM2->SR &= ~0x0001; // Clear interrupt bit
 void initTimer2() {
 	//Taken from exercise 8
 
-	// timer setup
-
 	RCC -> APB1ENR |= RCC_APB1Periph_TIM2 ; // Enable clock line to timer 2;
 	// RCC - > AHBENR |= RCC_AHBPeriph_GPIOA | RCC_AHBPeriph_GPIOB |RCC_AHBPeriph_GPIOC ; // Enable clock for GPIO Port A
 	TIM2 -> CR1 = 0; // Configure timer 2
@@ -26,11 +24,7 @@ void initTimer2() {
 
 	TIM2 -> DIER |= 0x0001 ; // Enable timer 2 interrupts
 	TIM2 -> CR1 = 1;
-	// not needed ?
-	// NVIC_SetPriority ( TIM2_IRQn , 0); // Set interrupt priority
-	// NVIC_EnableIRQ ( TIM2_IRQn ); // Enable interrupt
 
-	// counter compare
 	TIM2 -> CCER &= ~ TIM_CCER_CC3P ; // Clear CCER register
 	TIM2 -> CCER |= 0x00000001 << 8; // Enable OC3 output
 	TIM2 -> CCMR2 &= ~ TIM_CCMR2_OC3M ; // Clear CCMR2 register
@@ -66,7 +60,7 @@ void setFreq(uint16_t freq) {
 
 void delaysong(uint16_t milli) {
 
-uint32_t delay = milli * 64000;
+uint32_t delay = milli * 52000;
 for (uint32_t i = 0; i < delay; i++) {
 }
 }
