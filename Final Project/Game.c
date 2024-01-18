@@ -136,16 +136,16 @@ void updateAndPrintShots(int pause, int level,int speed, int position) {
 
 	        enemies = level * 10;
 	        once = 1;
-			if (level == 6) {initiate_black_hole(17,30);printblackhole=1;}
-			if (level == 7) {initiate_black_hole(35,30);printblackhole=1;}
-			if (level == 8) {initiate_black_hole(70,30);printblackhole=1;}
-			if (level == 9) {initiate_black_hole(100,30);printblackhole=1;}
+			if (level == 6) {initiate_worm_hole(17,30);printblackhole=1;}
+			if (level == 7) {initiate_worm_hole(35,30);printblackhole=1;}
+			if (level == 8) {initiate_worm_hole(70,30);printblackhole=1;}
+			if (level == 9) {initiate_worm_hole(100,30);printblackhole=1;}
 	    }
 	if (printblackhole == 1) {
-		if (level == 6) {print_black_hole(17,30);}
-		if (level == 7) {print_black_hole(35,30);}
-		if (level == 8) {print_black_hole(70,30);}
-		if (level == 9) {print_black_hole(100,30);}
+		if (level == 6) {print_worm_hole(17,30);}
+		if (level == 7) {print_worm_hole(35,30);}
+		if (level == 8) {print_worm_hole(70,30);}
+		if (level == 9) {print_worm_hole(100,30);}
 	}
 	if ((enemies == 0) || ((enemies == 1) && (globalLives == 2)) || ((enemies == 2) && (globalLives == 1))) {
 		enemiesbegin(10,level,1);
