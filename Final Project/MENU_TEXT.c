@@ -1,9 +1,3 @@
-/*
- * Menu_text.c
- *
- *  Created on: 10. jan. 2024
- *      Author: Matti
- */
 #include <string.h>
 #include <stdio.h>
 #include <stdint.h>
@@ -262,10 +256,10 @@ void write_help(){
 	cursor_right(2);cursor_up(2);
 }
 //################## SCORE ###################
-void write_score(int x, int y, int colour) {
+void write_score(int x, int y, int color) {
 	//Sets cursor
 	gotoxy(x,y);
-	fgcolor(colour);
+	fgcolor(color);
 	//Print S
 	printf("%c", 219);cursor_down(1);cursor_left(1);printf("%c", 219);printf("%c", 219);cursor_down(1);printf("%c", 219);
 	printf("%c", 219);cursor_down(1);cursor_left(4);printf("%c", 219);printf("%c", 219);printf("%c", 219);printf("%c", 219);
@@ -637,17 +631,17 @@ void write_gameover(int x,int y) {
 
 }
 
-void write_colon(int x, int y, int colour) {
+void write_colon(int x, int y, int color) {
 	gotoxy(x,y);
-	fgcolor(colour);
+	fgcolor(color);
 	printf("%c", 254);
 	cursor_down(2);cursor_left(1);
 	printf("%c", 254);
 }
 
-void write_yourendscore(int x,int y, int colour) {
+void write_yourendscore(int x,int y, int color) {
 	gotoxy(x,y);
-	fgcolor(colour);
+	fgcolor(color);
 	int digits[3];
 	long number = globalPoints;
 	for (int i = 0;i<3;i++) {
@@ -695,11 +689,11 @@ void write_yourendscore(int x,int y, int colour) {
 		}
 }
 
-void write_skull(int x, int y, int colour){
+void write_skull(int x, int y, int color){
 	//Sets cursor
 	gotoxy(x,y);
-	//Sets Colour
-	fgcolor(colour);
+	//Sets color
+	fgcolor(color);
 	//Script for drawing the skull
 	cursor_right(2); for (int i=0;i<7;i++) {printf("%c", 219);}cursor_left(8);cursor_down(1);
 	for (int i = 0;i<9;i++) {printf("%c", 219);}cursor_left(9);cursor_down(1);
@@ -713,11 +707,11 @@ void write_skull(int x, int y, int colour){
 	cursor_left(7);cursor_down(1);for (int i = 0;i<5;i++){printf("%c", 219);}
 	cursor_down(1);cursor_left(5);for(int i = 0;i<3;i++){printf("%c", 219);cursor_right(1);}
 }
-void write_youwin(int x, int y, int colour) {
+void write_youwin(int x, int y, int color) {
 	//Sets cursor
 	gotoxy(x,y);
-	//Colour:
-	fgcolor(colour);
+	//color:
+	fgcolor(color);
 	//"Y"
 		for (int i = 0;i<3;i++){printf("%c", 219);printf("%c", 219);cursor_down(1);cursor_left(2);}
 		cursor_right(1); for (int i = 0;i<5;i++){printf("%c", 219);}cursor_down(1);cursor_left(4);
@@ -765,11 +759,11 @@ void write_youwin(int x, int y, int colour) {
 }
 
 
-void write_nextlevel(int x, int y, int colour) {
+void write_nextlevel(int x, int y, int color) {
 	//Sets cursor
 	gotoxy(x,y);
-	//Colour
-	fgcolor(colour);
+	//color
+	fgcolor(color);
 
 	//"N"
 		for (int i = 0;i<5;i++){printf("%c", 219);cursor_down(1);cursor_left(1);}cursor_up(4);cursor_right(1);
