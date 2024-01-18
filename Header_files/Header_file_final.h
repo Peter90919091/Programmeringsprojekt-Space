@@ -179,6 +179,7 @@ void update_score(long int score);
 void lives(int damage);
 void prevShot(int x, int y);
 void clearallshots();
+int callreturn (int value);
 bool isCollision(struct vector_t shot_values, struct enemy enemy_values);
 bool isCollisionHole(struct vector_t shot_values, struct vector_t hole);
 bool isAstroidCollision(struct vector_t shot_values, struct vector_t asteroid_values);
@@ -211,3 +212,6 @@ void print_big_asteroid(int x, int y);
 //BOSS KEY
 void boss_key_function();
 void boss_spreadsheet();
+
+/*void addWhateverFunctionsYouNeed( type parameter );*/
+#endif // _HEADER_FILE_H_
