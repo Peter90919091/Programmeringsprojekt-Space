@@ -274,7 +274,6 @@ int PlayControls() {
 
 //Function for controls in Score menu
 int ScoreControls() {
-	LED(8);
 	uint8_t value = 0;
 	while(1) {
 	//Boss key start
