@@ -100,19 +100,24 @@ void menuGAMEOVER() {
 	lcd_write_index("   ",1,0);
 	GAMEOVERControls();
 }
+
 void menuWIN(int level) {
+	playingsong();
 	ClearScreen();
 	background(); //FØRST
 	border();
+	text_color_blink(0,7);
+	write_nextlevel(47,25,15);
+	write_exit(60,23,15);
 	write_youwin(46,5,2);
 	write_score(55,15,1);
 	write_colon(80,16,1);
 	write_yourendscore(82,14,1);
+	globalPoints = 0;
 	lcd_resetwrite("",1);
 	lcd_write_index("YOU WIN!",2,45);
 	lcd_write_index("Quit or play again!",3,12);
 	lcd_write_index("   ",1,0);
-	globalPoints = 0;
 	int value = GAMEWINControls();
 	if (value == 1) {
 		switch (level) {
@@ -141,6 +146,7 @@ void menuWIN(int level) {
 	if (value == 2) {
 		menu();
 	}
+
 }
 
 void ChooseUserInput() {
