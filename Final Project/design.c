@@ -1,9 +1,3 @@
-/*
- * design.c
- *
- *  Created on: 10. jan. 2024
- *      Author: Matti
- */
 #include <string.h>
 #include <stdio.h>
 #include <stdint.h>
@@ -14,11 +8,11 @@
 #include "stm32f30x_conf.h"
 #include "30010_io.h"
 #include "Header_file.h"
-void text_color_blink(int on, int colour) {
+void text_color_blink(int on, int color) {
 	if (on == 1) {
-		LED(colour);
+		LED(color);
 		blink(1);
-		switch (colour) {
+		switch (color) {
 		case 1:
 			fgcolor(1);
 			break;
@@ -45,7 +39,7 @@ void text_color_blink(int on, int colour) {
 		}
 	}
 	else if (on != 1) {
-		LED(colour);
+		LED(color);
 		blink(0);
 		fgcolor(7);
 	}
