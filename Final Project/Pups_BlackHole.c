@@ -1,9 +1,3 @@
-/*
- * Menu_text.c
- *
- *  Created on: 10. jan. 2024
- *      Author: Matti
- */
 #include <string.h>
 #include <stdio.h>
 #include <stdint.h>
@@ -22,6 +16,13 @@ void heart_power(const int x, const int y) {
             case 1: heart[i].x = x+1;     heart[i].y = y; break;
         }
     }
+    for (int i = 0; i< 2; i++) {
+    		gotoxy(heart[i].x,heart[i].y);
+    		fgcolor(1);
+    		if (i == 0) {printf("<");}
+    		if (i == 1) {printf("3");}
+    		fgcolor(7);
+    	}
 }
 void bomb_power(const int x, const int y) {
     for (int i = 0; i < 10; i++) {
@@ -38,6 +39,25 @@ void bomb_power(const int x, const int y) {
             case 9: bomb[i].x = x+4 ; bomb[i].y = y-1; break;
         }
     }
+    	for (int i = 0; i< 10; i++) {
+    		gotoxy(bomb[i].x,bomb[i].y);
+    		fgcolor(1);
+    		underline(1);
+    		switch(i) {
+    		case 0:{printf(":");} break;
+    		case 1:{printf("T");} break;
+    		case 2:{printf("N");} break;
+    		case 3:{printf("T");} break;
+    		case 4:{printf(":");} break;
+    		case 5:{printf(" ");} break;
+    		case 6:{printf(" ");} break;
+    		case 7:{printf(" ");} break;
+    		case 8:{printf(" ");} break;
+    		case 9:{printf(" ");} break;
+    		}
+    		underline(0);
+    		fgcolor(7);
+    	}
 }
 void start_black_hole(int x, int y) {
 	 for (int i = 0; i < 18; i++) {
@@ -78,37 +98,12 @@ void print_black_hole(int x, int y) {
 void powerUpHeart() {
 	int x_pos = rand() % 139 + 2;
 	heart_power(x_pos, 38);
-	for (int i = 0; i< 2; i++) {
-		gotoxy(heart[i].x,heart[i].y);
-		fgcolor(1);
-		if (i == 0) {printf("<");}
-		if (i == 1) {printf("3");}
-	}
 }
 void powerUpBomb() {
 	int x_pos = rand() % 139 + 2;
 	int y_pos = 3;
 	bomb_power(x_pos, y_pos);
-	for (int i = 0; i< 10; i++) {
-		gotoxy(bomb[i].x,bomb[i].y);
-		fgcolor(1);
-		underline(1);
-		switch(i) {
-		case 0:{printf(":");} break;
-		case 1:{printf("T");} break;
-		case 2:{printf("N");} break;
-		case 3:{printf("T");} break;
-		case 4:{printf(":");} break;
-		case 5:{printf(" ");} break;
-		case 6:{printf(" ");} break;
-		case 7:{printf(" ");} break;
-		case 8:{printf(" ");} break;
-		case 9:{printf(" ");} break;
-		}
-		underline(0);
-		fgcolor(7);
 	}
-}
 void deletepowerUpBomb() {
 	for (int i = 0; i< 10; i++) {
 		gotoxy(bomb[i].x,bomb[i].y);
