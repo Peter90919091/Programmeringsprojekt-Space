@@ -70,28 +70,46 @@ uint32_t delay = milli * 64000;
 for (uint32_t i = 0; i < delay; i++) {
 }
 }
-void playingsong() {
+void playingsong(int value) {
+	int FSH = 740;
+	int G = 391;
 	int C4 = 262;
 	int D4 = 294;
 	int E4 = 330;
+	int F = 349;
 	int A4 = 440;
 	int B4 = 494;
-	uint16_t interstellar[]= {
-			 A4,E4,A4,E4,B4,E4,B4,E4,C4,E4,C4,E4,
-			 D4,E4,D4,E4
-	 };
-	size_t interlength = sizeof(interstellar)/sizeof(interstellar[0]);
+
+	if (value == 0) {
+		uint16_t notearray1[] = {A4,E4,A4,E4,B4,E4,B4,E4,C4,E4,C4,E4,
+			 D4,E4,D4,E4};
+	size_t interlength = sizeof(notearray1)/sizeof(notearray1[0]);
 	//How long you want it to play
 	uint16_t duration = 20;
 	for (size_t i = 0; i < interlength; i++) {
+			//Changes the frequency on the buzzer
+		uint16_t freq = notearray1[i];
+		setFreq(freq);
+			  //Delays it
+		delaysong(duration);
+			  //Resets the frequency
+		setFreq(0);
+			  //Delay again until next note
+		delaysong(0);
+	}
+	}
+	else if (value == 1) {
+		uint16_t notearray[] = {FSH,G,F,E4};
+		size_t arraylength = sizeof(notearray)/sizeof(notearray[0]);
+		uint16_t duration = 40;
+	for (size_t i = 0; i < arraylength; i++) {
 		//Changes the frequency on the buzzer
-	uint16_t freq = song[i];
+	uint16_t freq = notearray[i];
 	setFreq(freq);
 		  //Delays it
 	delaysong(duration);
 		  //Resets the frequency
 	setFreq(0);
-		  //Delay again until next note
-	delaysong(0);
+	}
 }
 }
