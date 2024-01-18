@@ -187,7 +187,7 @@ void LED(int colour){
 		GPIOB->ODR |= (0 << 4);
 		GPIOB->BSRR |= (0 << 4);
 		break;
-
+		//Turning them off
 	case 8:
 		RCC->AHBENR |= RCC_AHBPeriph_GPIOA;
 		GPIOA->ODR |= (1<<9);
@@ -205,13 +205,4 @@ void LED(int colour){
 		break;
 	}
 
-}
-
-void LED_blink(int colour,int pause) {
-	if (pause == 1) {
-		LED(colour);
-	}
-	else if (pause == 0) {
-		LED(8);
-	}
 }
