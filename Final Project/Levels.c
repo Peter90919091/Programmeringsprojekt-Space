@@ -1,9 +1,3 @@
-/*
- * levels.c
- *
- *  Created on: 11. jan. 2024
- *      Author: Matti
- */
 #include <string.h>
 #include <stdio.h>
 #include <stdint.h>
