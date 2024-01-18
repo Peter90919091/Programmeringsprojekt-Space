@@ -1,9 +1,3 @@
-/*
- * boss_key.c
- *
- *  Created on: 16. jan. 2024
- *      Author: Matti
- */
 #include <string.h>
 #include <stdio.h>
 #include <stdint.h>
