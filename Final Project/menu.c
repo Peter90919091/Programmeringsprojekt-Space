@@ -10,12 +10,14 @@
 #include "Header_file.h"
 
 void menuHELP() {
+	LED(8);
 	background();
 	lives(0);
 	write_asteroid(2,2);
 	border();
 	box();
 	text_color_blink(1,4);
+	write_exit();
 	text_color_blink(0,4);
 	help_design();
 	lcd_resetwrite("Controls and object of the game!",1);
@@ -108,7 +110,7 @@ void menuWIN(int level) {
 	write_yourendscore(82,14,1);
 	lcd_resetwrite("",1);
 	lcd_write_index("YOU WIN!",2,45);
-	lcd_write_index("Quit or play again!",3,15);
+	lcd_write_index("Quit or play again!",3,12);
 	lcd_write_index("   ",1,0);
 	globalPoints = 0;
 	int value = GAMEWINControls();
