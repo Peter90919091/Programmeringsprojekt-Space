@@ -8,10 +8,12 @@
 #include "stm32f30x_conf.h"
 #include "30010_io.h"
 #include "Header_file.h"
+//Makes the text blink in given color
 void text_color_blink(int on, int color) {
 	if (on == 1) {
 		LED(color);
 		blink(1);
+		//Uses colorscheme from LCD_LED.c and converts to corresponding color in fgcolor-colorscheme
 		switch (color) {
 		case 1:
 			fgcolor(1);
