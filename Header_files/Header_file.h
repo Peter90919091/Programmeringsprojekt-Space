@@ -209,6 +209,6 @@ void TIM2_IRQHandler(void);
 void initTimer2();
 void setFreq(uint16_t freq);
 void delaysong(uint16_t milli);
-void playingsong();
+void playingsong(int value);
 
 #endif // _HEADER_FILE_H_
