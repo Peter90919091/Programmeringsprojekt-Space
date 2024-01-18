@@ -37,7 +37,7 @@ int levelControls(int difficulty) {
 	int shot_x = 0;
 	int shot_y = 0;
 	initiate_rocket(cursor_leftright, 38);
-	text_color_blink(0);
+	text_color_blink(0,0);
 	int shot = 0;
 	uint8_t value;
 	while(1) {
