@@ -59,7 +59,7 @@ void bomb_power(const int x, const int y) {
     		fgcolor(7);
     	}
 }
-void start_black_hole(int x, int y) {
+void start_worm_hole(int x, int y) {
 	 for (int i = 0; i < 18; i++) {
 	        switch (i) {
 	            case 0: hole[i].x = x ; hole[i].y = y; break;
@@ -82,10 +82,10 @@ void start_black_hole(int x, int y) {
 }
 
 
-void initiate_black_hole(int x,int y){
-	start_black_hole(x,y);
+void initiate_worm_hole(int x,int y){
+	start_worm_hole(x,y);
 }
-void print_black_hole(int x, int y) {
+void print_worm_hole(int x, int y) {
 	for (int i = 0; i < 15; i++) {
 		int symbol = (i < 5) ? 187 : ((i < 10) ? 178 : ((i < 15) ? 200 : 0));
 		int color = (i < 5) ? 8 : ((i < 10) ? 12 : ((i < 15) ? 8 : 0));
