@@ -82,6 +82,7 @@ void menu() {
 }
 
 void menuGAMEOVER() {
+	playingsong(1);
 	ClearScreen();
 	background(); //FØRST
 	border();
@@ -102,7 +103,7 @@ void menuGAMEOVER() {
 }
 
 void menuWIN(int level) {
-	playingsong();
+	playingsong(0);
 	ClearScreen();
 	background(); //FØRST
 	border();
