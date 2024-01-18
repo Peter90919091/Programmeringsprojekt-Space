@@ -66,8 +66,8 @@ void setFreq(uint16_t freq) {
 
 void delaysong(uint16_t milli) {
 
-uint32_t ticks = milli * 64000;
-for (uint32_t i = 0; i < ticks; i++) {
+uint32_t delay = milli * 64000;
+for (uint32_t i = 0; i < delay; i++) {
 }
 }
 void playingsong() {
