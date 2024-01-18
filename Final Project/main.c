@@ -6,15 +6,9 @@ int main(void) {
 	hideCursor();
 	blink(0);
 	ClearScreen();
-	//MenuControls();
+	
 	while (1) {
-		//menu();
 		ChooseUserInput();
-		//gotoxy(2,0);
-		//uint8_t value = readKeyboard();
-		//printf("%c",value);
-		//ChooseUserInput();
-
 	}
 	return 0;
 }
