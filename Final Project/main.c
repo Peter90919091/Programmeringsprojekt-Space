@@ -3,7 +3,7 @@ int main(void) {
 	uart_init(115200);
 	lcd_init();
 	config_timer();
-	initim2();
+	inittim2();
 	hideCursor();
 	blink(0);
 	ClearScreen();
