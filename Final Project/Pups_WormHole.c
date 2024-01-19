@@ -9,7 +9,10 @@
 #include "stm32f30x_conf.h"
 #include "30010_io.h"
 #include "Header_file.h"
+
+// Funktion til at tegne et hjerte-power-up på skærmen på position (x, y)
 void heart_power(const int x, const int y) {
+    // Loop gennem hjertets positioner og tegn det
     for (int i = 0; i < 2; i++) {
         switch (i) {
             case 0: heart[i].x = x ; heart[i].y = y; break;
@@ -24,7 +27,9 @@ void heart_power(const int x, const int y) {
     		fgcolor(7);
     	}
 }
+// Funktion til at tegne en bombe-power-up på skærmen på position (x, y)
 void bomb_power(const int x, const int y) {
+    // Loop gennem bombens positioner og tegn den
     for (int i = 0; i < 10; i++) {
         switch (i) {
             case 0: bomb[i].x = x ; bomb[i].y = y; break;
@@ -59,7 +64,9 @@ void bomb_power(const int x, const int y) {
     		fgcolor(7);
     	}
 }
+// Funktion til at initialisere positioner for et ormehul på skærmen
 void start_worm_hole(int x, int y) {
+	 // Loop gennem ormehullets positioner og initialiser dem
 	 for (int i = 0; i < 18; i++) {
 	        switch (i) {
 	            case 0: hole[i].x = x ; hole[i].y = y; break;
@@ -81,10 +88,11 @@ void start_worm_hole(int x, int y) {
 	    }
 }
 
-
+// Funktion til at initiere og tegne et ormehul på skærmen
 void initiate_worm_hole(int x,int y){
 	start_worm_hole(x,y);
 }
+
 void print_worm_hole(int x, int y) {
 	for (int i = 0; i < 15; i++) {
 		int symbol = (i < 5) ? 187 : ((i < 10) ? 178 : ((i < 15) ? 200 : 0));
@@ -95,16 +103,22 @@ void print_worm_hole(int x, int y) {
 	fgcolor(7);
 	}
 }
+// Funktion til at generere et hjerte-power-up på en tilfældig position på skærmen
 void powerUpHeart() {
 	int x_pos = rand() % 139 + 2;
 	heart_power(x_pos, 38);
 }
+
+// Funktion til at generere en bombe-power-up på en tilfældig position på skærmen
 void powerUpBomb() {
 	int x_pos = rand() % 139 + 2;
 	int y_pos = 3;
 	bomb_power(x_pos, y_pos);
 	}
+
+// Funktion til at slette en bombe-power-up fra skærmen
 void deletepowerUpBomb() {
+	/ Loop gennem bombens positioner, sletter dem fra skærmen, og nulstil positionerne
 	for (int i = 0; i< 10; i++) {
 		gotoxy(bomb[i].x,bomb[i].y);
 		printf(" ");
@@ -112,12 +126,16 @@ void deletepowerUpBomb() {
 		bomb[i].y = 0;
  }
 }
+
+// Funktion til at håndtere kollision med en bombe-power-up
 int hitpowerupBomb(struct vector_t shot_values,int level) {
+	// Loop gennem bombens positioner og håndter kollision med skud
 	int hit_bomb = 0;
 	int enemies_down = 0;
 		for (int i = 0; i< 10; i++) {
 			if (hit_bomb == 0) {
 			if (shot_values.x == bomb[i].x && shot_values.y == bomb[i].y) {
+				// Hvis kollision, tænd LED med farve 3, slet bomben, ryd alle skud, og håndter fjender
 				LED(3);
 				hit_bomb = 1;
 				deletepowerUpBomb();
@@ -135,6 +153,8 @@ int hitpowerupBomb(struct vector_t shot_values,int level) {
 		LED(8);
 		return enemies_down;
 }
+
+// Funktion til at slette en hjerte-power-up fra skærmen
 void deletepowerUpHeart() {
 	for (int i = 0; i< 2; i++) {
 		gotoxy(heart[i].x,heart[i].y);
@@ -143,6 +163,8 @@ void deletepowerUpHeart() {
 		heart[i].y = 0;
  }
 }
+
+// Funktion til at håndtere kollision med en hjerte-power-up
 int hitpowerupHeart(int pos) {
 	int ekstra_liv = 0;
 	for (int i = 0; i < 2; i ++) {
