@@ -148,11 +148,10 @@ void initiate_rocket(int x, int y);
 void delete_rocket(int x, int y);
 
 //POWER UPS AND OTHER
-void initiate_black_hole(int x,int y);
 void heart_power(const int x, const int y);
 void bomb_power(const int x, const int y);
-void print_black_hole(int x, int y);
-void initiate_black_hole(int x,int y);
+void print_worm_hole(int x, int y);
+void initiate_worm_hole(int x,int y);
 int hitpowerupHeart(int pos);
 void deletepowerUpHeart();
 int hitpowerupBomb(struct vector_t shot_values,int level);
