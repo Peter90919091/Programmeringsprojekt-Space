@@ -9,6 +9,8 @@
 #include "stm32f30x_conf.h"
 #include "30010_io.h"
 #include "Header_file.h"
+
+// Funktion til at læse joystickens input
 uint16_t Joystickport(){
 // PA4 UP
 RCC->AHBENR |= RCC_AHBPeriph_GPIOA; // Enable clock for GPIO Port A PA0 = 110
@@ -74,6 +76,7 @@ uint8_t bit[8] = {0,0,0,val_CENTER,val_RIGHT,val_LEFT,val_DOWN,val_UP};
 return 0;
 }
 
+// Funktion til at læse keyboard input
 uint8_t readKeyboard() {
     uint8_t value = 0;
     value = uart_get_char();
