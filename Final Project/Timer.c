@@ -9,6 +9,8 @@
 #include "stm32f30x_conf.h"
 #include "30010_io.h"
 #include "Header_file.h"
+
+// Funktion til konfiguration af timeren
 void config_timer() {
     RCC->APB2ENR |= RCC_APB2Periph_TIM15; // Enable clock line to timer 15;
     TIM15->CR1 |= 0x01; // Enable timer 15
@@ -19,6 +21,7 @@ void config_timer() {
     NVIC_EnableIRQ(TIM1_BRK_TIM15_IRQn); // Enable interrupt
 }
 
+// Afbrydelseshåndteringsfunktion for TIM15
 void TIM1_BRK_TIM15_IRQHandler(void) {
     timer++;
     TIM15->SR &= ~0x0001; // Clear interrupt bit
