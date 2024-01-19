@@ -9,6 +9,7 @@
 #include "stm32f30x_conf.h"
 #include "30010_io.h"
 #define ESC 0x1B
+// Funktion til at ændre tekstfarven i terminalen
 void fgcolor(uint8_t foreground) {
 /*  Value      foreground     Value     foreground
     ------------------------------------------------
@@ -29,18 +30,24 @@ void fgcolor(uint8_t foreground) {
   printf("%c[%d;%dm", ESC, type, foreground+30);
 }
 
+// Funktion til at aktivere eller deaktivere blinkende tekst i terminalen
 void blink(uint8_t on) {
 	if (on) {printf("%c[%d%c",ESC,05,'m');}
 	else {printf("%c[%d%c",ESC,25,'m');}
 }
+
+// Funktion til at positionere cursoren i terminalen
 void gotoxy(int x, int y) {
 	printf("%c[%d;%d%c",ESC,y,x,'H');
 }
+
+// Funktion til at rydde skærmen i terminalen
 void ClearScreen(){
 	printf("%c[2J",ESC);
 	gotoxy(0,0);
 }
-// Move cursor
+
+// Funktioner til at flytte cursoren op, ned, til højre og til venstre i terminalen
 void cursor_up(int amount) {
 	printf("%c[%d%c",ESC,amount,'A');
 }
@@ -53,6 +60,8 @@ void cursor_right(int amount) {
 void cursor_left(int amount) {
 	printf("%c[%d%c",ESC,amount,'D');
 }
+
+// Funktion til at aktivere eller deaktivere understregning i terminalen
 void underline(uint8_t on) {
 	if (on) {
 	printf("%c[%d%c",ESC,04,'m');
@@ -61,4 +70,7 @@ void underline(uint8_t on) {
 		printf("%c[%d%c",ESC,24,'m');
 	}
 }
+
+
+// Funktion til at skjule cursoren i terminalen
 void hideCursor() {printf("\e[?25l");}
