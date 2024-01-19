@@ -8,12 +8,13 @@
 #include "stm32f30x_conf.h"
 #include "30010_io.h"
 #include "Header_file.h"
-//Makes the text blink in given color
+// Funktion for at lade teksten blinke i en given farve
 void text_color_blink(int on, int color) {
 	if (on == 1) {
+		// Tænd LED og lav blink-effekt
 		LED(color);
 		blink(1);
-		//Uses colorscheme from LCD_LED.c and converts to corresponding color in fgcolor-colorscheme
+		// Brug farveskema fra LCD_LED.c og oversæt til tilsvarende farve i fgcolor-farveskemaet
 		switch (color) {
 		case 1:
 			fgcolor(1);
@@ -41,15 +42,20 @@ void text_color_blink(int on, int color) {
 		}
 	}
 	else if (on != 1) {
+		// Sluk LED og stop blink-effekt
 		LED(color);
 		blink(0);
 		fgcolor(7);
 	}
 }
+
+// Vis credits-besked på skærmen
 void credits() {
 	gotoxy(2,39);
 	printf("Lavet af Mattias, Ida, Emil & Peter");
 }
+
+// Funktion til at tegne en kant omkring skærmen
 void border() {
 	fgcolor(7);
 	// 140x40
@@ -79,7 +85,7 @@ void border() {
 			printf("%c",188);
 }
 
-
+// Funktion for at lave baggrundseffekt med stjerner
 void background() {
 	fgcolor(7);
 	for (int i = 0; i<40; i++) {
@@ -90,7 +96,7 @@ void background() {
 		}
 	}
 }
-
+// Funktion til at tegne en stor boks i midten af skærmen
 void box() {
 	//Værdier vi benytter:
 					int  toplength = 51; //trukket 2 fra for at have hjørner med
@@ -118,6 +124,8 @@ void box() {
 					printf("%c",188);
 					gotoxy(60,10);
 }
+
+// Funktion for at tegne en mindre boks
 void Smallbox() {
 	//Værdier vi benytter:
 					int  toplength = 8; //trukket 2 fra for at have hjørner med
@@ -146,6 +154,8 @@ void Smallbox() {
 								}
 					printf("%c",188);
 }
+
+// Funktion for at vise helpside og spilinstruktioner
 void help_design() {
 	box();
 	fgcolor(15);
@@ -172,6 +182,8 @@ void help_design() {
 	gotoxy(47,31);printf("Play through the levels");
 	gotoxy(47,32);printf("and beat your own highscore!");
 }
+
+// Funktion for at tegne en række mindre bokse til levels
 void drawLevelBoxes() {
     int startX = 37;
     int startY = 15;
