@@ -94,7 +94,7 @@ void updateAndPrintShots(int pause, int level,int speed, int position) {
 	static int once = 0;
 	static int enemies = 0;
 	static int printpowerup = 0;
-	static int printblackhole = 0;
+	static int printwormhole = 0;
 	int enemy_down;
 	static int amount_enemies_down = 0;
 	int gravityResult;
@@ -136,12 +136,12 @@ void updateAndPrintShots(int pause, int level,int speed, int position) {
 
 	        enemies = level * 10;
 	        once = 1;
-			if (level == 6) {initiate_worm_hole(17,30);printblackhole=1;}
-			if (level == 7) {initiate_worm_hole(35,30);printblackhole=1;}
-			if (level == 8) {initiate_worm_hole(70,30);printblackhole=1;}
-			if (level == 9) {initiate_worm_hole(100,30);printblackhole=1;}
+			if (level == 6) {initiate_worm_hole(17,30);printwormhole=1;}
+			if (level == 7) {initiate_worm_hole(35,30);printwormhole=1;}
+			if (level == 8) {initiate_worm_hole(70,30);printwormhole=1;}
+			if (level == 9) {initiate_worm_hole(100,30);printwormhole=1;}
 	    }
-	if (printblackhole == 1) {
+	if (printwormhole == 1) {
 		if (level == 6) {print_worm_hole(17,30);}
 		if (level == 7) {print_worm_hole(35,30);}
 		if (level == 8) {print_worm_hole(70,30);}
