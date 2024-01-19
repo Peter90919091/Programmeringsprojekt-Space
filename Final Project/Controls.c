@@ -10,13 +10,15 @@
 #include "Header_file.h"
 volatile uint32_t timer;
 
-//Takes the level as input and changes the speed and layout of the map
+// Funktion som tager sværhedsgraden som input og ændrer hastighed og layout af level
 int levelControls(int difficulty) {
+	// Initialiser variabler
 	LED(8);
 	int rocket_position = 38;
 	int speed = 0;
 	int level = 0;
 	int pause = 0;
+	// Konfigurer niveauindstillinger baseret på sværhedsgrad
 	if (difficulty == 1) {speed = 10;level = 1;pause = 2000;Asteroid1(0,14,10); Asteroid1(1, 80,20);}
 	if (difficulty == 2) {speed = 10;level = 2;pause = 1500;Asteroid1(0, 20, 12);Asteroid1(1, 70, 7);Asteroid2(0,90,6);Asteroid2(1,50,9);}
 	if (difficulty == 3) {speed = 9;level = 3;pause = 1000;Asteroid1(0,14,15); Asteroid1(1, 80, 7);Asteroid2(0,90,20);Asteroid2(1,32,18);Asteroid3(0,70,10);Asteroid3(1,70,15);}
@@ -31,6 +33,8 @@ int levelControls(int difficulty) {
 	int prev_cursor_leftright = 3;
 	int shot_x = 0;
 	int shot_y = 0;
+
+	// Initialiser raketen og vis den på skærmen
 	initiate_rocket(cursor_leftright, 38);
 	text_color_blink(0,8);
 	int shot = 0;
@@ -40,15 +44,18 @@ int levelControls(int difficulty) {
 				if (uart_get_char() == 0x1B){
 					boss_key_function();
 				}
-				//Boss key slut
+		//Boss key slut
+		// Vis niveauinformation og fjender
 		level_lcd(difficulty,globalLives,globalPoints);
 		enemiesbegin(speed,level,0);
+
+		// Læs input fra brugeren (joystick eller tastatur)
 		if (UserPlayMode == 0) {
 		value =  Joystickport();//Joystickport();
 		} else if (UserPlayMode == 1) {
 			value = readKeyboard();
 		}
-
+		// Opdater raketcursor baseret på brugerinput
 		if (cursor_leftright == 139 && (value == 8 || value == 'd')) {
 			cursor_leftright = 3;}
 		if (cursor_leftright == 3 && value == 4) {
@@ -62,6 +69,7 @@ int levelControls(int difficulty) {
 						if (cursor_leftright< 139) {cursor_leftright += 1;}
 						pause_control(pause<<2);
 					}
+	 // Opdater raketcursoren og vis ændringer på skærmen
 	if (cursor_leftright != prev_cursor_leftright) {
 						blink(0);
 						fgcolor(7);
@@ -70,7 +78,7 @@ int levelControls(int difficulty) {
 						initiate_rocket(cursor_leftright, 38);
 						rocket_position =cursor_leftright;
 							}
-
+	// Behandl skud fra brugeren
 	if (value == 16 || value == ' ') { //SKUD
 		shot_x = cursor_leftright;
 		shot_y = 36;
@@ -81,13 +89,14 @@ int levelControls(int difficulty) {
 		pause_control(200000);
 		}
 		}
+	// Opdater og vis skud på skærmen	
 	if (shot == 1) {
 	        updateAndPrintShots(pause,level, speed, rocket_position);
 	    }
 	}
 }
 
-//Functions for controls in the help menu
+//Funktioner der kontrollerer menu
 int HelpControls() {
 	LED(8);
 	uint8_t value = 0;
@@ -121,7 +130,7 @@ void cursor_movement(uint8_t value, int *cursorUpDown, int *cursorLeftRight) {
     }
 }
 
-// funktion for at bestemme level
+// Funktion for at bestemme level
 void level_selection(uint8_t value, int cursorUpDown, int cursorLeftRight) {
     if (value == 16 || value == ' ') {
         ClearScreen();
@@ -147,7 +156,7 @@ void level_selection(uint8_t value, int cursorUpDown, int cursorLeftRight) {
     }
 }
 
-// funktion til hvis der trykkes på exit eller play
+// Funktion til hvis der trykkes på exit eller play
 void playexit(uint8_t value, int cursorUpDown) {
     if (value == 16 || value == ' ') {
         ClearScreen();
@@ -158,7 +167,7 @@ void playexit(uint8_t value, int cursorUpDown) {
     }
 }
 
-// opdater skærmen
+// Opdater skærmen
 void updateScreen(int cursorUpDown, int cursorLeftRight, int prevCursorUpDown, int prevCursorLeftRight) {
     if (cursorLeftRight != prevCursorLeftRight || cursorUpDown != prevCursorUpDown) {
         text_color_blink(0,0);
@@ -176,7 +185,7 @@ void updateScreen(int cursorUpDown, int cursorLeftRight, int prevCursorUpDown, i
     }
 }
 
-// Function for showing cursor position
+// Funktion som viser kursorposition
 void show_cursor_pos(int cursorUpDown, int cursorLeftRight) {
 		switch (cursorLeftRight) {
 			case 0: switch (cursorUpDown) {
@@ -217,7 +226,7 @@ void show_cursor_pos(int cursorUpDown, int cursorLeftRight) {
 	}
 }
 
-// PlayControls
+// Kontrol af spil
 int PlayControls() {
     int cursorUpDown = 0;
     int cursorLeftRight = 0;
@@ -249,30 +258,31 @@ int PlayControls() {
 				value = readKeyboard();
 			}
 // ALLE DISSE FUNKTIONER ER LAVET OG BENYTTES FORDI VI ER LØBET TØR FOR PLADS TIL AT LEGE MED STORE TAL
-        // cursor bevægelse
+	    
+        // Kursor bevægelse
         cursor_movement(value, &cursorUpDown, &cursorLeftRight);
 
-        // levels
+        // Levels
         level_selection(value, cursorUpDown, cursorLeftRight);
 
-        // hvis cursor er over play eller exit
+        // Hvis cursor er over play eller exit
         playexit(value, cursorUpDown);
 
         // Fremvis poisition for cursor
         show_cursor_pos(cursorUpDown, cursorLeftRight);
 
-        // opdater skærmen hvis cursor skifter position
+        // Opdater skærmen hvis cursor skifter position
         updateScreen(cursorUpDown, cursorLeftRight, prevCursorUpDown, prevCursorLeftRight);
         prevCursorUpDown = cursorUpDown;
         prevCursorLeftRight = cursorLeftRight;
-        // pause
+        // Pause
         if (value != 0 && UserPlayMode == 0) {
             pause_control(1000000);
         }
     }
 }
 
-//Function for controls in Score menu
+//Funktion for kontrol af score menu
 int ScoreControls() {
 	uint8_t value = 0;
 	while(1) {
@@ -290,7 +300,7 @@ int ScoreControls() {
 	}
 }
 
-//Function for controls in main menu
+//Funktion for kontrol af menu
 int MenuControls() {
 	int cursor_placement = 0;
 	int prev_cursor_placement = 0;
@@ -366,7 +376,7 @@ int MenuControls() {
 	pause_control(1000000);}}
 }
 
-//Controls when you lose
+// Kontrol ved tabt spil
 void GAMEOVERControls() {
 	uint8_t value;
 	while(1) {
@@ -385,7 +395,7 @@ void GAMEOVERControls() {
 		}
 }
 
-//Controls when you win
+// Kontrol ved vundet spil
 int GAMEWINControls() {
 	//Boss key start
 	if (uart_get_char() == 0x1B){
