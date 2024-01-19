@@ -8,6 +8,8 @@
 #include "stm32f30x_conf.h"
 #include "30010_io.h"
 #include "Header_file.h"
+
+// Funktion til at initialisere en fjende på en given position (x, y) med en given farve
 void initiate_enemies(int x, int y,int color) {
     fgcolor(color);
     gotoxy(x,y);
@@ -16,10 +18,14 @@ void initiate_enemies(int x, int y,int color) {
     printf("%c", 185);
     fgcolor(15);
 }
+
+// Funktion til at fjerne en fjende fra en given position (x, y).
 void clear_enemy(int x, int y) {
     gotoxy(x, y);
     printf("   ");
 }
+
+// Funktion til at håndtere kollision mellem en fjende og en asteroid baseret på deres positioner
 int gravityenemy(struct enemy enemy_values, struct vector_t asteroid_values) {
     if (abs(enemy_values.x - asteroid_values.x) <= 8 &&
     	    (((asteroid_values.y - enemy_values.y) == 3) ||
@@ -34,9 +40,11 @@ int gravityenemy(struct enemy enemy_values, struct vector_t asteroid_values) {
             return 0;
         }
     } else {
-        return 0;
+        return 0; // Returnerer retningen for fjenden baseret på kollisionen med asteroiden.
     }
 }
+
+// Funktion til at håndtere kollisionen mellem skud og fjender.
 void handleEnemyCollision(int i,int j,int level) {
     if (enemies_level[j].x != 0 && enemies_level[j].y != 0) {
     	LED(3);
@@ -60,8 +68,8 @@ void handleEnemyCollision(int i,int j,int level) {
                 pointsEarned = 10;
                 break;
         }
-        points(pointsEarned);
-
+        points(pointsEarned); // Håndterer kollisionen ved at opdatere point, fjerne fjenden og fjerne skuddet.
+	
         clear_enemy(enemies_level[j].x, enemies_level[j].y);
         if (shots[i].x != 0 && shots[i].y != 0) {
         gotoxy(shots[i].x,shots[i].y);
@@ -74,6 +82,8 @@ void handleEnemyCollision(int i,int j,int level) {
         LED(8);
     }
 }
+
+// Funktion til at starte eller genstarte fjenderne med en given hastighed og niveau.
 void enemiesbegin(int speed,int level, int reset) {
 	int gravityResult = 0;
 	static int amount;
