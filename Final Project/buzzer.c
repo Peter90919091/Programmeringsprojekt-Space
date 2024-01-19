@@ -13,7 +13,7 @@ void TIM2_IRQHandler(void) {
 TIM2->SR &= ~0x0001; // Clear interrupt bit
 }
 
-void initTimer2() {
+void inittim2() {
 	//Taken from exercise 9
 
 	RCC -> APB1ENR |= RCC_APB1Periph_TIM2 ; // Enable clock line to timer 2;
