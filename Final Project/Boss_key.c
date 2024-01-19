@@ -11,12 +11,13 @@
 #include "30010_io.h"
 
 
-
+// Funktion til at generere et regneark og printe Excel-logo med ASCII-karakterer
 void boss_spreadsheet(){
 	int row = 0;
-
+	// Flytter cursor til position (2,2) og starter et loop
 	gotoxy(2,2);
 	while (row <=37){
+		// Printer vandrette linjer
 		if (row % 2 == 0){
 			for (int i = 0; i <= 137; i++){
 				if (i%11 == 0 && i!=0){
@@ -27,6 +28,7 @@ void boss_spreadsheet(){
 				}
 			}
 		}
+		 // Printer lodrette linjer
 		if (row %2 != 0){
 			for (int j = 0; j <=137; j++){
 				if (j%11 == 0 && j !=0){
@@ -136,19 +138,22 @@ void boss_spreadsheet(){
 		}
 	}
 }
-
+// Funktion til brug af "boss key" funktionalitet 
 void boss_key_function() {
 	while(1) {
     static int push_count = 0;
 
+    // Tjekker Escape-tasten
     int boss_value = uart_get_char();
 
     if (boss_value == 0x1B) {
         push_count++;
-
+	    
+	// Viser regnearket
         if (push_count == 1) {
             border();
             boss_spreadsheet();
+	// Viser menu
         } else if (push_count == 2) {
             push_count = 0;
             menu();
