@@ -206,7 +206,7 @@ void boss_spreadsheet();
 
 //BUZZER
 void TIM2_IRQHandler(void);
-void initTimer2();
+void inittim2();
 void setFreq(uint16_t freq);
 void delaysong(uint16_t milli);
 void playingsong(int value);
