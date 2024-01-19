@@ -9,7 +9,9 @@
 #include "30010_io.h"
 #include "Header_file.h"
 
+// Funktion til at vise hjælpemenu
 void menuHELP() {
+	// Initialiserer visuelle elementer som LED, baggrund, liv og asteroider
 	LED(8);
 	background();
 	lives(0);
@@ -23,6 +25,8 @@ void menuHELP() {
 	lcd_resetwrite("Controls and object of the game!",1);
 	HelpControls();
 }
+
+// Funktion til at vise menu for spil
 void menuPLAY() {
     background();
     border();
@@ -33,6 +37,8 @@ void menuPLAY() {
     drawLevelBoxes();
     PlayControls();
 }
+
+// Funktion til at vise menu for highscores
 void menuSCORE() {
 	background();
 	border();
@@ -44,6 +50,8 @@ void menuSCORE() {
 	text_color_blink(0,5);
 	write_highscore();
 	lcd_resetwrite("Look at your highscore!",1);
+
+	// Viser top 10 highscores
 	gotoxy(50,15);
 		for (int i = 0; i< 10; i++) {
 		int scorearray[2] = {0,scores[i].score_count};
@@ -54,7 +62,9 @@ void menuSCORE() {
 	ScoreControls();
 	//display scores:
 }
+// Hovedmenufunktion
 void menu() {
+	 // Ryd skærmen og initialiser visuelle elementer
 	ClearScreen();
 	background(); //FØRST
 	border();
@@ -81,7 +91,9 @@ void menu() {
 		}
 }
 
+// Funktion til visning af game over-menu
 void menuGAMEOVER() {
+	 // Afspil lyd, ryd skærmen og initialiser visuelle elementer
 	playingsong(1);
 	ClearScreen();
 	background(); //FØRST
@@ -102,7 +114,9 @@ void menuGAMEOVER() {
 	GAMEOVERControls();
 }
 
+// Funktion til visning af vindermenu med angivet niveau
 void menuWIN(int level) {
+	// Afspil lyd, ryd skærmen og initialiser visuelle elementer
 	playingsong(0);
 	ClearScreen();
 	background(); //FØRST
@@ -120,6 +134,7 @@ void menuWIN(int level) {
 	lcd_write_index("Quit or play again!",3,12);
 	lcd_write_index("   ",1,0);
 	int value = GAMEWINControls();
+	// Start næste niveau baseret på det aktuelle niveau
 	if (value == 1) {
 		switch (level) {
 		case 1:
@@ -149,7 +164,7 @@ void menuWIN(int level) {
 	}
 
 }
-
+// Funktion til at vælge brugerinputstype (tastatur eller joystick)
 void ChooseUserInput() {
 	static int once = 0;
 	uint8_t value = readKeyboard();
@@ -157,6 +172,7 @@ void ChooseUserInput() {
 	printf("Press 'x' for keyboard controls. Wait for box to turn red, then press 'p'. (IN BETA)");
 	gotoxy(55,11);
 	printf("For joystick controls press 'p'");
+	 // Aktiver tastaturkontrol ved tryk på 'x'
 	if (value == 'x') {
 		text_color_blink(1,1);
 		gotoxy(67,15);
