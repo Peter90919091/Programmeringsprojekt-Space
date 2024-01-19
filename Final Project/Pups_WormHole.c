@@ -118,7 +118,7 @@ void powerUpBomb() {
 
 // Funktion til at slette en bombe-power-up fra skærmen
 void deletepowerUpBomb() {
-	/ Loop gennem bombens positioner, sletter dem fra skærmen, og nulstil positionerne
+	// Loop gennem bombens positioner, sletter dem fra skærmen, og nulstil positionerne
 	for (int i = 0; i< 10; i++) {
 		gotoxy(bomb[i].x,bomb[i].y);
 		printf(" ");
